@@ -69,6 +69,7 @@ struct BaseVehicleListWindow : public Window {
 	enum GroupBy : uint8_t {
 		GB_NONE,
 		GB_SHARED_ORDERS,
+		GB_DEPOT,
 
 		GB_END,
 	};
@@ -132,6 +133,8 @@ struct BaseVehicleListWindow : public Window {
 			case GB_NONE:
 				return vehicle_group_none_sorter_funcs;
 			case GB_SHARED_ORDERS:
+				return vehicle_group_shared_orders_sorter_funcs;
+			case GB_DEPOT:
 				return vehicle_group_shared_orders_sorter_funcs;
 			default:
 				NOT_REACHED();

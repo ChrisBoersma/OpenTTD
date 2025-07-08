@@ -154,6 +154,7 @@ const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group
 const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_by_names = {
 	STR_GROUP_BY_NONE,
 	STR_GROUP_BY_SHARED_ORDERS,
+	STR_GROUP_BY_STOPPED_IN_DEPOT,
 };
 
 /** List of depot name strings for each \c VehicleType. */
@@ -177,6 +178,8 @@ std::span<const StringID> BaseVehicleListWindow::GetVehicleSorterNames() const
 		case GB_NONE:
 			return TimerGameEconomy::UsingWallclockUnits() ? vehicle_group_none_sorter_names_wallclock : vehicle_group_none_sorter_names_calendar;
 		case GB_SHARED_ORDERS:
+			return TimerGameEconomy::UsingWallclockUnits() ? vehicle_group_shared_orders_sorter_names_wallclock : vehicle_group_shared_orders_sorter_names_calendar;
+		case GB_DEPOT:
 			return TimerGameEconomy::UsingWallclockUnits() ? vehicle_group_shared_orders_sorter_names_wallclock : vehicle_group_shared_orders_sorter_names_calendar;
 		default:
 			NOT_REACHED();
@@ -235,37 +238,71 @@ void BaseVehicleListWindow::BuildVehicleList()
 	}
 	this->used_cargoes = used;
 
-	if (this->grouping == GB_NONE) {
-		uint max_unitnumber = 0;
-		for (auto it = this->vehicles.begin(); it != this->vehicles.end(); ++it) {
-			this->vehgroups.emplace_back(it, it + 1);
+	switch (this->grouping) {
+		case GB_NONE:
+		{
+			uint max_unitnumber = 0;
+			for (auto it = this->vehicles.begin(); it != this->vehicles.end(); ++it) {
+				this->vehgroups.emplace_back(it, it + 1);
 
-			max_unitnumber = std::max<uint>(max_unitnumber, (*it)->unitnumber);
+				max_unitnumber = std::max<uint>(max_unitnumber, (*it)->unitnumber);
+			}
+			this->unitnumber_digits = CountDigitsForAllocatingSpace(max_unitnumber);
+			break;
 		}
-		this->unitnumber_digits = CountDigitsForAllocatingSpace(max_unitnumber);
-	} else {
+		case GB_SHARED_ORDERS:
+		{
 		/* Sort by the primary vehicle; we just want all vehicles that share the same orders to form a contiguous range. */
-		std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle * const &u, const Vehicle * const &v) {
-			return u->FirstShared() < v->FirstShared();
-		});
-
-		uint max_num_vehicles = 0;
-
-		VehicleList::const_iterator begin = this->vehicles.begin();
-		while (begin != this->vehicles.end()) {
-			VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [first_shared = (*begin)->FirstShared()](const Vehicle * const &v) {
-				return v->FirstShared() == first_shared;
+			std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle * const &u, const Vehicle * const &v) {
+				return u->FirstShared() < v->FirstShared();
 			});
 
-			this->vehgroups.emplace_back(begin, end);
+			uint max_num_vehicles = 0;
 
-			max_num_vehicles = std::max<uint>(max_num_vehicles, static_cast<uint>(end - begin));
+			VehicleList::const_iterator begin = this->vehicles.begin();
+			while (begin != this->vehicles.end()) {
+				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [first_shared = (*begin)->FirstShared()](const Vehicle * const &v) {
+					return v->FirstShared() == first_shared;
+				});
 
-			begin = end;
+				this->vehgroups.emplace_back(begin, end);
+
+				max_num_vehicles = std::max<uint>(max_num_vehicles, static_cast<uint>(end - begin));
+
+				begin = end;
+			}
+
+			this->unitnumber_digits = CountDigitsForAllocatingSpace(max_num_vehicles);
+			break;
 		}
+		case GB_DEPOT:
+		{
+			std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle *const &u, const Vehicle *const &v) {
+				return u->IsStoppedInDepot() < v->IsStoppedInDepot();
+			});
 
-		this->unitnumber_digits = CountDigitsForAllocatingSpace(max_num_vehicles);
+			uint max_num_vehicles = 0;
+
+			VehicleList::const_iterator begin = this->vehicles.begin();
+			while (begin != this->vehicles.end()) {
+				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [stopped = (*begin)->IsStoppedInDepot()](const Vehicle *const &v) {
+					return v->IsStoppedInDepot() == stopped;
+				});
+
+				this->vehgroups.emplace_back(begin, end);
+
+				max_num_vehicles = std::max<uint>(max_num_vehicles, static_cast<uint>(end - begin));
+
+				begin = end;
+			}
+
+			this->unitnumber_digits = CountDigitsForAllocatingSpace(max_num_vehicles);
+			break;
+		}
+		default:
+			NOT_REACHED();
 	}
+
 	this->FilterVehicleList();
 
 	this->vehgroups.RebuildDone();
@@ -1877,6 +1914,28 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 				DrawString(ir.left, ir.right, ir.top + WidgetDimensions::scaled.framerect.top, GetString(STR_JUST_COMMA, vehgroup.NumVehicles()), TextColour::Black);
 				break;
 
+			case GB_DEPOT:
+				assert(vehgroup.NumVehicles() > 0);
+
+				for (int i = 0; i < static_cast<int>(vehgroup.NumVehicles()); ++i) {
+					if (image_left + WidgetDimensions::scaled.hsep_wide * i >= image_right) break; // Break if there is no more space to draw any more vehicles anyway.
+					DrawVehicleImage(vehgroup.vehicles_begin[i], { image_left + WidgetDimensions::scaled.hsep_wide * i, ir.top, image_right, ir.bottom }, selected_vehicle, EIT_IN_LIST, 0);
+				}
+
+				TextColour tc;
+				if (vehgroup.vehicles_begin[0]->IsStoppedInDepot()) {
+					DrawString(tr.left, tr.right, ir.top, GetString(STR_GROUP_BY_STOPPED_IN_DEPOT), TC_BLACK, SA_LEFT, false, FS_SMALL);
+					tc = TC_BLUE;
+				}
+				else {
+					tc = TC_BLACK;
+				}
+
+				if (show_orderlist) DrawSmallOrderList(*(vehgroup.vehicles_begin[0])->orders, olr.left, olr.right, ir.top + GetCharacterHeight(FS_SMALL), this->order_arrow_width);
+
+				DrawString(ir.left, ir.right, ir.top + WidgetDimensions::scaled.framerect.top, GetString(STR_JUST_COMMA, vehgroup.NumVehicles()), tc);
+				break;
+
 			default:
 				NOT_REACHED();
 		}
@@ -2163,6 +2222,24 @@ public:
 					}
 
 					case GB_SHARED_ORDERS: {
+						assert(vehgroup.NumVehicles() > 0);
+						if (!VehicleClicked(vehgroup)) {
+							const Vehicle *v = vehgroup.vehicles_begin[0];
+							if (_ctrl_pressed) {
+								ShowOrdersWindow(v);
+							} else {
+								if (vehgroup.NumVehicles() == 1) {
+									ShowVehicleViewWindow(v);
+								} else {
+									ShowVehicleListWindow(v);
+								}
+							}
+						}
+						break;
+					}
+
+					case GB_DEPOT:
+					{
 						assert(vehgroup.NumVehicles() > 0);
 						if (!VehicleClicked(vehgroup)) {
 							const Vehicle *v = vehgroup.vehicles_begin[0];

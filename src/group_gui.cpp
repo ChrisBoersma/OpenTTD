@@ -840,6 +840,12 @@ public:
 						break;
 					}
 
+					case GB_DEPOT:
+					{
+						/* no selecting of vehicles*/
+						break;
+					}
+
 					default:
 						NOT_REACHED();
 				}
@@ -1000,6 +1006,17 @@ public:
 								} else {
 									ShowVehicleListWindow(v);
 								}
+							}
+						}
+						break;
+					}
+
+					case GB_DEPOT:
+					{
+						if (!VehicleClicked(vehgroup)) {
+							const Vehicle *v = vehgroup.vehicles_begin[0];
+							if (vindex == v->index) {
+								ShowVehicleViewWindow(v);
 							}
 						}
 						break;
