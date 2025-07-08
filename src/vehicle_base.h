@@ -749,10 +749,10 @@ public:
 		this->orders->GetNextStoppingStation(next_station, this);
 	}
 
-	inline DestinationID GetDepotSortingIndex() const
+	inline DestinationID::BaseType GetDepotSortingIndex() const
 	{
 		if (this->IsStoppedInDepot()) {
-			return GetDepotDestinationIndex(this->tile);
+			return GetDepotDestinationIndex(this->tile).base();
 		}
 		return -1;
 	}

@@ -48,6 +48,7 @@
 #include "table/strings.h"
 
 #include "safeguards.h"
+#include "depot_func.h"
 
 
 static EnumIndexArray<VehicleTypeIndexArray<BaseVehicleListWindow::GroupBy>, VehicleListType, VehicleListType::End> _grouping{};
@@ -278,15 +279,15 @@ void BaseVehicleListWindow::BuildVehicleList()
 		case GB_DEPOT:
 		{
 			std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle *const &u, const Vehicle *const &v) {
-				return u->GetDepotSortingIndex().ToDepotID() < v->GetDepotSortingIndex().ToDepotID();
+				return u->GetDepotSortingIndex() < v->GetDepotSortingIndex();
 			});
 
 			uint max_num_vehicles = 0;
 
 			VehicleList::const_iterator begin = this->vehicles.begin();
 			while (begin != this->vehicles.end()) {
-				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [depot = (*begin)->GetDepotSortingIndex().ToDepotID()](const Vehicle *const &v) {
-					return v->GetDepotSortingIndex().ToDepotID() == depot;
+				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [depot = (*begin)->GetDepotSortingIndex()](const Vehicle *const &v) {
+					return v->GetDepotSortingIndex() == depot;
 				});
 
 				this->vehgroups.emplace_back(begin, end);
@@ -2242,14 +2243,8 @@ public:
 						assert(vehgroup.NumVehicles() > 0);
 						if (!VehicleClicked(vehgroup)) {
 							const Vehicle *v = vehgroup.vehicles_begin[0];
-							if (_ctrl_pressed) {
-								ShowOrdersWindow(v);
-							} else {
-								if (vehgroup.NumVehicles() == 1) {
-									ShowVehicleViewWindow(v);
-								} else {
-									ShowVehicleListWindow(v);
-								}
+							if (v->IsStoppedInDepot()) {
+								ShowDepotWindow(v->tile, v->type);
 							}
 						}
 						break;
