@@ -24,6 +24,7 @@
 #include "network/network.h"
 #include "saveload/saveload.h"
 #include "timer/timer_game_calendar.h"
+#include "depot_map.h"
 
 const uint TILE_AXIAL_DISTANCE = 192; ///< Logical length of the tile in any DiagDirection used in vehicle movement.
 const uint TILE_CORNER_DISTANCE = 128; ///< Logical length of the tile corner crossing in any non-diagonal direction used in vehicle movement.
@@ -746,6 +747,14 @@ public:
 	{
 		if (this->orders == nullptr) return;
 		this->orders->GetNextStoppingStation(next_station, this);
+	}
+
+	inline DestinationID GetDepotSortingIndex() const
+	{
+		if (this->IsStoppedInDepot()) {
+			return GetDepotDestinationIndex(this->tile);
+		}
+		return -1;
 	}
 
 	void ResetRefitCaps();

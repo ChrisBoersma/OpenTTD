@@ -36,6 +36,7 @@
 #include "table/strings.h"
 
 #include "safeguards.h"
+#include "depot_func.h"
 
 static constexpr std::initializer_list<NWidgetPart> _nested_group_widgets = {
 	NWidget(NWID_HORIZONTAL), // Window header
@@ -842,7 +843,12 @@ public:
 
 					case GB_DEPOT:
 					{
-						/* no selecting of vehicles*/
+						assert(vehgroup.NumVehicles() > 0);
+						v = vehgroup.vehicles_begin[0];
+						/*
+						 * No VehicleClicked(v) support for now, because don't want
+						 * to enable any contextual actions except perhaps clicking/ctrl-clicking to clone orders.
+						 */
 						break;
 					}
 
@@ -1015,8 +1021,9 @@ public:
 					{
 						if (!VehicleClicked(vehgroup)) {
 							const Vehicle *v = vehgroup.vehicles_begin[0];
-							if (vindex == v->index) {
-								ShowVehicleViewWindow(v);
+							if (v->IsStoppedInDepot())
+							{
+								ShowDepotWindow(v->tile, v->type);
 							}
 						}
 						break;

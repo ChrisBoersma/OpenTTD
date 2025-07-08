@@ -278,15 +278,15 @@ void BaseVehicleListWindow::BuildVehicleList()
 		case GB_DEPOT:
 		{
 			std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle *const &u, const Vehicle *const &v) {
-				return u->IsStoppedInDepot() < v->IsStoppedInDepot();
+				return u->GetDepotSortingIndex().ToDepotID() < v->GetDepotSortingIndex().ToDepotID();
 			});
 
 			uint max_num_vehicles = 0;
 
 			VehicleList::const_iterator begin = this->vehicles.begin();
 			while (begin != this->vehicles.end()) {
-				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [stopped = (*begin)->IsStoppedInDepot()](const Vehicle *const &v) {
-					return v->IsStoppedInDepot() == stopped;
+				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [depot = (*begin)->GetDepotSortingIndex().ToDepotID()](const Vehicle *const &v) {
+					return v->GetDepotSortingIndex().ToDepotID() == depot;
 				});
 
 				this->vehgroups.emplace_back(begin, end);
@@ -1924,7 +1924,6 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 
 				TextColour tc;
 				if (vehgroup.vehicles_begin[0]->IsStoppedInDepot()) {
-					DrawString(tr.left, tr.right, ir.top, GetString(STR_GROUP_BY_STOPPED_IN_DEPOT), TC_BLACK, SA_LEFT, false, FS_SMALL);
 					tc = TC_BLUE;
 				}
 				else {
