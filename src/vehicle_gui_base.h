@@ -104,8 +104,10 @@ struct BaseVehicleListWindow : public Window {
 	static const std::initializer_list<const StringID> vehicle_group_none_sorter_names_wallclock;
 	static const std::initializer_list<const StringID> vehicle_group_shared_orders_sorter_names_calendar;
 	static const std::initializer_list<const StringID> vehicle_group_shared_orders_sorter_names_wallclock;
+	static const std::initializer_list<const StringID> vehicle_group_depot_sorter_names;
 	static const std::initializer_list<VehicleGroupSortFunction * const> vehicle_group_none_sorter_funcs;
 	static const std::initializer_list<VehicleGroupSortFunction * const> vehicle_group_shared_orders_sorter_funcs;
+	static const std::initializer_list<VehicleGroupSortFunction *const> vehicle_group_depot_sorter_funcs;
 
 	BaseVehicleListWindow(WindowDesc &desc, const VehicleListIdentifier &vli);
 
@@ -135,7 +137,7 @@ struct BaseVehicleListWindow : public Window {
 			case GB_SHARED_ORDERS:
 				return vehicle_group_shared_orders_sorter_funcs;
 			case GB_DEPOT:
-				return vehicle_group_shared_orders_sorter_funcs;
+				return vehicle_group_depot_sorter_funcs;
 			default:
 				NOT_REACHED();
 		}

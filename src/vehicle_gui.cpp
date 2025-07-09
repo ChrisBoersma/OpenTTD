@@ -136,6 +136,14 @@ const std::initializer_list<BaseVehicleListWindow::VehicleGroupSortFunction * co
 	&VehicleGroupAverageProfitLastYearSorter,
 };
 
+const std::initializer_list<BaseVehicleListWindow::VehicleGroupSortFunction *const> BaseVehicleListWindow::vehicle_group_depot_sorter_funcs = {
+	&VehicleGroupLengthSorter,
+};
+
+const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_depot_sorter_names = {
+	STR_SORT_BY_NUM_VEHICLES,
+};
+
 const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_shared_orders_sorter_names_calendar = {
 	STR_SORT_BY_NUM_VEHICLES,
 	STR_SORT_BY_TOTAL_PROFIT_THIS_YEAR,
@@ -181,7 +189,7 @@ std::span<const StringID> BaseVehicleListWindow::GetVehicleSorterNames() const
 		case GB_SHARED_ORDERS:
 			return TimerGameEconomy::UsingWallclockUnits() ? vehicle_group_shared_orders_sorter_names_wallclock : vehicle_group_shared_orders_sorter_names_calendar;
 		case GB_DEPOT:
-			return TimerGameEconomy::UsingWallclockUnits() ? vehicle_group_shared_orders_sorter_names_wallclock : vehicle_group_shared_orders_sorter_names_calendar;
+			return vehicle_group_depot_sorter_names;
 		default:
 			NOT_REACHED();
 	}
@@ -1930,8 +1938,6 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 				else {
 					tc = TC_BLACK;
 				}
-
-				if (show_orderlist) DrawSmallOrderList(*(vehgroup.vehicles_begin[0])->orders, olr.left, olr.right, ir.top + GetCharacterHeight(FS_SMALL), this->order_arrow_width);
 
 				DrawString(ir.left, ir.right, ir.top + WidgetDimensions::scaled.framerect.top, GetString(STR_JUST_COMMA, vehgroup.NumVehicles()), tc);
 				break;
