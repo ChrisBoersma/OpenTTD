@@ -1924,6 +1924,7 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 				break;
 
 			case GB_DEPOT:
+			{
 				assert(vehgroup.NumVehicles() > 0);
 
 				for (int i = 0; i < static_cast<int>(vehgroup.NumVehicles()); ++i) {
@@ -1931,17 +1932,17 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 					DrawVehicleImage(vehgroup.vehicles_begin[i], { image_left + WidgetDimensions::scaled.hsep_wide * i, ir.top, image_right, ir.bottom }, selected_vehicle, EIT_IN_LIST, 0);
 				}
 
-				TextColour tc;
-				if (vehgroup.vehicles_begin[0]->IsStoppedInDepot()) {
-					tc = TC_BLUE;
+				const Vehicle *v = vehgroup.vehicles_begin[0];
+
+				if (v->IsStoppedInDepot() && v->type != VEH_AIRCRAFT) {
+					DrawString(tr.left, tr.right, ir.top, GetString(STR_DEPOT_NAME, v->type, GetDepotIndex(v->tile)), TC_BLACK, SA_LEFT, false, FS_SMALL);
 				}
-				else {
-					tc = TC_BLACK;
-				}
+
+				TextColour tc = v->IsStoppedInDepot() ? TC_BLUE : TC_BLACK;
 
 				DrawString(ir.left, ir.right, ir.top + WidgetDimensions::scaled.framerect.top, GetString(STR_JUST_COMMA, vehgroup.NumVehicles()), tc);
 				break;
-
+			}
 			default:
 				NOT_REACHED();
 		}

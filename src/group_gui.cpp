@@ -963,7 +963,7 @@ public:
 	{
 		switch (widget) {
 			case WID_GL_DEFAULT_VEHICLES: // Ungrouped vehicles
-				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, DEFAULT_GROUP, this->vehicle_sel, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS, VehicleListIdentifier{});
+				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, DEFAULT_GROUP, this->vehicle_sel, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS || this->grouping == GB_DEPOT, VehicleListIdentifier{});
 
 				this->vehicle_sel = VehicleID::Invalid();
 				this->group_over = GroupID::Invalid();
@@ -980,7 +980,7 @@ public:
 				auto it = this->group_sb->GetScrolledItemFromWidget(this->groups, pt.y, this, WID_GL_LIST_GROUP);
 				GroupID new_g = it == this->groups.end() ? NEW_GROUP : it->group->index;
 
-				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, new_g == NEW_GROUP ? CcAddVehicleNewGroup : nullptr, new_g, vindex, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS, VehicleListIdentifier{});
+				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, new_g == NEW_GROUP ? CcAddVehicleNewGroup : nullptr, new_g, vindex, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS || this->grouping == GB_DEPOT, VehicleListIdentifier{});
 				break;
 			}
 
