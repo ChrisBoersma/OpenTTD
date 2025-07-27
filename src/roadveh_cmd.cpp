@@ -781,6 +781,15 @@ struct OvertakeData {
 	Trackdir trackdir;
 };
 
+static bool IsTileOneWay(Tile tile)
+{
+	if (IsNormalRoadTile(tile)) {
+		DisallowedRoadDirections disallowed_dir = GetDisallowedRoadDirections(tile);
+		if (disallowed_dir == DRD_SOUTHBOUND || disallowed_dir == DRD_NORTHBOUND) return true;
+	}
+	return false;
+}
+
 /**
  * Check if overtaking is possible on a piece of track
  *
@@ -794,9 +803,16 @@ static bool CheckRoadBlockedForOvertaking(OvertakeData *od)
 	TrackdirBits trackdirbits = TrackStatusToTrackdirBits(ts);
 	TrackdirBits red_signals = TrackStatusToRedSignals(ts); // barred level crossing
 	TrackBits trackbits = TrackdirBitsToTrackBits(trackdirbits);
+	Tile next_tile = od->tile + TileOffsByDiagDir(DirToDiagDir(od->v->direction));
 
-	/* Track does not continue along overtaking direction || track has junction || levelcrossing is barred */
-	if (!HasBit(trackdirbits, od->trackdir) || (trackbits & ~TRACK_BIT_CROSS) || (red_signals != TRACKDIR_BIT_NONE)) return true;
+	/* Track does not continue along overtaking direction || levelcrossing is barred */
+	if (!HasBit(trackdirbits, od->trackdir) || (red_signals != TRACKDIR_BIT_NONE)) return true;
+
+	/* Track has junction and next tile is not one-way*/
+	if ((trackbits & ~TRACK_BIT_CROSS) && !IsTileOneWay(next_tile)) return true;
+
+	/* Allow overtaking if tile is one-way*/
+	if (IsTileOneWay(od->tile)) return false;
 
 	/* Are there more vehicles on the tile except the two vehicles involved in overtaking */
 	return HasVehicleOnTile(od->tile, [&](const Vehicle *v) {
