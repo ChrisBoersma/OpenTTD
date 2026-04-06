@@ -1599,6 +1599,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Полегат
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Стръмен
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Много стръмен
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Разпределение на разнообразието: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Изберете дали картата да съдържа както планини, така и равнинни зони. Колкото по-голямо е разнообразието, толкова по-големи са разликите във височината между планинските и равнинните зони
 
@@ -2433,15 +2435,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} и
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} свалени досега
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} изтеглени
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Свързване..
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Оторизиране..
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Изчакване..
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Сваляне на карта..
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Обработка на данни..
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Регистриране..
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Сваляне на инфо за играта..
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Сваляне на инфо за компаниите..
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Изключване
 
@@ -2799,6 +2799,8 @@ STR_PICKER_MODE_USED                                            :Използв�
 STR_PICKER_MODE_USED_TOOLTIP                                    :Превключване показването само на съществуващи обекти
 STR_PICKER_MODE_SAVED                                           :Записани
 STR_PICKER_MODE_SAVED_TOOLTIP                                   :Превключване показването само на записани обекти
+
+
 
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Изберане на тип станция за показване
@@ -4101,6 +4103,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Макс
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Обхват: {GOLD}{COMMA} полета
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Тип летателно средство: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Всички типове товари
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Стоки
@@ -4261,6 +4265,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Иск�
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Съобщение от производител
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Създадохме нов {STRING} - интересувате ли се от ексклузивното право да използвате това ПС за една година, за да видим как то работи, преди да го пуснем на пазара за масова употреба?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :локомотив за двурелсов път
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :локомотив за електрифициран релсов път
@@ -4437,7 +4442,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Печа
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Печалба за тази година: {LTBLUE}{CURRENCY_LONG} (за миналата: {CURRENCY_LONG}) {BLACK}Мин. производителност: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Печалба за този период: {LTBLUE}{CURRENCY_LONG} (за миналия: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Печалба за този период: {LTBLUE}{CURRENCY_LONG} (за миналия: {CURRENCY_LONG}) {BLACK}Мин. производителност: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Надеждност: {LTBLUE}{COMMA}% {BLACK}Разваляния от последното сервизиране: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{G=m}{LTBLUE}{ENGINE} {BLACK}Построен: {LTBLUE}{NUM}{BLACK} Стойност: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Капацитет: {LTBLUE}няма{STRING}
@@ -4977,7 +4981,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Не м�
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Градът не може да бъде преименуван
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Не може да се основе град тук...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Градът не може да се разрасне
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... прекалено близо до края на картата
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... прекалено близо до друг град
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... прекалено много градове
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... няма повече място на картата

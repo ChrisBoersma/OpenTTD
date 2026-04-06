@@ -533,7 +533,11 @@ static void SlWriteSimpleGamma(size_t i)
 	SlWriteByte((uint8_t)i);
 }
 
-/** Return how many bytes used to encode a gamma value */
+/**
+ * Return how many bytes used to encode a gamma value.
+ * @param i The value to encode with gamma encoding.
+ * @return The length in bytes.
+ */
 static inline uint SlGetGammaLength(size_t i)
 {
 	return 1 + (i >= (1 << 7)) + (i >= (1 << 14)) + (i >= (1 << 21)) + (i >= (1 << 28));
@@ -566,6 +570,8 @@ static inline uint SlGetArrayLength(size_t length)
 
 /**
  * Return the type as saved/loaded inside the savegame.
+ * @param sld The save-load configuration for a single variable.
+ * @return The type description part for the way the data is stored in the file.
  */
 static uint8_t GetSavegameFileType(const SaveLoad &sld)
 {
@@ -656,7 +662,10 @@ static inline uint8_t SlCalcConvFileLen(VarType conv)
 	}
 }
 
-/** Return the size in bytes of a reference (pointer) */
+/**
+ * Return the size in bytes of a reference (pointer).
+ * @return Return the size of this type in bytes.
+ */
 static inline size_t SlCalcRefLen()
 {
 	return IsSavegameVersionBefore(SLV_69) ? 2 : 4;
@@ -796,7 +805,10 @@ static void SlCopyBytes(void *ptr, size_t length)
 	}
 }
 
-/** Get the length of the current object */
+/**
+ * Get the length of the current object.
+ * @return The length of the object in bytes.
+ */
 size_t SlGetFieldLength()
 {
 	return _sl.obj_len;
@@ -929,6 +941,7 @@ static inline size_t SlCalcStdStringLen(const void *ptr)
  * because the validation looks for SCC_ENCODED. If there is something invalid,
  * just bail out and do not continue trying to replace the tokens.
  * @param str the string to fix.
+ * @param fix_code Whether to interpret/replace codes 0xE028 and 0xE02A as/with SCC_ENCODED.
  */
 void FixSCCEncoded(std::string &str, bool fix_code)
 {
@@ -1165,6 +1178,7 @@ void SlCopy(void *object, size_t length, VarType conv)
  * Return the size in bytes of a certain type of atomic array
  * @param length The length of the array counted in elements
  * @param conv VarType type of the variable that is used in calculating the size
+ * @return The size of this type in bytes.
  */
 static inline size_t SlCalcArrayLen(size_t length, VarType conv)
 {
@@ -1357,6 +1371,7 @@ public:
 	 * @param storage The storage to find the size of
 	 * @param conv VarType type of variable that is used for calculating the size
 	 * @param cmd The SaveLoadType ware are saving/loading.
+	 * @return The size of this type in bytes.
 	 */
 	static size_t SlCalcLen(const void *storage, VarType conv, SaveLoadType cmd = SL_VAR)
 	{
@@ -1443,6 +1458,7 @@ public:
  * Return the size in bytes of a list.
  * @param list The std::list to find the size of.
  * @param conv VarType type of variable that is used for calculating the size.
+ * @return The size of this type in bytes.
  */
 static inline size_t SlCalcRefListLen(const void *list, VarType conv)
 {
@@ -1470,6 +1486,7 @@ static void SlRefList(void *list, VarType conv)
  * Return the size in bytes of a vector.
  * @param vector The std::vector to find the size of.
  * @param conv VarType type of variable that is used for calculating the size.
+ * @return The size of this type in bytes.
  */
 static size_t SlCalcRefVectorLen(const void *vector, VarType conv)
 {
@@ -1497,6 +1514,7 @@ static void SlRefVector(void *vector, VarType conv)
  * Return the size in bytes of a std::deque.
  * @param deque The std::deque to find the size of
  * @param conv VarType type of variable that is used for calculating the size
+ * @return The size of this type in bytes.
  */
 static inline size_t SlCalcDequeLen(const void *deque, VarType conv)
 {
@@ -1555,6 +1573,7 @@ static void SlDeque(void *deque, VarType conv)
  * Return the size in bytes of a std::vector.
  * @param vector The std::vector to find the size of
  * @param conv VarType type of variable that is used for calculating the size
+ * @return The size of this type in bytes.
  */
 static inline size_t SlCalcVectorLen(const void *vector, VarType conv)
 {
@@ -1609,7 +1628,11 @@ static void SlVector(void *vector, VarType conv)
 	}
 }
 
-/** Are we going to save this object or not? */
+/**
+ * Are we going to save this object or not?
+ * @param sld The save-load configuration for a single variable.
+ * @return \c true iff the version of the current save game is within the range of the configuration.
+ */
 static inline bool SlIsObjectValidInSavegame(const SaveLoad &sld)
 {
 	return (_sl_version >= sld.version_from && _sl_version < sld.version_to);
@@ -1812,7 +1835,7 @@ static bool SlObjectMember(void *object, const SaveLoad &sld)
 
 /**
  * Set the length of this list.
- * @param The length of the list.
+ * @param length The length of the list.
  */
 void SlSetStructListLength(size_t length)
 {
@@ -1879,12 +1902,12 @@ class SlSkipHandler : public SaveLoadHandler {
 		this->Load(object);
 	}
 
-	virtual SaveLoadTable GetDescription() const override
+	SaveLoadTable GetDescription() const override
 	{
 		return {};
 	}
 
-	virtual SaveLoadCompatTable GetCompatDescription() const override
+	SaveLoadCompatTable GetCompatDescription() const override
 	{
 		NOT_REACHED();
 	}
@@ -2794,11 +2817,11 @@ struct LZMASaveFilter : SaveFilter {
 
 /** The format for a reader/writer type of a savegame */
 struct SaveLoadFormat {
-	std::string_view name; ///< name of the compressor/decompressor (debug-only)
-	uint32_t tag;                           ///< the 4-letter tag by which it is identified in the savegame
-
 	std::shared_ptr<LoadFilter> (*init_load)(std::shared_ptr<LoadFilter> chain); ///< Constructor for the load filter.
 	std::shared_ptr<SaveFilter> (*init_write)(std::shared_ptr<SaveFilter> chain, uint8_t compression); ///< Constructor for the save filter.
+
+	std::string_view name; ///< name of the compressor/decompressor (debug-only)
+	uint32_t tag; ///< the 4-letter tag by which it is identified in the savegame
 
 	uint8_t min_compression;                 ///< the minimum compression level of this format
 	uint8_t default_compression;             ///< the default compression level of this format
@@ -2814,19 +2837,19 @@ static const uint32_t SAVEGAME_TAG_LZMA = TO_BE32('OTTX');
 static const SaveLoadFormat _saveload_formats[] = {
 #if defined(WITH_LZO)
 	/* Roughly 75% larger than zlib level 6 at only ~7% of the CPU usage. */
-	{"lzo",  SAVEGAME_TAG_LZO,  CreateLoadFilter<LZOLoadFilter>,    CreateSaveFilter<LZOSaveFilter>,    0, 0, 0},
+	{CreateLoadFilter<LZOLoadFilter>, CreateSaveFilter<LZOSaveFilter>, "lzo", SAVEGAME_TAG_LZO, 0, 0, 0},
 #else
-	{"lzo",  SAVEGAME_TAG_LZO,  nullptr,                            nullptr,                            0, 0, 0},
+	{nullptr, nullptr, "lzo", SAVEGAME_TAG_LZO, 0, 0, 0},
 #endif
 	/* Roughly 5 times larger at only 1% of the CPU usage over zlib level 6. */
-	{"none", SAVEGAME_TAG_NONE, CreateLoadFilter<NoCompLoadFilter>, CreateSaveFilter<NoCompSaveFilter>, 0, 0, 0},
+	{CreateLoadFilter<NoCompLoadFilter>, CreateSaveFilter<NoCompSaveFilter>, "none", SAVEGAME_TAG_NONE, 0, 0, 0},
 #if defined(WITH_ZLIB)
 	/* After level 6 the speed reduction is significant (1.5x to 2.5x slower per level), but the reduction in filesize is
 	 * fairly insignificant (~1% for each step). Lower levels become ~5-10% bigger by each level than level 6 while level
 	 * 1 is "only" 3 times as fast. Level 0 results in uncompressed savegames at about 8 times the cost of "none". */
-	{"zlib", SAVEGAME_TAG_ZLIB, CreateLoadFilter<ZlibLoadFilter>,   CreateSaveFilter<ZlibSaveFilter>,   0, 6, 9},
+	{CreateLoadFilter<ZlibLoadFilter>, CreateSaveFilter<ZlibSaveFilter>, "zlib", SAVEGAME_TAG_ZLIB, 0, 6, 9},
 #else
-	{"zlib", SAVEGAME_TAG_ZLIB, nullptr,                            nullptr,                            0, 0, 0},
+	{nullptr, nullptr, "zlib", SAVEGAME_TAG_ZLIB, 0, 0, 0},
 #endif
 #if defined(WITH_LIBLZMA)
 	/* Level 2 compression is speed wise as fast as zlib level 6 compression (old default), but results in ~10% smaller saves.
@@ -2834,9 +2857,9 @@ static const SaveLoadFormat _saveload_formats[] = {
 	 * The next significant reduction in file size is at level 4, but that is already 4 times slower. Level 3 is primarily 50%
 	 * slower while not improving the filesize, while level 0 and 1 are faster, but don't reduce savegame size much.
 	 * It's OTTX and not e.g. OTTL because liblzma is part of xz-utils and .tar.xz is preferred over .tar.lzma. */
-	{"lzma", SAVEGAME_TAG_LZMA, CreateLoadFilter<LZMALoadFilter>,   CreateSaveFilter<LZMASaveFilter>,   0, 2, 9},
+	{CreateLoadFilter<LZMALoadFilter>, CreateSaveFilter<LZMASaveFilter>, "lzma", SAVEGAME_TAG_LZMA, 0, 2, 9},
 #else
-	{"lzma", SAVEGAME_TAG_LZMA, nullptr,                            nullptr,                            0, 0, 0},
+	{nullptr, nullptr, "lzma", SAVEGAME_TAG_LZMA, 0, 0, 0},
 #endif
 };
 
@@ -2957,19 +2980,28 @@ static void SaveFileDone()
 #endif
 }
 
-/** Set the error message from outside of the actual loading/saving of the game (AfterLoadGame and friends) */
+/**
+ * Set the error message from outside of the actual loading/saving of the game (AfterLoadGame and friends).
+ * @param str The string describing the error.
+ */
 void SetSaveLoadError(StringID str)
 {
 	_sl.error_str = str;
 }
 
-/** Return the appropriate initial string for an error depending on whether we are saving or loading. */
+/**
+ * Return the appropriate initial string for an error depending on whether we are saving or loading.
+ * @return The encoded string with the error type.
+ */
 EncodedString GetSaveLoadErrorType()
 {
 	return GetEncodedString(_sl.action == SLA_SAVE ? STR_ERROR_GAME_SAVE_FAILED : STR_ERROR_GAME_LOAD_FAILED);
 }
 
-/** Return the description of the error. **/
+/**
+ * Return the description of the error.
+ * @return The encoded string with the error message.
+ */
 EncodedString GetSaveLoadErrorMessage()
 {
 	return GetEncodedString(_sl.error_str, _sl.extra_msg);
@@ -2985,6 +3017,8 @@ static void SaveFileError()
 /**
  * We have written the whole game into memory, _memory_savegame, now find
  * and appropriate compressor and start writing to file.
+ * @param threaded Whether to run the compression in the background or not.
+ * @return SL_OK when everything went okay, otherwise an error.
  */
 static SaveOrLoadResult SaveFileToDisk(bool threaded)
 {
@@ -3251,6 +3285,7 @@ SaveOrLoadResult LoadWithFilter(std::shared_ptr<LoadFilter> reader)
  * handled. It opens the savegame, selects format and checks versions
  * @param filename The name of the savegame being created/loaded
  * @param fop Save or load mode. Load can also be a TTD(Patch) game.
+ * @param dft The type of file to save or load.
  * @param sb The sub directory to save the savegame in
  * @param threaded True when threaded saving is allowed
  * @return Return the result of the action. #SL_OK, #SL_ERROR, or #SL_REINIT ("unload" the game)
@@ -3258,7 +3293,7 @@ SaveOrLoadResult LoadWithFilter(std::shared_ptr<LoadFilter> reader)
 SaveOrLoadResult SaveOrLoad(std::string_view filename, SaveLoadOperation fop, DetailedFileType dft, Subdirectory sb, bool threaded)
 {
 	/* An instance of saving is already active, so don't go saving again */
-	if (_sl.saveinprogress && fop == SLO_SAVE && dft == DFT_GAME_FILE && threaded) {
+	if (_sl.saveinprogress && fop == SaveLoadOperation::Save && dft == DetailedFileType::GameFile && threaded) {
 		/* if not an autosave, but a user action, show error message */
 		if (!_do_autosave) ShowErrorMessage(GetEncodedString(STR_ERROR_SAVE_STILL_IN_PROGRESS), {}, WL_ERROR);
 		return SL_OK;
@@ -3267,7 +3302,7 @@ SaveOrLoadResult SaveOrLoad(std::string_view filename, SaveLoadOperation fop, De
 
 	try {
 		/* Load a TTDLX or TTDPatch game */
-		if (fop == SLO_LOAD && dft == DFT_OLD_GAME_FILE) {
+		if (fop == SaveLoadOperation::Load && dft == DetailedFileType::OldGameFile) {
 			ResetSaveloadData();
 
 			InitializeGame(256, 256, true, true); // set a mapsize of 256x256 for TTDPatch games or it might get confused
@@ -3290,35 +3325,35 @@ SaveOrLoadResult SaveOrLoad(std::string_view filename, SaveLoadOperation fop, De
 			return SL_OK;
 		}
 
-		assert(dft == DFT_GAME_FILE);
+		assert(dft == DetailedFileType::GameFile);
 		switch (fop) {
-			case SLO_CHECK:
+			case SaveLoadOperation::Check:
 				_sl.action = SLA_LOAD_CHECK;
 				break;
 
-			case SLO_LOAD:
+			case SaveLoadOperation::Load:
 				_sl.action = SLA_LOAD;
 				break;
 
-			case SLO_SAVE:
+			case SaveLoadOperation::Save:
 				_sl.action = SLA_SAVE;
 				break;
 
 			default: NOT_REACHED();
 		}
 
-		auto fh = (fop == SLO_SAVE) ? FioFOpenFile(filename, "wb", sb) : FioFOpenFile(filename, "rb", sb);
+		auto fh = (fop == SaveLoadOperation::Save) ? FioFOpenFile(filename, "wb", sb) : FioFOpenFile(filename, "rb", sb);
 
 		/* Make it a little easier to load savegames from the console */
-		if (!fh.has_value() && fop != SLO_SAVE) fh = FioFOpenFile(filename, "rb", SAVE_DIR);
-		if (!fh.has_value() && fop != SLO_SAVE) fh = FioFOpenFile(filename, "rb", BASE_DIR);
-		if (!fh.has_value() && fop != SLO_SAVE) fh = FioFOpenFile(filename, "rb", SCENARIO_DIR);
+		if (!fh.has_value() && fop != SaveLoadOperation::Save) fh = FioFOpenFile(filename, "rb", Subdirectory::Save);
+		if (!fh.has_value() && fop != SaveLoadOperation::Save) fh = FioFOpenFile(filename, "rb", Subdirectory::Base);
+		if (!fh.has_value() && fop != SaveLoadOperation::Save) fh = FioFOpenFile(filename, "rb", Subdirectory::Scenario);
 
 		if (!fh.has_value()) {
-			SlError(fop == SLO_SAVE ? STR_GAME_SAVELOAD_ERROR_FILE_NOT_WRITEABLE : STR_GAME_SAVELOAD_ERROR_FILE_NOT_READABLE);
+			SlError(fop == SaveLoadOperation::Save ? STR_GAME_SAVELOAD_ERROR_FILE_NOT_WRITEABLE : STR_GAME_SAVELOAD_ERROR_FILE_NOT_READABLE);
 		}
 
-		if (fop == SLO_SAVE) { // SAVE game
+		if (fop == SaveLoadOperation::Save) { // SAVE game
 			Debug(desync, 1, "save: {:08x}; {:02x}; {}", TimerGameEconomy::date, TimerGameEconomy::date_fract, filename);
 			if (!_settings_client.gui.threaded_saves) threaded = false;
 
@@ -3326,25 +3361,24 @@ SaveOrLoadResult SaveOrLoad(std::string_view filename, SaveLoadOperation fop, De
 		}
 
 		/* LOAD game */
-		assert(fop == SLO_LOAD || fop == SLO_CHECK);
+		assert(fop == SaveLoadOperation::Load || fop == SaveLoadOperation::Check);
 		Debug(desync, 1, "load: {}", filename);
-		return DoLoad(std::make_shared<FileReader>(std::move(*fh)), fop == SLO_CHECK);
+		return DoLoad(std::make_shared<FileReader>(std::move(*fh)), fop == SaveLoadOperation::Check);
 	} catch (...) {
 		/* This code may be executed both for old and new save games. */
 		ClearSaveLoadState();
 
 		/* Skip the "colour" character */
-		if (fop != SLO_CHECK) Debug(sl, 0, "{}", GetSaveLoadErrorType().GetDecodedString().substr(3) + GetSaveLoadErrorMessage().GetDecodedString());
+		if (fop != SaveLoadOperation::Check) Debug(sl, 0, "{}", GetSaveLoadErrorType().GetDecodedString().substr(3) + GetSaveLoadErrorMessage().GetDecodedString());
 
 		/* A saver/loader exception!! reinitialize all variables to prevent crash! */
-		return (fop == SLO_LOAD) ? SL_REINIT : SL_ERROR;
+		return (fop == SaveLoadOperation::Load) ? SL_REINIT : SL_ERROR;
 	}
 }
 
 /**
  * Create an autosave or netsave.
  * @param counter A reference to the counter variable to be used for rotating the file name.
- * @param netsave Indicates if this is a regular autosave or a netsave.
  */
 void DoAutoOrNetsave(FiosNumberedSaveName &counter)
 {
@@ -3357,7 +3391,7 @@ void DoAutoOrNetsave(FiosNumberedSaveName &counter)
 	}
 
 	Debug(sl, 2, "Autosaving to '{}'", filename);
-	if (SaveOrLoad(filename, SLO_SAVE, DFT_GAME_FILE, AUTOSAVE_DIR) != SL_OK) {
+	if (SaveOrLoad(filename, SaveLoadOperation::Save, DetailedFileType::GameFile, Subdirectory::Autosave) != SL_OK) {
 		ShowErrorMessage(GetEncodedString(STR_ERROR_AUTOSAVE_FAILED), {}, WL_ERROR);
 	}
 }
@@ -3366,11 +3400,12 @@ void DoAutoOrNetsave(FiosNumberedSaveName &counter)
 /** Do a save when exiting the game (_settings_client.gui.autosave_on_exit) */
 void DoExitSave()
 {
-	SaveOrLoad("exit.sav", SLO_SAVE, DFT_GAME_FILE, AUTOSAVE_DIR);
+	SaveOrLoad("exit.sav", SaveLoadOperation::Save, DetailedFileType::GameFile, Subdirectory::Autosave);
 }
 
 /**
  * Get the default name for a savegame *or* screenshot.
+ * @return The default name, i.e. company name and (play) time.
  */
 std::string GenerateDefaultSaveName()
 {
@@ -3420,8 +3455,8 @@ std::string GenerateDefaultSaveName()
  */
 void FileToSaveLoad::SetMode(const FiosType &ft, SaveLoadOperation fop)
 {
-	if (ft.abstract == FT_INVALID || ft.abstract == FT_NONE) {
-		this->file_op = SLO_INVALID;
+	if (ft.abstract == AbstractFileType::Invalid || ft.abstract == AbstractFileType::None) {
+		this->file_op = SaveLoadOperation::Invalid;
 		this->ftype = FIOS_TYPE_INVALID;
 		return;
 	}
@@ -3431,8 +3466,8 @@ void FileToSaveLoad::SetMode(const FiosType &ft, SaveLoadOperation fop)
 }
 
 /**
- * Set the title of the file.
- * @param title Title of the file.
+ * Set the mode, title and name of the file.
+ * @param item Container with mode, title and name.
  */
 void FileToSaveLoad::Set(const FiosItem &item)
 {

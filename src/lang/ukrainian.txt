@@ -379,6 +379,7 @@ STR_UNITS_FORCE_SI                                              :{DECIMAL}{NBSP}
 STR_UNITS_HEIGHT_IMPERIAL                                       :{DECIMAL}{NBSP}фт
 STR_UNITS_HEIGHT_METRIC                                         :{DECIMAL}{NBSP}м
 STR_UNITS_HEIGHT_SI                                             :{DECIMAL}{NBSP}м
+STR_UNITS_HEIGHT_GAMEUNITS                                      :{DECIMAL}{NBSP}рів{P ень ні нів}
 
 # Time units used in string control characters
 STR_UNITS_DAYS                                                  :{COMMA}{NBSP}день
@@ -766,6 +767,8 @@ STR_GRAPH_LAST_24_MONTHS                                        :{TINY_FONT}{BLA
 STR_GRAPH_LAST_24_QUARTERS                                      :{TINY_FONT}{BLACK}6 років (щоквартально)
 STR_GRAPH_LAST_24_YEARS                                         :{TINY_FONT}{BLACK}24 роки (щорічно)
 
+STR_GRAPH_TOGGLE_RANGE                                          :Перемкнути графік для цього проміжку даних
+STR_GRAPH_SELECT_SCALE                                          :Змінити горизонтальну шкалу графа
 
 STR_GRAPH_CARGO_PAYMENT_RATES_CAPTION                           :{WHITE}Тарифи доставки вантажів
 STR_GRAPH_CARGO_PAYMENT_RATES_DAYS                              :{TINY_FONT}{BLACK}Днів у русі
@@ -773,9 +776,9 @@ STR_GRAPH_CARGO_PAYMENT_RATES_SECONDS                           :{TINY_FONT}{BLA
 STR_GRAPH_CARGO_PAYMENT_RATES_TITLE                             :{TINY_FONT}{BLACK}Плата за доставку 10 одиниць (або 10,000 літрів) вантажу на відстань 20 квадратів
 STR_GRAPH_CARGO_ENABLE_ALL                                      :{TINY_FONT}{BLACK}Усі
 STR_GRAPH_CARGO_DISABLE_ALL                                     :{TINY_FONT}{BLACK}Нічого
-STR_GRAPH_CARGO_TOOLTIP_ENABLE_ALL                              :{BLACK}Показувати всі види вантажів на графіку
-STR_GRAPH_CARGO_TOOLTIP_DISABLE_ALL                             :{BLACK}Не показувати ніякі типи вантажів на графіку
-STR_GRAPH_CARGO_PAYMENT_TOGGLE_CARGO                            :{BLACK}Ввімк/вимик графік типів вантажу
+STR_GRAPH_CARGO_TOOLTIP_ENABLE_ALL                              :{BLACK}Показувати всі види вантажів на графі
+STR_GRAPH_CARGO_TOOLTIP_DISABLE_ALL                             :{BLACK}Не показувати типи вантажів на графі
+STR_GRAPH_CARGO_PAYMENT_TOGGLE_CARGO                            :{BLACK}Перемкнути графік вантажу цього типу
 STR_GRAPH_CARGO_PAYMENT_CARGO                                   :{TINY_FONT}{BLACK}{STRING}
 
 STR_GRAPH_INDUSTRY_CAPTION                                      :{WHITE}{INDUSTRY} - Історія вантажів
@@ -792,7 +795,7 @@ STR_GRAPH_PERFORMANCE_DETAIL_TOOLTIP                            :{BLACK}Пока
 
 # Graph key window
 STR_GRAPH_KEY_CAPTION                                           :{WHITE}Легенда графіків
-STR_GRAPH_KEY_COMPANY_SELECTION_TOOLTIP                         :{BLACK}Натисніть тут для ввімк/вимик. графіку окремої компанії
+STR_GRAPH_KEY_COMPANY_SELECTION_TOOLTIP                         :{BLACK}Натисніть тут для перемикання графіку окремої компанії
 
 # Company league window
 STR_COMPANY_LEAGUE_TABLE_CAPTION                                :{WHITE}Рейтингова таблиця
@@ -1249,7 +1252,7 @@ STR_GAME_OPTIONS_BASE_GRF_TOOLTIP                               :Оберіть,
 STR_GAME_OPTIONS_BASE_GRF_DESCRIPTION_TOOLTIP                   :Додаткова інформація про базовий набір графіки
 
 STR_GAME_OPTIONS_BASE_SFX                                       :Базовий набір звуків
-STR_GAME_OPTIONS_BASE_SFX_TOOLTIP                               :Оберіть базовий набір звуків для використання (неможливо змінити у грі, тільки з головного меню)
+STR_GAME_OPTIONS_BASE_SFX_TOOLTIP                               :Оберіть базовий набір звуків для використання
 STR_GAME_OPTIONS_BASE_SFX_DESCRIPTION_TOOLTIP                   :Додаткова інформація про базовий набір звуків
 
 STR_GAME_OPTIONS_BASE_MUSIC                                     :Базовий музичний набір
@@ -1760,6 +1763,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :плавно
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :грубо
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :дуже грубо
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Розподіл різноманітності: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Оберіть наявність на мапі гір і рівнин. Чим більша різноманітність, тим більша відмінність у висотах між гірськими і пласкими ділянками
 
@@ -1788,8 +1793,8 @@ STR_CONFIG_SETTING_HEIGHTMAP_ROTATION_CLOCKWISE                 :за годин
 
 STR_CONFIG_SETTING_SE_FLAT_WORLD_HEIGHT                         :Основний рівень суші плаского рельєфу: {STRING}
 ###length 2
-STR_CONFIG_SETTING_EDGES_NOT_EMPTY                              :{WHITE}Одна або більше клітинок з північного краю не є вільними
-STR_CONFIG_SETTING_EDGES_NOT_WATER                              :{WHITE}Одна або більше клітинок на одному з країв не є водними
+STR_CONFIG_SETTING_EDGES_NOT_EMPTY                              :{WHITE}Одна або більше клітинок з північного краю не вільні
+STR_CONFIG_SETTING_EDGES_NOT_WATER                              :{WHITE}Одна або більше клітинок на одному з країв не водна
 
 STR_CONFIG_SETTING_STATION_SPREAD                               :Максимальний розмір станцій: {STRING}
 STR_CONFIG_SETTING_STATION_SPREAD_HELPTEXT                      :Максимально допустимий лінійний розмір станцій. Зауважте, що занадто високе значення параметра може уповільнити гру.
@@ -1826,6 +1831,8 @@ STR_CONFIG_SETTING_SCROLLMODE_LMB                               :Переміщ�
 STR_CONFIG_SETTING_SMOOTH_SCROLLING                             :Плавна прокрутка у вікні: {STRING}
 STR_CONFIG_SETTING_SMOOTH_SCROLLING_HELPTEXT                    :Налаштування способу прокрутки основного екрану при клацанні мишею по зменшенній карті, або інших діях, що призводять до переміщення по карті (кнопки "Оглянути", тощо). При включенні опції переміщення карти відбувається плавно. При виключенні - відбувається моментальне переміщення в необхідну точку
 
+STR_CONFIG_SETTING_TOOLBAR_DROPDOWN_AUTOSELECT                  :Стандартний вибір в панелі інструментів: {STRING}
+STR_CONFIG_SETTING_TOOLBAR_DROPDOWN_AUTOSELECT_HELPTEXT         :Поведінка обрання пунктів меню панелей інструментів. "Вимкнуто" — пункти меню панелей інструментів залишаються відкритими до вибору пункту меню. "Увімкнуто" — пункти меню панелей інструментів діють коли відпущена кнопка миші.
 
 STR_CONFIG_SETTING_MEASURE_TOOLTIP                              :Показувати підказки про розміри під час побудови: {STRING}
 STR_CONFIG_SETTING_MEASURE_TOOLTIP_HELPTEXT                     :Відображати довжини та різниці висот в підказках в процесі побудови
@@ -2223,6 +2230,7 @@ STR_CONFIG_SETTING_LARGER_TOWNS_DISABLED                        :Жодного
 STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER                         :Множник розміру мегаполісів: {STRING}
 STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER_HELPTEXT                :Середньостатистичне відношення початкового розміру мегаполісів порівняно зі звичайними містами.
 STR_CONFIG_SETTING_TOWN_MIN_DISTANCE                            :Найменша відстань між містами: {STRING}
+STR_CONFIG_SETTING_TOWN_MIN_DISTANCE_HELPTEXT                   :Встановлення найменшої відстані у клітинках між містами при створенні мапи і випадковому заснуванні
 
 STR_CONFIG_SETTING_LINKGRAPH_RECALC_INTERVAL                    :Оновлення обрахунку зв'язків, час {STRING}
 STR_CONFIG_SETTING_LINKGRAPH_RECALC_INTERVAL_HELPTEXT           :Час між перерозрахунками графа зв'язків. Кожен розрахунок обчислює один компонент графа, тобто лише деякі компоненти оновляться після закінчення кожного проміжку часу, а не весь граф. Чим менше це значення, тим більше часу процесора буде витрачатися. Чим більше це значення, тим довше доведеться очікувати розподілення вантажів на нових маршрутах
@@ -2564,7 +2572,7 @@ STR_NETWORK_SERVER_LIST_SERVER_FULL                             :{SILVER}Сер�
 STR_NETWORK_SERVER_LIST_SERVER_BANNED                           :{SILVER}ТЕБЕ ЗАБЛОКОВАНО НА СЕРВЕРІ
 STR_NETWORK_SERVER_LIST_SERVER_TOO_OLD                          :{SILVER}СЕРЕВЕР НЕЙМОВІРНО СТАРИЙ
 STR_NETWORK_SERVER_LIST_VERSION_MISMATCH                        :{SILVER}Версія не співпадає
-STR_NETWORK_SERVER_LIST_GRF_MISMATCH                            :{SILVER}NEWGRF ПОМИЛКА
+STR_NETWORK_SERVER_LIST_GRF_MISMATCH                            :{SILVER}НЕСУМІСНІСТЬ NEWGRF
 
 STR_NETWORK_SERVER_LIST_JOIN_GAME                               :{BLACK}Приєднатися
 STR_NETWORK_SERVER_LIST_REFRESH                                 :{BLACK}Оновити сервер
@@ -2608,15 +2616,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} к
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} завантажено
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} вже завантажено
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) З'єднання...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Авторизація...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Очікування...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Завантаження карти...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Обробка даних...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Реєстрація...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Запит інформації про гру...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Запит інформації про компанію...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Роз'єднання
 
@@ -2712,7 +2718,7 @@ STR_NETWORK_CHAT_OSKTITLE                                       :{BLACK}Введ
 # Network messages
 STR_NETWORK_ERROR_NOTAVAILABLE                                  :{WHITE}Не знайдено мережевого пристрою
 STR_NETWORK_ERROR_NOCONNECTION                                  :{WHITE}З'єднання з сервером затяглося або скасоване
-STR_NETWORK_ERROR_NEWGRF_MISMATCH                               :{WHITE}Не можна з'єднатись внаслідок неспівпадання NewGRF
+STR_NETWORK_ERROR_NEWGRF_MISMATCH                               :{WHITE}Неможливо з'єднатись внаслідок несумісності NewGRF
 STR_NETWORK_ERROR_DESYNC                                        :{WHITE}Помилка синхронізації з мережевою грою
 STR_NETWORK_ERROR_LOSTCONNECTION                                :{WHITE}З'єднання втрачено
 STR_NETWORK_ERROR_SAVEGAMEERROR                                 :{WHITE}Неможливо завантажити гру
@@ -2744,7 +2750,7 @@ STR_NETWORK_ERROR_CLIENT_DESYNC                                 :помилка 
 STR_NETWORK_ERROR_CLIENT_SAVEGAME                               :неможливо завантажити карту
 STR_NETWORK_ERROR_CLIENT_CONNECTION_LOST                        :з'єднання втрачено
 STR_NETWORK_ERROR_CLIENT_PROTOCOL_ERROR                         :помилка протоколу
-STR_NETWORK_ERROR_CLIENT_NEWGRF_MISMATCH                        :Неспівпадання NewGRF
+STR_NETWORK_ERROR_CLIENT_NEWGRF_MISMATCH                        :Несумісність NewGRF
 STR_NETWORK_ERROR_CLIENT_NOT_AUTHORIZED                         :відмова авторизації
 STR_NETWORK_ERROR_CLIENT_NOT_EXPECTED                           :отримано невірний або неочікуваний пакет
 STR_NETWORK_ERROR_CLIENT_WRONG_REVISION                         :невірна версія гри
@@ -2863,10 +2869,10 @@ STR_CONTENT_DOWNLOAD_COMPLETE                                   :{WHITE}Зава
 STR_CONTENT_DOWNLOAD_PROGRESS_SIZE                              :{WHITE}{BYTES} з {BYTES} завантажено ({NUM} %)
 
 # Content downloading error messages
-STR_CONTENT_ERROR_COULD_NOT_CONNECT                             :{WHITE}Не можна приєднатись до серверу вмісту...
+STR_CONTENT_ERROR_COULD_NOT_CONNECT                             :{WHITE}Неможливо приєднатись до сервера вмісту...
 STR_CONTENT_ERROR_COULD_NOT_DOWNLOAD                            :{WHITE}Не вдалося завантажити...
 STR_CONTENT_ERROR_COULD_NOT_DOWNLOAD_FILE_NOT_WRITABLE          :{WHITE}... файл не відкритий для запису
-STR_CONTENT_ERROR_COULD_NOT_EXTRACT                             :{WHITE}Не можна розпакувати завантажений файл
+STR_CONTENT_ERROR_COULD_NOT_EXTRACT                             :{WHITE}Неможлмво розпакувати завантажений файл
 
 STR_MISSING_GRAPHICS_SET_CAPTION                                :{WHITE}Відстуня графіка
 STR_MISSING_GRAPHICS_SET_MESSAGE                                :{BLACK}OpenTTD потребує пакет графіки для гри. Завантажити його?
@@ -2980,7 +2986,22 @@ STR_PICKER_MODE_SAVED                                           :Збереже�
 STR_PICKER_MODE_SAVED_TOOLTIP                                   :Переключити на показ лише збережених елементів
 
 STR_PICKER_PREVIEW_SHRINK                                       :-
+STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Зменшити висоту попереднього перегляду зображень. Ctrl+клац зменшує до нижньої межі
 STR_PICKER_PREVIEW_EXPAND                                       :+
+STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Збільшити висоту попереднього перегляду зображень. Ctrl+клац збільшує до верхньої межі
+
+STR_PICKER_SELECT_COLLECTION_TOOLTIP                            :Обрання збірки
+STR_PICKER_COLLECTION_ADD                                       :Додати
+STR_PICKER_COLLECTION_ADD_TOOLTIP                               :Створення нової збірки
+STR_PICKER_COLLECTION_RENAME                                    :Перейменувати
+STR_PICKER_COLLECTION_RENAME_TOOLTIP                            :Перейменування збірки
+STR_PICKER_COLLECTION_DELETE                                    :Видалити
+STR_PICKER_COLLECTION_DELETE_TOOLTIP                            :Видалення збірки
+
+STR_PICKER_COLLECTION_RENAME_QUERY                              :Перейменувати збірку
+STR_PICKER_COLLECTION_DELETE_QUERY                              :Видалити збірку
+STR_PICKER_COLLECTION_DELETE_QUERY_TEXT                         :{YELLOW}Дійсно бажаєте видалити збірку?
+STR_PICKER_COLLECTION_DELETE_QUERY_DISABLED_TEXT                :{YELLOW}Дійсно бажаєте видалити збірку? У списку є відключені NewGRFи!
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Виберіть тип станцій для відображення
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Виберіть тип станції для побудови. Клацніть Ctrl+Клік, щоб додати або видалити зі списку збереженого
@@ -2988,10 +3009,12 @@ STR_PICKER_WAYPOINT_CLASS_TOOLTIP                               :Виберіт�
 STR_PICKER_WAYPOINT_TYPE_TOOLTIP                                :Виберіть тип точки шляху для побудови. Клацніть Ctrl+Клік, щоб додати або видалити зі списку збереженого
 STR_PICKER_ROADSTOP_BUS_CLASS_TOOLTIP                           :Виберіть тип автобусної зупинки для відображення
 STR_PICKER_ROADSTOP_BUS_TYPE_TOOLTIP                            :Виберіть тип автобусної зупинки для побудови. Клацніть Ctrl+Клік, щоб додати або видалити зі списку збереженого
+STR_PICKER_ROADSTOP_BUS_COLLECTION_TOOLTIP                      :Обрання збірки автобусних станцій для показу
 STR_PICKER_ROADSTOP_TRUCK_CLASS_TOOLTIP                         :Виберіть клас вантажної станції для відображення
 STR_PICKER_ROADSTOP_TRUCK_TYPE_TOOLTIP                          :Виберіть тип вантажної станції для побудови. Клацніть Ctrl+Клік, щоб додати або видалити зі списку збереженого
 STR_PICKER_OBJECT_CLASS_TOOLTIP                                 :Виберіть тип об’єкта для його відображення
 STR_PICKER_OBJECT_TYPE_TOOLTIP                                  :Виберіть тип об’єкта для побудови. Ctrl+клац, щоб додати або видалити зі списку збереженого. Ctrl+клац+протягування для виділення діагональної ділянки. Утримуйте Shift для показу очікуваних витрат
+STR_PICKER_OBJECT_COLLECTION_TOOLTIP                            :Обрання збірки чи об'єктів для показу
 STR_PICKER_HOUSE_CLASS_TOOLTIP                                  :Виберіть зону міста для відображення
 STR_PICKER_HOUSE_TYPE_TOOLTIP                                   :Виберіть тип споруди для побудови. Клацніть Ctrl+Клік, щоб додати або видалити зі списку збереженого
 
@@ -3016,6 +3039,7 @@ STR_HOUSE_PICKER_PROTECT                                        :Заборон�
 STR_HOUSE_PICKER_PROTECT_TOOLTIP                                :Укажіть, чи буде захищено цю будівлю від змін у разі зростання міста
 
 STR_HOUSE_PICKER_REPLACE                                        :Замінити наявний
+STR_HOUSE_PICKER_REPLACE_TOOLTIP                                :Чи наявний будинок автоматично видалятиметься з клітинки розташування
 
 STR_STATION_CLASS_DFLT                                          :Звичайна
 STR_STATION_CLASS_DFLT_STATION                                  :Звичайна станція
@@ -3562,6 +3586,10 @@ STR_MAPGEN_NORTHWEST                                            :{BLACK}півн
 STR_MAPGEN_NORTHEAST                                            :{BLACK}північно-східний
 STR_MAPGEN_SOUTHEAST                                            :{BLACK}південно-східний
 STR_MAPGEN_SOUTHWEST                                            :{BLACK}південно-західний
+STR_MAPGEN_NORTHWEST_TOOLTIP                                    :Перемкнути водний або довільний край північного заходу мапи
+STR_MAPGEN_NORTHEAST_TOOLTIP                                    :Перемкнути водний або довільний край північного сходу мапи
+STR_MAPGEN_SOUTHEAST_TOOLTIP                                    :Перемкнути водний або довільний край південного сходу мапи
+STR_MAPGEN_SOUTHWEST_TOOLTIP                                    :Перемкнути водний або довільний край південного заходу мапи
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}вільний формат
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}вода
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}довільно
@@ -3785,27 +3813,27 @@ STR_NEWGRF_LIST_COMPATIBLE                                      :{YELLOW}Зна�
 STR_NEWGRF_LIST_MISSING                                         :{RED}Відсутні файли
 
 # NewGRF 'it's broken' warnings
-STR_NEWGRF_BROKEN                                               :{WHITE}Поведінка NewGRF '{PUSH_COLOUR}{0:STRING}{POP_COLOUR}' може спричинити розсинхронізацію та/або аварійне завершення
-STR_NEWGRF_BROKEN_POWERED_WAGON                                 :{WHITE}Змінено стан моторвагону '{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}', коли він не у депо
-STR_NEWGRF_BROKEN_VEHICLE_LENGTH                                :{WHITE}Змінено довжину транспорту для '{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}', якщо він не в депо
-STR_NEWGRF_BROKEN_CAPACITY                                      :{WHITE}Вантажність транспорту змінено для '{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}' поза гаражем чи рембазою
+STR_NEWGRF_BROKEN                                               :{WHITE}Поведінка NewGRF '{0:STRING}'  може спричинити розсинхронізацію та/або аварійне завершення
+STR_NEWGRF_BROKEN_POWERED_WAGON                                 :{WHITE}Стан моторвагону '{1:ENGINE}' змінено поза депо
+STR_NEWGRF_BROKEN_VEHICLE_LENGTH                                :{WHITE}Довжину транспорту '{1:ENGINE}' змінено поза депо
+STR_NEWGRF_BROKEN_CAPACITY                                      :{WHITE}Вантажність транспорту '{1:ENGINE}' змінено поза гаражем чи переобладнанням
 STR_BROKEN_VEHICLE_LENGTH                                       :{WHITE}Потяг '{VEHICLE}', який належить '{COMPANY}', має неправильну довжину. Можливо, це спричинено проблемами з NewGRFs. Гра може розсинхронізуватись або аварійно завершитись
 
-STR_NEWGRF_BUGGY                                                :{WHITE}NewGRF '{PUSH_COLOUR}{0:STRING}{POP_COLOUR}'  надає хибну інформацію
-STR_NEWGRF_BUGGY_ARTICULATED_CARGO                              :{WHITE}Інформація про вантаж/переобладнання для '{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}' відрізняється від списку покупки після побудови. Це може спричинити невідповідності під час автооновлення/заміни
-STR_NEWGRF_BUGGY_ENDLESS_PRODUCTION_CALLBACK                    :{WHITE}'{PUSH_COLOUR}{1:STRING}{POP_COLOUR}' спричинив нескінченний цикл у виклику виробництва
+STR_NEWGRF_BUGGY                                                :{WHITE}NewGRF '{0:STRING}' надає хибну інформацію
+STR_NEWGRF_BUGGY_ARTICULATED_CARGO                              :{WHITE}Інформація про вантаж/переобладнання транспорту '{1:ENGINE}' відрізняється від списку покупки після побудови. Це може спричинити проблеми для автооновлення/заміни
+STR_NEWGRF_BUGGY_ENDLESS_PRODUCTION_CALLBACK                    :{WHITE}'{1:STRING}' спричиняє нескінченний цикл у виклику виробництва
 STR_NEWGRF_BUGGY_UNKNOWN_CALLBACK_RESULT                        :{WHITE}Виклик {1:HEX} повернув невідомий/неправильний результат {2:HEX}
-STR_NEWGRF_BUGGY_INVALID_CARGO_PRODUCTION_CALLBACK              :{WHITE}'{PUSH_COLOUR}{1:STRING}{POP_COLOUR}' використовує недійсний тип вантажу на виклик виробництва у {2:HEX}
+STR_NEWGRF_BUGGY_INVALID_CARGO_PRODUCTION_CALLBACK              :{WHITE}'{1:STRING}' використовує недійсний тип вантажу на виклик виробництва у {2:HEX}
 
 # 'User removed essential NewGRFs'-placeholders for stuff without specs
 STR_NEWGRF_INVALID_CARGO                                        :<невідомий вантаж>
 STR_NEWGRF_INVALID_CARGO_ABBREV                                 :??
 STR_NEWGRF_INVALID_CARGO_QUANTITY                               :{COMMA} <невідомого вантажу>
-STR_NEWGRF_INVALID_ENGINE                                       :<невірна модель транспорту>
+STR_NEWGRF_INVALID_ENGINE                                       :<недопустима модель транспорту>
 STR_NEWGRF_INVALID_INDUSTRYTYPE                                 :<невірне виробництво>
 
 # Placeholders for other invalid stuff, e.g. vehicles that have gone (Game Script).
-STR_INVALID_VEHICLE                                             :<невірний транспорт>
+STR_INVALID_VEHICLE                                             :<недопустимий транспорт>
 
 # NewGRF scanning window
 STR_NEWGRF_SCAN_CAPTION                                         :{WHITE}Шукаю NewGRF'и
@@ -3818,7 +3846,7 @@ STR_SIGN_LIST_MATCH_CASE                                        :{BLACK}Врах
 STR_SIGN_LIST_MATCH_CASE_TOOLTIP                                :{BLACK}Перемкнути регістр при порівнянні назви позначок з фільтром
 
 # Sign window
-STR_EDIT_SIGN_CAPTION                                           :{WHITE}Редагування напису
+STR_EDIT_SIGN_CAPTION                                           :{WHITE}Редагування назви
 STR_EDIT_SIGN_LOCATION_TOOLTIP                                  :{BLACK}Показати позначку в центрі екрану. Ctrl+клац мишею відкриє нове вікно у місці розташування позначки
 STR_EDIT_SIGN_NEXT_SIGN_TOOLTIP                                 :{BLACK}Наступне позначення
 STR_EDIT_SIGN_PREVIOUS_SIGN_TOOLTIP                             :{BLACK}Попереднє позначення
@@ -3855,6 +3883,7 @@ STR_TOWN_VIEW_LOCAL_AUTHORITY_BUTTON                            :{BLACK}Місц
 STR_TOWN_VIEW_LOCAL_AUTHORITY_TOOLTIP                           :{BLACK}Інформація про місцеву владу
 STR_TOWN_VIEW_RENAME_TOOLTIP                                    :{BLACK}Перейменувати місто
 STR_TOWN_VIEW_CARGO_GRAPH                                       :Вантажопотік
+STR_TOWN_VIEW_CARGO_GRAPH_TOOLTIP                               :Показати графік історії міських вантажів
 
 STR_TOWN_VIEW_EXPAND_BUTTON                                     :{BLACK}Розширити
 STR_TOWN_VIEW_EXPAND_TOOLTIP                                    :{BLACK}Збільшити розмір міста
@@ -4187,6 +4216,8 @@ STR_INDUSTRY_VIEW_PRODUCTION_LAST_MONTH_TITLE                   :{BLACK}Виро
 STR_INDUSTRY_VIEW_PRODUCTION_LAST_MINUTE_TITLE                  :{BLACK}Вироблено за минулу хвилину:
 STR_INDUSTRY_VIEW_TRANSPORTED                                   :{YELLOW}{CARGO_LONG}{STRING}{BLACK} ({COMMA}% перевезено)
 STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Показати підприємство у центрі екрану. Ctrl+клац мишею відкриє нове вікно з видом на підприємство
+STR_INDUSTRY_VIEW_CARGO_GRAPH                                   :{BLACK}Графік вантажів
+STR_INDUSTRY_VIEW_CARGO_GRAPH_TOOLTIP                           :{BLACK}Показати графік історії промислових вантажів
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Обсяг виробництва: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}Підприємство оголосило про близьке закриття!
 
@@ -4325,6 +4356,17 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Макс
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Дальність: {GOLD}{COMMA} клітинок
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Тип літака: {GOLD}{STRING}
 STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}Залізничні колії: {GOLD}{STRING}
+
+# Vehicle sort details
+STR_PURCHASE_SORT_DETAILS_COST                                  :{CURRENCY_LONG}
+STR_PURCHASE_SORT_DETAILS_SPEED                                 :{VELOCITY}
+STR_PURCHASE_SORT_DETAILS_POWER                                 :{POWER}
+STR_PURCHASE_SORT_DETAILS_MAX_TE                                :{FORCE}
+STR_PURCHASE_SORT_DETAILS_INTRO_DATE                            :{NUM}
+STR_PURCHASE_SORT_DETAILS_RUNNINGCOST_YEAR                      :{CURRENCY_LONG}/рік
+STR_PURCHASE_SORT_DETAILS_RUNNINGCOST_PERIOD                    :{CURRENCY_LONG}/період
+STR_PURCHASE_SORT_DETAILS_RELIABILITY                           :{COMMA}%
+STR_PURCHASE_SORT_DETAILS_POWER_VS_RUNNING_COST                 :{DECIMAL}
 
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Всі типи вантажів
@@ -4486,6 +4528,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Ви в
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Повідомлення від виробника транспорту
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Ми розробили новий {STRING} - чи бажаєте ексклюзивно користуватись ним протягом року, так ми побачимо, як він зарекомендує себе, перед тим як буде доступним для всіх?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :локомотив
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :електрифікований залізничний локомотив
@@ -4663,7 +4706,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Дохі
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Дохід цього року: {LTBLUE}{CURRENCY_LONG} (минулого року: {CURRENCY_LONG}) {BLACK}Найгірше: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Прибуток цього періоду: {LTBLUE}{CURRENCY_LONG} (минулого періоду: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Прибуток цього періоду: {LTBLUE}{CURRENCY_LONG} (минулого періоду: {CURRENCY_LONG}) {BLACK}Питома потужність: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Надійність: {LTBLUE}{COMMA}%  {BLACK}Аварії після останнього техогляду: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Побудований: {LTBLUE}{NUM}{BLACK} Вартість: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Місткість: {LTBLUE}нема{STRING}
@@ -5214,7 +5256,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Немо
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Неможливо перейменувати...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Тут не можна будувати місто...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Неможливо розширити місто...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... надто близько до краю карти
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... надто близько до іншого міста
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... забагато міст
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... на карті немає вільного місця
@@ -5268,6 +5309,7 @@ STR_ERROR_TOO_MANY_TRUCK_STOPS                                  :{WHITE}Дуже
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_DOCK                             :{WHITE}Дуже близько до іншого порту
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_AIRPORT                          :{WHITE}Дуже близько до іншого аеропорту
 STR_ERROR_CAN_T_RENAME_STATION                                  :{WHITE}Неможливо перейменувати станцію...
+STR_ERROR_CAN_T_MOVE_STATION_NAME                               :{WHITE}Неможливо пересунути назву станції...
 STR_ERROR_DRIVE_THROUGH_ON_TOWN_ROAD                            :{WHITE}... ця дорога у власності міста
 STR_ERROR_DRIVE_THROUGH_DIRECTION                               :{WHITE}... дорога не в тому напрямку
 STR_ERROR_DRIVE_THROUGH_CORNER                                  :{WHITE}... проїзні зупинки не можуть мати поворотів
@@ -5299,6 +5341,7 @@ STR_ERROR_CAN_T_BUILD_RAIL_WAYPOINT                             :{WHITE}Тут �
 STR_ERROR_CAN_T_BUILD_ROAD_WAYPOINT                             :{WHITE}Неможливо побудувати точку шляху тут...
 STR_ERROR_CAN_T_POSITION_BUOY_HERE                              :{WHITE}Неможливо розмістити бакен тут...
 STR_ERROR_CAN_T_CHANGE_WAYPOINT_NAME                            :{WHITE}Не можна перейменувати точку маршруту...
+STR_ERROR_CAN_T_MOVE_WAYPOINT_NAME                              :{WHITE}Неможливо пересунути назву точки шляху...
 
 STR_ERROR_CAN_T_REMOVE_RAIL_WAYPOINT                            :{WHITE}Тут не можна прибрати точку шляху..
 STR_ERROR_CAN_T_REMOVE_ROAD_WAYPOINT                            :{WHITE}Неможливо прибрати цю точку шляху...
@@ -5320,7 +5363,7 @@ STR_ERROR_ROAD_VEHICLE_MUST_BE_STOPPED_INSIDE_DEPOT             :{WHITE}... по
 STR_ERROR_SHIP_MUST_BE_STOPPED_INSIDE_DEPOT                     :{WHITE}... корабель має стояти в доці
 STR_ERROR_AIRCRAFT_MUST_BE_STOPPED_INSIDE_HANGAR                :{WHITE}... літак повинен стояти в ангарі
 
-STR_ERROR_TRAINS_CAN_ONLY_BE_ALTERED_INSIDE_A_DEPOT             :{WHITE}Поїзд можна змінювати тільки тоді, коли зупинений в депо
+STR_ERROR_TRAINS_CAN_ONLY_BE_ALTERED_INSIDE_A_DEPOT             :{WHITE}Можна змінювати тільки зупинені в депо поїзди
 STR_ERROR_TRAIN_TOO_LONG                                        :{WHITE}Поїзд дуже довгий
 STR_ERROR_CAN_T_REVERSE_DIRECTION_RAIL_VEHICLE                  :{WHITE}Не можна розвернути поїзд...
 STR_ERROR_CAN_T_REVERSE_DIRECTION_RAIL_VEHICLE_MULTIPLE_UNITS   :{WHITE}... складається з декількох частин
@@ -6139,4 +6182,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Філь
 STR_BADGE_CONFIG_PREVIEW                                        :Попередній перегляд
 STR_BADGE_CONFIG_NAME                                           :Назва
 STR_BADGE_FILTER_ANY_LABEL                                      :Заголовок: {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} це {STRING}

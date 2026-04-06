@@ -112,7 +112,7 @@ struct SelectGameWindow : public Window {
 	 * Find and parse all viewport command signs.
 	 * Fills the intro_viewport_commands vector and deletes parsed signs from the world.
 	 */
-	void ReadIntroGameViewportCommands()
+	void ReadIntroGameViewportCommand()
 	{
 		intro_viewport_commands.clear();
 
@@ -183,7 +183,7 @@ struct SelectGameWindow : public Window {
 		this->FinishInitNested(0);
 		this->OnInvalidateData();
 
-		this->ReadIntroGameViewportCommands();
+		this->ReadIntroGameViewportCommand();
 	}
 
 	void OnRealtimeTick(uint delta_ms) override
@@ -304,15 +304,15 @@ struct SelectGameWindow : public Window {
 				break;
 			case WID_SGI_LOAD_GAME:
 				_is_network_server = false;
-				ShowSaveLoadDialog(FT_SAVEGAME, SLO_LOAD);
+				ShowSaveLoadDialog(AbstractFileType::Savegame, SaveLoadOperation::Load);
 				break;
 			case WID_SGI_PLAY_SCENARIO:
 				_is_network_server = false;
-				ShowSaveLoadDialog(FT_SCENARIO, SLO_LOAD);
+				ShowSaveLoadDialog(AbstractFileType::Scenario, SaveLoadOperation::Load);
 				break;
 			case WID_SGI_PLAY_HEIGHTMAP:
 				_is_network_server = false;
-				ShowSaveLoadDialog(FT_HEIGHTMAP,SLO_LOAD);
+				ShowSaveLoadDialog(AbstractFileType::Heightmap,SaveLoadOperation::Load);
 				break;
 			case WID_SGI_EDIT_SCENARIO:
 				_is_network_server = false;
@@ -403,7 +403,7 @@ void ShowSelectGameWindow()
 static void AskExitGameCallback(Window *, bool confirmed)
 {
 	if (confirmed) {
-		_survey.Transmit(NetworkSurveyHandler::Reason::EXIT, true);
+		_survey.Transmit(NetworkSurveyHandler::Reason::Exit, true);
 		_exit_game = true;
 	}
 }

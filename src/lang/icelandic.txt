@@ -1308,6 +1308,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Slétt
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Hrjúft
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Mjög hrjúft
 
+###length 4
+
 
 
 STR_CONFIG_SETTING_TREE_PLACER                                  :Staðsetning trjáa: {STRING}
@@ -1939,15 +1941,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} þ
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} hefur verið niðurhalað
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} niðurhöluð hingaðtil
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Tengist...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Staðfesti...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Bíð...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Hala niður korti...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Vinn úr gögnum...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Skrái...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Næ í upplýsingar um leik...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Næ í upplýsingar um fyrirtæki...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Aftengjast
 
@@ -2207,6 +2207,8 @@ STR_STATION_BUILD_PLATFORM_LENGTH                               :{BLACK}Lengd le
 STR_STATION_BUILD_PLATFORM_LENGTH_TOOLTIP                       :{BLACK}Veldu lengd lestarstöðvar
 STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}Draga & Sleppa
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Byggja lestarstöð með 'draga og sleppa' aðferðinni
+
+
 
 
 
@@ -3193,6 +3195,8 @@ STR_PURCHASE_INFO_ALL_BUT                                       :Allt nema {CARG
 STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Hámarks togkrafur: {GOLD}{FORCE}
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Drægni: {GOLD}{COMMA} reitir
 
+# Vehicle sort details
+
 ###length 3
 
 ###length VEHICLE_TYPES
@@ -3331,6 +3335,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Þú er
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Skilaboð frá farartækisframleiðanda
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Við höfum hannað nýja {STRING} - hefðir þú áhuga á árs einkaleyfi á notkun þessa farartækis, svo að við getum athugað frammistöðu þess?
 
+
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :lest
 STR_ENGINE_PREVIEW_MONORAIL_LOCOMOTIVE                          :einteinungs eimreið
 STR_ENGINE_PREVIEW_MAGLEV_LOCOMOTIVE                            :Segulsvifvagn
@@ -3462,7 +3467,6 @@ STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED                         :{BLACK}Þyngd: 
 STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED_MAX_TE                  :{BLACK}Þyngd: {LTBLUE}{WEIGHT_SHORT} {BLACK}Afl: {LTBLUE}{POWER}{BLACK} Hámarkshraði: {LTBLUE}{VELOCITY} {BLACK}Hámarks dráttarafl.: {LTBLUE}{FORCE}
 
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Hagnaður í ár: {LTBLUE}{CURRENCY_LONG} (síðasta ár: {CURRENCY_LONG})
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Áreiðanleiki: {LTBLUE}{COMMA}%  {BLACK}Bilanir frá síðustu skoðun: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Framleiðsluár: {LTBLUE}{NUM}{BLACK} Verðgildi: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Burðargeta: {LTBLUE}Engin{STRING}
@@ -3937,7 +3941,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Get ekki
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Get ekki endurskírt bæ...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Get ekki byggt bæ hér...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Get ekki framlengt bæ...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... of nálægt brún kortsins
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... of nálægt öðrum bæ
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... of margir bæir
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... það er ekkert laust svæði á kortinu

@@ -1596,6 +1596,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Fin
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Dur
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Foarte dur
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Distribuția varietății: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Alegeți dacă harta conține atât munți, cât și zone plane. Cu cât varietatea este mai mare, cu atât mai multe diferențe de altitudine între zonele muntoase și cele plate.
 
@@ -2435,15 +2437,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} {P
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} descărcat până acum
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} descărcați până acum
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Conectare...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Autorizare...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Așteptați...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Descărcare hartă...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Prelucrare date...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Înregistrare...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Preluare informații joc...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Preluare informații companie...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Deconectare
 
@@ -2801,6 +2801,8 @@ STR_PICKER_MODE_USED                                            :Folosit
 STR_PICKER_MODE_USED_TOOLTIP                                    :Comutați afișarea numai a elementelor existente
 STR_PICKER_MODE_SAVED                                           :Salvat
 STR_PICKER_MODE_SAVED_TOOLTIP                                   :Comutați afișarea numai a elementelor salvate
+
+
 
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Selectați o clasă de stație de afișat
@@ -4112,6 +4114,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Efort tr
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Rază acțiune: {GOLD}{COMMA} pătrățele
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Tip de aeronavă: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Toate tipurile de marfă
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Marfă
@@ -4272,6 +4276,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Ești p
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Mesaj de la producătorul de vehicule
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Am creat un nou tip de {STRING}. Ați fi interesați de folosirea exclusivă pentru un an a acestui vehicul, astfel ca noi să-i putem observa performanțele înaintea lansării oficiale?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :locomotivă
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :locomotivă electrificată
@@ -4448,7 +4453,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Profit p
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Profit anul curent: {LTBLUE}{CURRENCY_LONG} (anul trecut: {CURRENCY_LONG}) {BLACK}performanta minima: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Profit perioada curentă: {LTBLUE}{CURRENCY_LONG} (ultima perioadă: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Profit perioada curentă: {LTBLUE}{CURRENCY_LONG} (ultima perioadă: {CURRENCY_LONG}) {BLACK}Performanță minimă: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Eficiență: {LTBLUE}{COMMA}%  {BLACK}Defecțiuni de la ultimul service: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Construit: {LTBLUE}{NUM}{BLACK} Valoare: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Capacitate: {LTBLUE}Nimic{STRING}
@@ -4991,7 +4995,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Nu pot c
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Nu se poate redenumi orașul...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Nu se poate construi un oraș aici...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Orașul nu poate fi extins...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... prea aproape de marginea hărții
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... prea aproape de alt oraș
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... prea multe orașe
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... nu mai este loc pe hartă

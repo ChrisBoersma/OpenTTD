@@ -1367,6 +1367,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :ราบเร
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :หยาบ
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :หยาบมาก
 
+###length 4
+
 
 STR_CONFIG_SETTING_RIVER_AMOUNT                                 :จำนวนแม่น้ำ: {STRING}
 
@@ -2090,15 +2092,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} cl
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :ดาวน์โหลดไปแล้ว {BLACK}{BYTES}
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} ดาวโหลดไปแล้วทั้งสิ้น
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) กำลังเชื่อมต่อ...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) กำลังตรวจสอบการเข้าร่วม...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) กรุณารอ...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) ดาวโหลดแผนที่...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) ประมวลข้อมูล...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) ลงทะเบียน...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}รวบรวมข้อมูลเกม...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}รวบรวมข้อมูลบริษัท...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}ตัดการเชื่อมต่อ
 
@@ -2392,6 +2392,8 @@ STR_STATION_BUILD_PLATFORM_LENGTH                               :{BLACK}คว�
 STR_STATION_BUILD_PLATFORM_LENGTH_TOOLTIP                       :{BLACK}เลือกความยาวของชานชาลา
 STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}ลากและวาง
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}สร้างสถานีโดยใช้การลากและวาง
+
+
 
 
 
@@ -3489,6 +3491,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}กำ�
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}พิสัยทำการ: {GOLD}{COMMA} ช่อง
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}ชนิดของเครื่องบิน: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 
 ###length VEHICLE_TYPES
@@ -3639,6 +3643,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}คุ�
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}ข้อความจากผู้ผลิตยานพาหนะ
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}เราได้ออกแบบ {STRING} ใหม่ - หากคุณต้องการที่จะนำไปทดลองใช้ เราจะให้คุณนำไปใช้งานก่อนที่จะนำออกไปจำหน่ายในตลาดปกติ{}คุณต้องการนำไปทดลองใช้หรือไม่ ?
 
+
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :หัวรถจักร
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :หัวรถจักรของรถไฟฟ้า
 STR_ENGINE_PREVIEW_MONORAIL_LOCOMOTIVE                          :รถไฟรางเดี่ยว
@@ -3786,7 +3791,6 @@ STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED                         :{BLACK}น้�
 STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED_MAX_TE                  :{BLACK}น้ำหนัก: {LTBLUE}{WEIGHT_SHORT} {BLACK}พลังขับเคลื่อน: {LTBLUE}{POWER}{BLACK} ความเร็วสูงสุด: {LTBLUE}{VELOCITY} {BLACK}กำลังลากจูงสูงสุด: {LTBLUE}{FORCE}
 
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}ผลประกอบการปีนี้: {LTBLUE}{CURRENCY_LONG} (ปีที่แล้ว: {CURRENCY_LONG})
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}ประสิทธิภาพ: {LTBLUE}{COMMA}%  {BLACK}เกิดการชำรุดหลังจากเข้าซ่อมบำรุงครั้งที่แล้ว: {LTBLUE}{COMMA} {BLACK}ครั้ง
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}สร้างเมื่อ: {LTBLUE}{NUM}{BLACK} มูลค่า: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}บรรทุก: {LTBLUE}ไม่มี{STRING}
@@ -4271,7 +4275,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}ไม�
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}ไม่สามารถเปลี่ยนชื่อเมืองได้...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}ไม่สามารถสร้างเมืองที่นี่ได้...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}ไม่สามารถขยายเมืองได้
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... ติดกับขอบแผนที่มากเกินไป
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... ใกล้กับเมืองอื่นมากเกินไป
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... มีเมืองมากเกินไป
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... มีพื้นที่บนแผนที่ไม่มากพอ

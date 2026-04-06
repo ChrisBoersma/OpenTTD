@@ -1626,6 +1626,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Flaach
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Fielseg
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Ganz Fielseg
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Vielfaltverdeelung: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Wielt aus op d'Kaart flaach Stécker an och Bierger huet. Wat d'Vielfalt méi héich, wat méi Ennerscheeder an der Landschaft tëscht de Bierger a flaach Arealer
 
@@ -2477,15 +2479,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} Sp
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} souwäit erofgelueden
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} erofgelueden
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Connectéiert...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Authoriséiert...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Waarden...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Kaart eroflueden...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Daten verarbëschten...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Registréierung...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Ruffen d'Spillinfo of..
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Ruffen d'Firmeninfos of...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Verbindung trennen
 
@@ -2849,6 +2849,8 @@ STR_PICKER_PREVIEW_SHRINK                                       :-
 STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :D'Héicht vun Virschaubiller erofsetzen. Ctrl+Klick fir op de Minimum ze setzen
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :D'Héicht vun Virschaubiller eropsetzen. Ctrl+Klick fir op de Maximum ze setzen.
+
+
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Wiel eng Statiounsklass fir unzeweisen
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Wiel en Typ vu Statioun fir ze bauen. Ctrl+Klick fir en bei d'gespäichert Objeten dobäizesetzen oder ewechzehuelen
@@ -4202,6 +4204,8 @@ STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Distanz:
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Fliger Typ: {GOLD}{STRING}
 STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}Schinnentypen: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :All Wuerentyp
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Fracht
@@ -4362,6 +4366,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Du verk
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Meldung vum Gefierkonstrukteur
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Mir hunn elo en neien {STRING} gebaut - bass du dorun interesséiert dëst Gefier 1 Joer exklusiv ze notzen, fir ze testen op et komplett maarträif ass?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :Lokomotiv
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :Elektresch Lokomotiv
@@ -4539,7 +4544,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Profit d
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Profit dëst Joer: {LTBLUE}{CURRENCY_LONG} (lescht Joer: {CURRENCY_LONG}) {BLACK}Min. Leeschtung: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Profit des Period: {LTBLUE}{CURRENCY_LONG} (Lescht Period: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Profit des Period: {LTBLUE}{CURRENCY_LONG} (Lescht Period: {CURRENCY_LONG}) {BLACK}Min. Leeschtung: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Zouverlässegkeet: {LTBLUE}{COMMA}%  {BLACK}Pannen säit leschter Revisioun: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Gebaut: {LTBLUE}{NUM}{BLACK} Wäert: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Kapazitéit: {LTBLUE}Keng{STRING}
@@ -5088,7 +5092,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Ka keng 
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Kann d'Stad net ëmbenennen...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Kann d'Stad hei net bauen...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Kann d'Stad net vergréisseren...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... ze no um Rand vun der Kaart
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... ze no un enger anerer Stad
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... ze vill Stied
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... et ass keng Plaz méi op der Kaart
@@ -5978,4 +5981,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Badgefil
 STR_BADGE_CONFIG_PREVIEW                                        :Bildvirschau
 STR_BADGE_CONFIG_NAME                                           :Numm
 STR_BADGE_FILTER_ANY_LABEL                                      :Iergendeen {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} ass {STRING}

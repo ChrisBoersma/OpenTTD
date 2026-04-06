@@ -1622,6 +1622,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Suave
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Rugoso
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Muy rugoso
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Distribución de variedad: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Elegir si el mapa tendrá zonas montañosas y planas. Entre mayor variedad de altitud, habrá más diferencias de elevación entre montañas y planicies
 
@@ -2468,15 +2470,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} cl
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} descargados hasta ahora
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES}/{BYTES} descargados
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Conectando...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Autorizando...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Esperando...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Descargando mapa...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Procesando datos...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Registrando...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Recibiendo información de partida...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Recibiendo información de la empresa...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Desconectarse
 
@@ -2840,6 +2840,8 @@ STR_PICKER_PREVIEW_SHRINK                                       :-
 STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Reducir la altura de las imágenes previas. Ctrl+Clic reduce al mínimo
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Incrementar la altura de las imágenes previas. Ctrl+Clic aumenta al máximo
+
+
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Elegir qué clase de estación mostrar
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Elegir qué tipo de estación construir. Ctrl+Clic lo añade o elimina de guardados
@@ -4172,6 +4174,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Máx. fu
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Alcance: {GOLD}{COMMA} casillas
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Tipo de aeronave: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Todos los tipos
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Carga
@@ -4332,6 +4336,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Se vend
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Mensaje del fabricante de vehículos
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Hemos diseñado un{G "" a "" a} nuev{G o a o a} {STRING}. ¿Le interesaría el uso exclusivo de este vehículo por un año para que podamos probar su desempeño antes de lanzarlo al público?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :{G=f}locomotora
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :locomotora eléctrica
@@ -4508,7 +4513,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Ganancia
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Ganancias este año: {LTBLUE}{CURRENCY_LONG} (año pasado: {CURRENCY_LONG}) {BLACK}Mín. rendimiento: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Ganancias este período: {LTBLUE}{CURRENCY_LONG} (período pasado: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Ganancias este período: {LTBLUE}{CURRENCY_LONG} (período pasado: {CURRENCY_LONG}){BLACK}Rendimiento mín.: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Fiabilidad: {LTBLUE}{COMMA}%  {BLACK}Averías desde el último mantenimiento: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Construido: {LTBLUE}{NUM}{BLACK} Valor: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Capacidad: {LTBLUE}Ninguna{STRING}
@@ -5057,7 +5061,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}No se pu
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}No se puede cambiar el nombre del pueblo...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}No se puede fundar el pueblo aquí...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}No se puede expandir el pueblo...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... demasiado cerca del borde del mapa
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... demasiado cerca de otro pueblo
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... demasiados pueblos
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... ya no hay espacio en el mapa
@@ -5936,4 +5939,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Filtros 
 STR_BADGE_CONFIG_PREVIEW                                        :Vista previa de imagen
 STR_BADGE_CONFIG_NAME                                           :Nombre
 STR_BADGE_FILTER_ANY_LABEL                                      :Cualquier {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} es {STRING}

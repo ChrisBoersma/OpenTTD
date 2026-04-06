@@ -62,6 +62,8 @@ void GRFConfig::SetParams(std::span<const uint32_t> pars)
 
 /**
  * Return whether this NewGRF can replace an older version of the same NewGRF.
+ * @param old_version The older version of the NewGRF (savegame loading).
+ * @return Whether the NewGRF says that this version can be loaded for games with the old version.
  */
 bool GRFConfig::IsCompatible(uint32_t old_version) const
 {
@@ -212,7 +214,7 @@ void GRFParameterInfo::Finalize()
  * Update the palettes of the graphics from the config file.
  * Called when changing the default palette in advanced settings.
  */
-void UpdateNewGRFConfigPalette(int32_t)
+void UpdateNewGRFConfigPalette()
 {
 	for (const auto &c : _grfconfig_newgame) c->SetSuitablePalette();
 	for (const auto &c : _grfconfig_static ) c->SetSuitablePalette();
@@ -292,12 +294,12 @@ static bool CalcGRFMD5Sum(GRFConfig &config, Subdirectory subdir)
 bool FillGRFDetails(GRFConfig &config, bool is_static, Subdirectory subdir)
 {
 	if (!FioCheckFileExists(config.filename, subdir)) {
-		config.status = GCS_NOT_FOUND;
+		config.status = GRFStatus::NotFound;
 		return false;
 	}
 
 	/* Find and load the Action 8 information */
-	LoadNewGRFFile(config, GLS_FILESCAN, subdir, true);
+	LoadNewGRFFile(config, GrfLoadingStage::FileScan, subdir, true);
 	config.SetSuitablePalette();
 	config.FinalizeParameterInfo();
 
@@ -306,9 +308,9 @@ bool FillGRFDetails(GRFConfig &config, bool is_static, Subdirectory subdir)
 
 	if (is_static) {
 		/* Perform a 'safety scan' for static GRFs */
-		LoadNewGRFFile(config, GLS_SAFETYSCAN, subdir, true);
+		LoadNewGRFFile(config, GrfLoadingStage::SafetyScan, subdir, true);
 
-		/* GRFConfigFlag::Unsafe is set if GLS_SAFETYSCAN finds unsafe actions */
+		/* GRFConfigFlag::Unsafe is set if GrfLoadingStage::SafetyScan finds unsafe actions */
 		if (config.flags.Test(GRFConfigFlag::Unsafe)) return false;
 	}
 
@@ -330,7 +332,7 @@ void ClearGRFConfigList(GRFConfigList &config)
  * Append a GRF Config list onto another list.
  * @param dst The destination list
  * @param src The source list
- * @param init_only the copied GRF will be processed up to GLS_INIT
+ * @param init_only the copied GRF will be processed up to GrfLoadingStage::Init
  */
 static void AppendGRFConfigList(GRFConfigList &dst, const GRFConfigList &src, bool init_only)
 {
@@ -348,7 +350,7 @@ static void AppendGRFConfigList(GRFConfigList &dst, const GRFConfigList &src, bo
  * Copy a GRF Config list.
  * @param dst The destination list
  * @param src The source list
- * @param init_only the copied GRF will be processed up to GLS_INIT
+ * @param init_only the copied GRF will be processed up to GrfLoadingStage::Init
  */
 void CopyGRFConfigList(GRFConfigList &dst, const GRFConfigList &src, bool init_only)
 {
@@ -403,7 +405,10 @@ void AppendToGRFConfigList(GRFConfigList &dst, std::unique_ptr<GRFConfig> &&el)
 }
 
 
-/** Reset the current GRF Config to either blank or newgame settings. */
+/**
+ * Reset the current GRF Config to either blank or newgame settings.
+ * @param defaults Whether configure to fully load the copied NewGRFs.
+ */
 void ResetGRFConfig(bool defaults)
 {
 	CopyGRFConfigList(_grfconfig, _grfconfig_newgame, !defaults);
@@ -416,15 +421,15 @@ void ResetGRFConfig(bool defaults)
  * @param grfconfig GrfConfig to check
  * @return will return any of the following 3 values:<br>
  * <ul>
- * <li> GLC_ALL_GOOD: No problems occurred, all GRF files were found and loaded
- * <li> GLC_COMPATIBLE: For one or more GRF's no exact match was found, but a
+ * <li> GRFListCompatibility::AllGood: No problems occurred, all GRF files were found and loaded
+ * <li> GRFListCompatibility::Compatible: For one or more GRF's no exact match was found, but a
  *     compatible GRF with the same grfid was found and used instead
- * <li> GLC_NOT_FOUND: For one or more GRF's no match was found at all
+ * <li> GRFListCompatibility::NotFound: For one or more GRF's no match was found at all
  * </ul>
  */
 GRFListCompatibility IsGoodGRFConfigList(GRFConfigList &grfconfig)
 {
-	GRFListCompatibility res = GLC_ALL_GOOD;
+	GRFListCompatibility res = GRFListCompatibility::AllGood;
 
 	for (auto &c : grfconfig) {
 		const GRFConfig *f = FindGRFConfig(c->ident.grfid, FGCM_EXACT, &c->ident.md5sum);
@@ -441,15 +446,15 @@ GRFListCompatibility IsGoodGRFConfigList(GRFConfigList &grfconfig)
 				}
 
 				/* Non-found has precedence over compatibility load */
-				if (res != GLC_NOT_FOUND) res = GLC_COMPATIBLE;
+				if (res != GRFListCompatibility::NotFound) res = GRFListCompatibility::Compatible;
 				goto compatible_grf;
 			}
 
 			/* No compatible grf was found, mark it as disabled */
 			Debug(grf, 0, "NewGRF {:08X} ({}) not found; checksum {}", std::byteswap(c->ident.grfid), c->filename, FormatArrayAsHex(c->ident.md5sum));
 
-			c->status = GCS_NOT_FOUND;
-			res = GLC_NOT_FOUND;
+			c->status = GRFStatus::NotFound;
+			res = GRFListCompatibility::NotFound;
 		} else {
 compatible_grf:
 			Debug(grf, 1, "Loading GRF {:08X} from {}", std::byteswap(f->ident.grfid), f->filename);
@@ -493,7 +498,10 @@ public:
 
 	bool AddFile(const std::string &filename, size_t basepath_length, const std::string &tar_filename) override;
 
-	/** Do the scan for GRFs. */
+	/**
+	 * Do the scan for GRFs.
+	 * @return The number of GRFs that have been found.
+	 */
 	static uint DoScan()
 	{
 		if (_skip_all_newgrf_scanning > 0) {
@@ -502,7 +510,7 @@ public:
 		}
 
 		GRFFileScanner fs;
-		int ret = fs.Scan(".grf", NEWGRF_DIR);
+		int ret = fs.Scan(".grf", Subdirectory::NewGrf);
 		/* The number scanned and the number returned may not be the same;
 		 * duplicate NewGRFs and base sets are ignored in the return value. */
 		_settings_client.gui.last_newgrf_count = fs.num_scanned;
@@ -535,14 +543,10 @@ bool GRFFileScanner::AddFile(const std::string &filename, size_t basepath_length
 }
 
 /**
- * Simple sorter for GRFS
- * @param c1 the first GRFConfig *
- * @param c2 the second GRFConfig *
- * @return true if the name of first NewGRF is before the name of the second.
- */
-static bool GRFSorter(std::unique_ptr<GRFConfig> const &c1, std::unique_ptr<GRFConfig> const &c2)
+ * Simple sorter for GRFS. @copydoc GUIList::Sorter */
+static bool GRFSorter(std::unique_ptr<GRFConfig> const &a, std::unique_ptr<GRFConfig> const &b)
 {
-	return StrNaturalCompare(c1->GetName(), c2->GetName()) < 0;
+	return StrNaturalCompare(a->GetName(), b->GetName()) < 0;
 }
 
 /**
@@ -628,7 +632,11 @@ GRFConfig *GetGRFConfig(uint32_t grfid, uint32_t mask)
 }
 
 
-/** Build a string containing space separated parameter values, and terminate */
+/**
+ * Build a string containing space separated parameter values.
+ * @param c The GRFConfig to create the parameter list for.
+ * @return The parameter list.
+ */
 std::string GRFBuildParamList(const GRFConfig &c)
 {
 	std::string result;
@@ -646,5 +654,5 @@ std::string GRFBuildParamList(const GRFConfig &c)
  */
 std::optional<std::string> GRFConfig::GetTextfile(TextfileType type) const
 {
-	return ::GetTextfile(type, NEWGRF_DIR, this->filename);
+	return ::GetTextfile(type, Subdirectory::NewGrf, this->filename);
 }

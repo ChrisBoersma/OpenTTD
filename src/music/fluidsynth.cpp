@@ -26,6 +26,7 @@ static struct {
 	fluid_synth_t *synth; ///< FluidSynth synthesizer handle
 	fluid_player_t *player; ///< FluidSynth MIDI player handle
 	std::mutex synth_mutex; ///< Guard mutex for synth access
+	double max_gain; ///< Default max gain.
 } _midi; ///< Metadata about the midi we're playing.
 
 /** Factory for the FluidSynth driver. */
@@ -60,6 +61,18 @@ static void RenderMusicStream(int16_t *buffer, size_t samples)
 	fluid_synth_write_s16(_midi.synth, samples, buffer, 0, 2, buffer, 1, 2);
 }
 
+static void load_and_execute_config_file(fluid_cmd_handler_t *cmd_handler, const char *config_file)
+{
+	if (std::filesystem::exists(config_file)) {
+		Debug(driver, 2, "Fluidsynth: Attempting to load config file '{}'", config_file);
+		if (fluid_source(cmd_handler, config_file) < 0) {
+			Debug(driver, 0, "Fluidsynth: Failed to execute command configuration file '{}'", config_file);
+		}
+	} else {
+		Debug(driver, 1, "Fluidsynth: Failed to load config file '{}' - file doesn't exist", config_file);
+	}
+}
+
 std::optional<std::string_view> MusicDriver_FluidSynth::Start(const StringList &param)
 {
 	std::lock_guard<std::mutex> lock{_midi.synth_mutex};
@@ -72,6 +85,19 @@ std::optional<std::string_view> MusicDriver_FluidSynth::Start(const StringList &
 	/* Create the settings. */
 	_midi.settings = new_fluid_settings();
 	if (_midi.settings == nullptr) return "Could not create midi settings";
+
+	/* Read config file(s) */
+	fluid_cmd_handler_t *cmd_handler = new_fluid_cmd_handler2(_midi.settings, nullptr, nullptr, nullptr);
+	if (cmd_handler == NULL) return "Failed to create the early command handler";
+
+	char buf[MAX_PATH] = {};
+	const char *config_file = fluid_get_sysconf(buf, sizeof(buf)); // system-wide config file
+	load_and_execute_config_file(cmd_handler, config_file);
+	config_file = fluid_get_userconf(buf, sizeof(buf)); // user config file (potentially overrides system)
+	load_and_execute_config_file(cmd_handler, config_file);
+
+	delete_fluid_cmd_handler(cmd_handler);
+
 	/* Don't try to lock sample data in memory, OTTD usually does not run with privileges allowing that */
 	fluid_settings_setint(_midi.settings, "synth.lock-memory", 0);
 
@@ -90,11 +116,12 @@ std::optional<std::string_view> MusicDriver_FluidSynth::Start(const StringList &
 		sfont_id = FLUID_FAILED;
 
 		/* Try loading the default soundfont registered with FluidSynth. */
-		char *default_soundfont;
+		char *default_soundfont = nullptr;
 		fluid_settings_dupstr(_midi.settings, "synth.default-soundfont", &default_soundfont);
-		if (fluid_is_soundfont(default_soundfont)) {
+		if (default_soundfont != nullptr && std::filesystem::exists(default_soundfont) && fluid_is_soundfont(default_soundfont)) {
 			sfont_id = fluid_synth_sfload(_midi.synth, default_soundfont, 1);
 		}
+		fluid_free(default_soundfont);
 
 		/* If no default soundfont found, try our own list. */
 		if (sfont_id == FLUID_FAILED) {
@@ -109,6 +136,14 @@ std::optional<std::string_view> MusicDriver_FluidSynth::Start(const StringList &
 		std::string name{sfont_name.value()};
 		sfont_id = fluid_synth_sfload(_midi.synth, name.c_str(), 1);
 		if (sfont_id == FLUID_FAILED) return "Could not open sound font";
+	}
+
+	/* Treat a configured synth gain as the maximum gain to use. */
+	if (fluid_settings_getnum(_midi.settings, "synth.gain", &_midi.max_gain) != FLUID_OK) {
+		if (fluid_settings_getnum_default(_midi.settings, "synth.gain", &_midi.max_gain) != FLUID_OK) {
+			/* No synth.gain value present for some reason, use FluidSynth's default value. */
+			_midi.max_gain = 0.2;
+		}
 	}
 
 	_midi.player = nullptr;
@@ -191,11 +226,8 @@ void MusicDriver_FluidSynth::SetVolume(uint8_t vol)
 	std::lock_guard<std::mutex> lock{_midi.synth_mutex};
 	if (_midi.settings == nullptr) return;
 
-	/* Allowed range of synth.gain is 0.0 to 10.0 */
-	/* fluidsynth's default gain is 0.2, so use this as "full
-	 * volume". Set gain using OpenTTD's volume, as a number between 0
-	 * and 0.2. */
-	double gain = (1.0 * vol) / (128.0 * 5.0);
+	/* Set gain using OpenTTD's volume, as a number between 0 and max_gain. */
+	double gain = (1.0 * vol) / 128.0 * _midi.max_gain;
 	if (fluid_settings_setnum(_midi.settings, "synth.gain", gain) != FLUID_OK) {
 		Debug(driver, 0, "Could not set volume");
 	}

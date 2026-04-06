@@ -37,7 +37,7 @@ static void OpenBankFile(const std::string &filename)
 	/* If there is no sound file (nosound set), don't load anything */
 	if (filename.empty()) return;
 
-	original_sound_file = std::make_unique<RandomAccessFile>(filename, BASESET_DIR);
+	original_sound_file = std::make_unique<RandomAccessFile>(filename, Subdirectory::Baseset);
 	size_t pos = original_sound_file->GetPos();
 	uint count = original_sound_file->ReadDword();
 
@@ -266,6 +266,7 @@ void SndConfirmBeep()
 /** Names corresponding to the sound set's files */
 static const std::string_view _sound_file_names[] = { "samples" };
 
+/** @copydoc BaseSet::GetFilenames */
 template <>
 /* static */ std::span<const std::string_view> BaseSet<SoundsSet>::GetFilenames()
 {

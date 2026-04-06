@@ -1202,7 +1202,7 @@ STR_GAME_OPTIONS_BASE_GRF_TOOLTIP                               :Vyber si zákla
 STR_GAME_OPTIONS_BASE_GRF_DESCRIPTION_TOOLTIP                   :Další informace o základní sadě grafiky
 
 STR_GAME_OPTIONS_BASE_SFX                                       :Základní sada zvuků
-STR_GAME_OPTIONS_BASE_SFX_TOOLTIP                               :Vyber si základní sadu zvuků (nemůže být změněna během hry, ale pouze z hlavního menu)
+STR_GAME_OPTIONS_BASE_SFX_TOOLTIP                               :Vyber si základní sadu zvuků
 STR_GAME_OPTIONS_BASE_SFX_DESCRIPTION_TOOLTIP                   :Další informace o základní sadě zvuků
 
 STR_GAME_OPTIONS_BASE_MUSIC                                     :Základní hudební set
@@ -1685,7 +1685,7 @@ STR_CONFIG_SETTING_LAND_GENERATOR_HELPTEXT                      :Originální ge
 STR_CONFIG_SETTING_LAND_GENERATOR_ORIGINAL                      :původní
 STR_CONFIG_SETTING_LAND_GENERATOR_TERRA_GENESIS                 :TerraGenesis
 
-STR_CONFIG_SETTING_TERRAIN_TYPE                                 :Druh terénu: {STRING}
+STR_CONFIG_SETTING_TERRAIN_TYPE                                 :Výchozí maximální výška terénu: {STRING}
 STR_CONFIG_SETTING_TERRAIN_TYPE_HELPTEXT                        :Zvol výšku hor a kopců v terénu
 
 STR_CONFIG_SETTING_INDUSTRY_DENSITY                             :Množství průmyslu: {STRING}
@@ -1712,6 +1712,14 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_SMOOTH             :velmi rovná
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :rovná
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :členitá
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :velmi členitá
+
+STR_CONFIG_SETTING_AVERAGE_HEIGHT                               :Průměrná výška: {STRING}
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_HELPTEXT                      :Vyber průměrnou výšku terénu. Volba 'automaticky' nastaví výchozí výšku na základě klimatu: 'nížiny' pro subtropické klima, 'střední polohy' pro mírné klima a zemi hraček a 'náhorní plošiny' pro klima subarktické.
+###length 4
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_AUTO                          :automaticky
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_LOWLANDS                      :nížiny
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_NORMAL                        :střední polohy
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_PLATEAUS                      :náhorní plošiny
 
 STR_CONFIG_SETTING_VARIETY                                      :Rozmanitost umisťování: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Vyberte, zda mapa obsahuje jak hory, tak i rovinaté oblasti. Čím vyšší je rozmanitost, tím více rozdílů v nadmořské výšce mezi horskými a rovinatými oblastmi.
@@ -2155,7 +2163,7 @@ STR_CONFIG_SETTING_ZOOM_LVL_OUT_4X                              :4x
 STR_CONFIG_SETTING_ZOOM_LVL_OUT_8X                              :8x
 
 STR_CONFIG_SETTING_SPRITE_ZOOM_MIN                              :Nejvyšší dovolené rozlišení spritů: {STRING}
-STR_CONFIG_SETTING_SPRITE_ZOOM_MIN_HELPTEXT                     :Omezte maximální rozlišení používané pro sprity. Omezení rozlišení spritů zabrání použití grafiky ve vysokém rozlišení, i když je k dispozici. To může pomoci udržet jednotný vzhled hry při použití kombinace souborů GRF s grafikou ve vysokém rozlišení a bez ní.
+STR_CONFIG_SETTING_SPRITE_ZOOM_MIN_HELPTEXT                     :Omezte maximální rozlišení používané pro sprity. Omezení rozlišení spritů zabrání použití grafiky ve vysokém rozlišení, i když je k dispozici. To může pomoci udržet jednotný vzhled hry při použití kombinace souborů NewGRF s grafikou ve vysokém rozlišení a bez ní.
 ###length 3
 STR_CONFIG_SETTING_SPRITE_ZOOM_LVL_MIN                          :4x
 STR_CONFIG_SETTING_SPRITE_ZOOM_LVL_IN_2X                        :2x
@@ -2192,7 +2200,7 @@ STR_CONFIG_SETTING_DISTRIBUTION_MAIL_HELPTEXT                   :"Symetricky" zn
 STR_CONFIG_SETTING_DISTRIBUTION_ARMOURED                        :Mód distribuce pro náklady pancéřových vozů: {STRING}
 STR_CONFIG_SETTING_DISTRIBUTION_ARMOURED_HELPTEXT               :Třída nákladu ARMOURED (Cennosti) obsahuje cennosti v mírném podnebí, diamanty v subtropickém nebo zlato v subarktickém podnebí. NewGRF soubory toto mohou změnit. "Symetrický" znamená, že ze stanice A do stanice B bude odesláno zhruba stejné množství tohoto nákladu jako ze stanice B do stanice A. "Asymetrický" znamená, že v obou směrech může být zasláno libovolné množství tohoto nákladu. "Manuální" znamená, že u daného nákladu nebude probíhat žádná automatická distribuce. Při hraní v subarktickém nebo subtropickém podnebí se doporučuje nastavit asymetrickou nebo manuální distribuci, protože banky v těchto podnebích náklad pouze přijímají. Pro mírné podnebí můžete zvolit i symetrickou, protože banky v něm posílají cennosti zpět do výchozí banky.
 STR_CONFIG_SETTING_DISTRIBUTION_DEFAULT                         :Módy distribuce pro ostatní třídy nákladu: {STRING}
-STR_CONFIG_SETTING_DISTRIBUTION_DEFAULT_HELPTEXT                :"Asymmetricky" znamená, že v obou směrech může být zasláno libovolné množství nákladu. "Manuální" znamená, že u těchto nákladů nebude probíhat žádná automatická distribuce.
+STR_CONFIG_SETTING_DISTRIBUTION_DEFAULT_HELPTEXT                :"Asymetrický" znamená, že v obou směrech může být zasláno libovolné množství nákladu. "Manuální" znamená, že u těchto nákladů nebude probíhat žádná automatická distribuce.
 ###length 3
 STR_CONFIG_SETTING_DISTRIBUTION_MANUAL                          :manuální
 STR_CONFIG_SETTING_DISTRIBUTION_ASYMMETRIC                      :Asymmetrický
@@ -2293,7 +2301,7 @@ STR_CONFIG_ERROR                                                :{WHITE}Chyba v 
 STR_CONFIG_ERROR_ARRAY                                          :{WHITE}... chyba v poli '{STRING}'
 STR_CONFIG_ERROR_INVALID_VALUE                                  :{WHITE}... neplatná hodnota '{STRING}' pro '{STRING}'
 STR_CONFIG_ERROR_TRAILING_CHARACTERS                            :{WHITE}... koncové znaky na konci nastavení '{STRING}'
-STR_CONFIG_ERROR_DUPLICATE_GRFID                                :{WHITE}... ignorována grafika '{STRING}': duplicitní GRF ID s '{STRING}'
+STR_CONFIG_ERROR_DUPLICATE_GRFID                                :{WHITE}... ignorována grafika '{STRING}': duplicitní NewGRF ID s '{STRING}'
 STR_CONFIG_ERROR_INVALID_GRF                                    :{WHITE}... ignorovány neplatné grafiky '{STRING}': {STRING}
 STR_CONFIG_ERROR_INVALID_GRF_NOT_FOUND                          :nenalezeno
 STR_CONFIG_ERROR_INVALID_GRF_UNSAFE                             :nebezpečné pro statické použití
@@ -2564,15 +2572,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} kl
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} staženo
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} staženo
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Připojování...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Ověřování...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Čekání...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Stahování mapy...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Zpracovávání dat...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Registrování...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Přijímání informací o hře...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Přijímání informací o společnosti...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Odpojit se
 
@@ -2936,6 +2942,8 @@ STR_PICKER_PREVIEW_SHRINK                                       :-
 STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Snížit výšku náhledových obrázků. Klikni s Ctrl pro minimální výšku
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Zvýšit výšku náhledových obrázků. Klikni s Ctrl pro maximální výšku
+
+
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Vyber typ stanice pro zobrazení
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Zvol typ stanice pro stavbu. Podrž Ctrl pro přidaní nebo odebrání z oblíbených položek
@@ -3479,7 +3487,8 @@ STR_MAPGEN_DESERT_COVERAGE                                      :{BLACK}Pokrytí
 STR_MAPGEN_DESERT_COVERAGE_UP_TOOLTIP                           :{BLACK}Zvětšit pokrytí pouštěmi o deset procent
 STR_MAPGEN_DESERT_COVERAGE_DOWN_TOOLTIP                         :{BLACK}Zmenšit pokrytí pouštěmi o deset procent
 STR_MAPGEN_DESERT_COVERAGE_TEXT                                 :{BLACK}{NUM}%
-STR_MAPGEN_TERRAIN_TYPE                                         :{BLACK}Typ krajiny:
+STR_MAPGEN_TERRAIN_TYPE                                         :{BLACK}Maximální výška:
+STR_MAPGEN_AVERAGE_HEIGHT                                       :{BLACK}Průměrná výška:
 STR_MAPGEN_SEA_LEVEL                                            :{BLACK}Četnost jezer:
 STR_MAPGEN_SEA_LEVEL_TOOLTIP                                    :{BLACK}Zvol úroveň moře
 STR_MAPGEN_QUANTITY_OF_RIVERS                                   :{BLACK}Řeky:
@@ -3724,7 +3733,7 @@ STR_NEWGRF_ERROR_INVALID_ID                                     :Pokus o použit
 STR_NEWGRF_ERROR_CORRUPT_SPRITE                                 :{YELLOW}{STRING} obsahuje poškozený sprite. Všechny takové se zobrazí jako červený otazník (?)
 STR_NEWGRF_ERROR_MULTIPLE_ACTION_8                              :Obsahuje vícero Akce 8 záznamů (sprite {3:NUM})
 STR_NEWGRF_ERROR_READ_BOUNDS                                    :Čtení konce pseudo-spritu (sprite {3:NUM})
-STR_NEWGRF_ERROR_GRM_FAILED                                     :Požadované zdroje GRF nejsou dostupné (sprite {3:NUM})
+STR_NEWGRF_ERROR_GRM_FAILED                                     :Požadované zdroje NewGRF nejsou dostupné (sprite {3:NUM})
 STR_NEWGRF_ERROR_FORCEFULLY_DISABLED                            :{1:STRING} byla vypnuta {STRING}
 STR_NEWGRF_ERROR_INVALID_SPRITE_LAYOUT                          :Neplatný/neznámý sprite layout formát (sprite {3:NUM})
 STR_NEWGRF_ERROR_LIST_PROPERTY_TOO_LONG                         :Příliš mnoho prvků v seznamu hodnot vlastností (sprite {3:NUM}, vlastnost {4:HEX})
@@ -3734,13 +3743,13 @@ STR_NEWGRF_ERROR_INDPROD_CALLBACK                               :Neplatné zpět
 STR_NEWGRF_POPUP_CAUTION_CAPTION                                :{WHITE}Varování!
 STR_NEWGRF_CONFIRMATION_TEXT                                    :{YELLOW}Právě se chystáš změnit nastavení za běžící hry. To může to shodit OpenTTD nebo způsobit zaseknutí hry. Neupozorňujte na to jako na bug.{}Jste si tím opravdu jisti?
 
-STR_NEWGRF_DUPLICATE_GRFID                                      :{WHITE}Nelze přidat soubor: duplicitní GRF ID
-STR_NEWGRF_COMPATIBLE_LOADED                                    :{ORANGE}Odpovídající soubor nebyl nalezen (načetl se kompatibilní GRF)
+STR_NEWGRF_DUPLICATE_GRFID                                      :{WHITE}Nelze přidat soubor: duplicitní NewGRF ID
+STR_NEWGRF_COMPATIBLE_LOADED                                    :{ORANGE}Odpovídající soubor nebyl nalezen (načetl se kompatibilní NewGRF)
 STR_NEWGRF_TOO_MANY_NEWGRFS                                     :{WHITE}Nemůžu přidat soubor. Dosažen limit NewGRF souborů
 
-STR_NEWGRF_COMPATIBLE_LOAD_WARNING                              :{WHITE}Kompatibilní GRF se načetly místo chybějících
+STR_NEWGRF_COMPATIBLE_LOAD_WARNING                              :{WHITE}Kompatibilní NewGRF se načetly místo chybějících
 STR_NEWGRF_DISABLED_WARNING                                     :{WHITE}Chybějící grafiky byly vypnuty
-STR_NEWGRF_UNPAUSE_WARNING_TITLE                                :{YELLOW}Chybějící grafické soubory
+STR_NEWGRF_UNPAUSE_WARNING_TITLE                                :{YELLOW}Chybějící soubory NewGRF grafik
 STR_NEWGRF_UNPAUSE_WARNING                                      :{WHITE}Spuštění hry může shodit OpenTTD. Nehlaš chybu kvůli pádům způsobeným touto akcí.{}Opravdu chceš rozjet hru?
 
 # NewGRF status
@@ -4295,6 +4304,8 @@ STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Dosah: {
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Typ letadla: {GOLD}{STRING}
 STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}Druhy kolejí: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Všechny druhy nákladu
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Náklad
@@ -4455,6 +4466,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Chceš 
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Zpráva od výrobce dopravních prostředků
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Právě jsme vyvinuli nov{G ý ou é é é é á} {STRING.acc}. Měl byste zájem o roční výhradní právo na používání tohoto prostředku, aby byl otestován před uvedením na trh?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :{G=f}lokomotiva
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE.acc                      :lokomotivu
@@ -4635,7 +4647,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Letošn�
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Letošní zisk: {LTBLUE}{CURRENCY_LONG} (vloni: {CURRENCY_LONG}) {BLACK}Min. výkon: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Zisk v tomto období: {LTBLUE}{CURRENCY_LONG} (minulé období: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Zisk v tomto období: {LTBLUE}{CURRENCY_LONG} (minulé období: {CURRENCY_LONG}) {BLACK}Min. výkon: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Spolehlivost: {LTBLUE}{COMMA}%  {BLACK}Poruch od posledního servisu: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Koupeno: {LTBLUE}{NUM}{BLACK} Cena: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Kapacita: {LTBLUE}nic{STRING}
@@ -5184,7 +5195,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Nelze vy
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Nelze přejmenovat město...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Zde nelze postavit město...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Město nemůže být rozšířeno...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... moc blízko k okraji mapy
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... moc blízko k jinému městu
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... příliš mnoho měst
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... na mapě už není místo
@@ -6198,4 +6208,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Filtr od
 STR_BADGE_CONFIG_PREVIEW                                        :Náhled obrázku
 STR_BADGE_CONFIG_NAME                                           :Jméno
 STR_BADGE_FILTER_ANY_LABEL                                      :{G 0 Jakýkoliv Jakákoliv Jakékoliv Jacíkoliv Jakékoliv Jakékoliv Jakékoliv} {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} je {STRING}

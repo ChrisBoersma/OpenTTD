@@ -43,8 +43,8 @@
 static constexpr std::initializer_list<NWidgetPart> _nested_textfile_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_MAUVE),
-		NWidget(WWT_PUSHARROWBTN, COLOUR_MAUVE, WID_TF_NAVBACK), SetFill(0, 1), SetMinimalSize(15, 1), SetArrowWidgetTypeTip(AWV_DECREASE, STR_TEXTFILE_NAVBACK_TOOLTIP),
-		NWidget(WWT_PUSHARROWBTN, COLOUR_MAUVE, WID_TF_NAVFORWARD), SetFill(0, 1), SetMinimalSize(15, 1), SetArrowWidgetTypeTip(AWV_INCREASE, STR_TEXTFILE_NAVFORWARD_TOOLTIP),
+		NWidget(WWT_PUSHARROWBTN, COLOUR_MAUVE, WID_TF_NAVBACK), SetFill(0, 1), SetMinimalSize(15, 1), SetArrowWidgetTypeTip(ArrowWidgetType::Decrease, STR_TEXTFILE_NAVBACK_TOOLTIP),
+		NWidget(WWT_PUSHARROWBTN, COLOUR_MAUVE, WID_TF_NAVFORWARD), SetFill(0, 1), SetMinimalSize(15, 1), SetArrowWidgetTypeTip(ArrowWidgetType::Increase, STR_TEXTFILE_NAVFORWARD_TOOLTIP),
 		NWidget(WWT_CAPTION, COLOUR_MAUVE, WID_TF_CAPTION), SetToolTip(STR_TOOLTIP_WINDOW_TITLE_DRAG_THIS),
 		NWidget(WWT_TEXTBTN, COLOUR_MAUVE, WID_TF_WRAPTEXT), SetStringTip(STR_TEXTFILE_WRAP_TEXT, STR_TEXTFILE_WRAP_TEXT_TOOLTIP),
 		NWidget(WWT_DEFSIZEBOX, COLOUR_MAUVE),
@@ -83,7 +83,7 @@ static WindowDesc _textfile_desc(
 	_nested_textfile_widgets
 );
 
-TextfileWindow::TextfileWindow(Window *parent, TextfileType file_type) : Window(_textfile_desc), file_type(file_type)
+TextfileWindow::TextfileWindow(Window *parent, TextfileType file_type) : Window(_textfile_desc), BaseStringMissingGlyphSearcher(FS_MONO), file_type(file_type)
 {
 	/* Init of nested tree is deferred.
 	 * TextfileWindow::ConstructWindow must be called by the inheriting window. */
@@ -366,7 +366,7 @@ void TextfileWindow::NavigateHistory(int delta)
 	if (this->history[this->history_pos].filepath != this->filepath) {
 		this->filepath = this->history[this->history_pos].filepath;
 		this->filename = this->filepath.substr(this->filepath.find_last_of(PATHSEP) + 1);
-		this->LoadTextfile(this->filepath, NO_DIRECTORY);
+		this->LoadTextfile(this->filepath, Subdirectory::None);
 	}
 
 	this->SetWidgetDisabledState(WID_TF_NAVFORWARD, this->history_pos + 1 >= this->history.size());
@@ -445,7 +445,7 @@ void TextfileWindow::NavigateToFile(std::string newfile, size_t line)
 
 	/* Paste the two together and check file exists. */
 	newpath = newpath + newfile;
-	if (!FioCheckFileExists(newpath, NO_DIRECTORY)) return;
+	if (!FioCheckFileExists(newpath, Subdirectory::None)) return;
 
 	/* Update history. */
 	this->AppendHistory(newpath);
@@ -454,7 +454,7 @@ void TextfileWindow::NavigateToFile(std::string newfile, size_t line)
 	this->filepath = newpath;
 	this->filename = newpath.substr(newpath.find_last_of(PATHSEP) + 1);
 
-	this->LoadTextfile(this->filepath, NO_DIRECTORY);
+	this->LoadTextfile(this->filepath, Subdirectory::None);
 
 	this->GetScrollbar(WID_TF_HSCROLLBAR)->SetPosition(0);
 	this->GetScrollbar(WID_TF_VSCROLLBAR)->SetPosition(0);
@@ -754,19 +754,6 @@ bool TextfileWindow::IsTextWrapped() const
 	return this->lines[this->search_iterator++].text;
 }
 
-/* virtual */ bool TextfileWindow::Monospace()
-{
-	return true;
-}
-
-/* virtual */ void TextfileWindow::SetFontNames([[maybe_unused]] FontCacheSettings *settings, [[maybe_unused]] std::string_view font_name, [[maybe_unused]] const void *os_data)
-{
-#if defined(WITH_FREETYPE) || defined(_WIN32) || defined(WITH_COCOA)
-	settings->mono.font = font_name;
-	settings->mono.os_handle = os_data;
-#endif
-}
-
 #if defined(WITH_ZLIB)
 
 /**
@@ -847,6 +834,8 @@ static std::vector<char> Xunzip(std::span<char> input)
 
 /**
  * Loads the textfile text from file and setup #lines.
+ * @param textfile The filename of the file to load.
+ * @param dir The sub directory to find the file in.
  */
 /* virtual */ void TextfileWindow::LoadTextfile(const std::string &textfile, Subdirectory dir)
 {

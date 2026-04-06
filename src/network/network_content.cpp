@@ -46,7 +46,7 @@ extern bool HasScenario(const ContentInfo &ci, bool md5sum);
 /** The client we use to connect to the server. */
 ClientNetworkContentSocketHandler _network_content_client;
 
-/** Wrapper function for the HasProc */
+/** Check whether NewGRF content exists. @copydoc HasContentProc */
 static bool HasGRFConfig(const ContentInfo &ci, bool md5sum)
 {
 	return FindGRFConfig(std::byteswap(ci.unique_id), md5sum ? FGCM_EXACT : FGCM_ANY, md5sum ? &ci.md5sum : nullptr) != nullptr;
@@ -83,7 +83,7 @@ static HasContentProc *GetHasContentProcforContentType(ContentType type)
 	}
 }
 
-bool ClientNetworkContentSocketHandler::Receive_SERVER_INFO(Packet &p)
+bool ClientNetworkContentSocketHandler::ReceiveServerInfo(Packet &p)
 {
 	auto ci = std::make_unique<ContentInfo>();
 	ci->type     = (ContentType)p.Recv_uint8();
@@ -190,7 +190,7 @@ void ClientNetworkContentSocketHandler::RequestContentList(ContentType type)
 
 	this->Connect();
 
-	auto p = std::make_unique<Packet>(this, PACKET_CONTENT_CLIENT_INFO_LIST);
+	auto p = std::make_unique<Packet>(this, PacketContentType::ClientInfoList);
 	p->Send_uint8 ((uint8_t)type);
 	p->Send_uint32(0xffffffff);
 	p->Send_uint8 (1);
@@ -212,7 +212,6 @@ void ClientNetworkContentSocketHandler::RequestContentList(ContentType type)
 
 /**
  * Request the content list for a given number of content IDs.
- * @param count The number of IDs to request.
  * @param content_ids The unique identifiers of the content to request information about.
  */
 void ClientNetworkContentSocketHandler::RequestContentList(std::span<const ContentID> content_ids)
@@ -230,7 +229,7 @@ void ClientNetworkContentSocketHandler::RequestContentList(std::span<const Conte
 	for (auto it = std::begin(content_ids); it != std::end(content_ids); /* nothing */) {
 		auto last = std::ranges::next(it, MAX_CONTENT_IDS_PER_PACKET, std::end(content_ids));
 
-		auto p = std::make_unique<Packet>(this, PACKET_CONTENT_CLIENT_INFO_ID, TCP_MTU);
+		auto p = std::make_unique<Packet>(this, PacketContentType::ClientInfoID, TCP_MTU);
 		p->Send_uint16(std::distance(it, last));
 
 		for (; it != last; ++it) {
@@ -256,7 +255,7 @@ void ClientNetworkContentSocketHandler::RequestContentList(ContentVector *cv, bo
 	assert(cv->size() < (TCP_MTU - sizeof(PacketSize) - sizeof(uint8_t) - sizeof(uint8_t)) /
 			(sizeof(uint8_t) + sizeof(uint32_t) + (send_md5sum ? MD5_HASH_BYTES : 0)));
 
-	auto p = std::make_unique<Packet>(this, send_md5sum ? PACKET_CONTENT_CLIENT_INFO_EXTID_MD5 : PACKET_CONTENT_CLIENT_INFO_EXTID, TCP_MTU);
+	auto p = std::make_unique<Packet>(this, send_md5sum ? PacketContentType::ClientInfoExternalIDMD5 : PacketContentType::ClientInfoExternalID, TCP_MTU);
 	p->Send_uint8((uint8_t)cv->size());
 
 	for (const auto &ci : *cv) {
@@ -348,7 +347,7 @@ void ClientNetworkContentSocketHandler::DownloadSelectedContentFallback(const Co
 		 * The rest of the packet can be used for the IDs. */
 		uint p_count = std::min<uint>(count, (TCP_MTU - sizeof(PacketSize) - sizeof(uint8_t) - sizeof(uint16_t)) / sizeof(uint32_t));
 
-		auto p = std::make_unique<Packet>(this, PACKET_CONTENT_CLIENT_CONTENT, TCP_MTU);
+		auto p = std::make_unique<Packet>(this, PacketContentType::ClientContent, TCP_MTU);
 		p->Send_uint16(p_count);
 
 		for (uint i = 0; i < p_count; i++) {
@@ -371,9 +370,9 @@ void ClientNetworkContentSocketHandler::DownloadSelectedContentFallback(const Co
 static std::string GetFullFilename(const ContentInfo &ci, bool compressed)
 {
 	Subdirectory dir = GetContentInfoSubDir(ci.type);
-	if (dir == NO_DIRECTORY) return {};
+	if (dir == Subdirectory::None) return {};
 
-	std::string buf = FioGetDirectory(SP_AUTODOWNLOAD_DIR, dir);
+	std::string buf = FioGetDirectory(Searchpath::AutodownloadDir, dir);
 	buf += ci.filename;
 	buf += compressed ? ".tar.gz" : ".tar";
 
@@ -447,7 +446,7 @@ static bool GunzipFile(const ContentInfo &ci)
 #endif /* defined(WITH_ZLIB) */
 }
 
-bool ClientNetworkContentSocketHandler::Receive_SERVER_CONTENT(Packet &p)
+bool ClientNetworkContentSocketHandler::ReceiveServerContent(Packet &p)
 {
 	if (!this->cur_file.has_value()) {
 		/* When we haven't opened a file this must be our first packet with metadata. */
@@ -528,7 +527,7 @@ void ClientNetworkContentSocketHandler::AfterDownload()
 		FioRemove(GetFullFilename(*this->cur_info, true));
 
 		Subdirectory sd = GetContentInfoSubDir(this->cur_info->type);
-		if (sd == NO_DIRECTORY) NOT_REACHED();
+		if (sd == Subdirectory::None) NOT_REACHED();
 
 		TarScanner ts;
 		std::string fname = GetFullFilename(*this->cur_info, false);
@@ -536,7 +535,7 @@ void ClientNetworkContentSocketHandler::AfterDownload()
 
 		if (this->cur_info->type == CONTENT_TYPE_BASE_MUSIC) {
 			/* Music can't be in a tar. So extract the tar! */
-			ExtractTar(fname, BASESET_DIR);
+			ExtractTar(fname, Subdirectory::Baseset);
 			FioRemove(fname);
 		}
 
@@ -696,7 +695,7 @@ class NetworkContentConnecter : public TCPConnecter {
 public:
 	/**
 	 * Initiate the connecting.
-	 * @param address The address of the server.
+	 * @param connection_string The address of the server.
 	 */
 	NetworkContentConnecter(std::string_view connection_string) : TCPConnecter(connection_string, NETWORK_CONTENT_SERVER_PORT) {}
 
@@ -730,10 +729,8 @@ void ClientNetworkContentSocketHandler::Connect()
 	TCPConnecter::Create<NetworkContentConnecter>(NetworkContentServerConnectionString());
 }
 
-/**
- * Disconnect from the content server.
- */
-NetworkRecvStatus ClientNetworkContentSocketHandler::CloseConnection(bool)
+/** Disconnect from the content server. @copydoc NetworkTCPSocketHandler::CloseConnection */
+NetworkRecvStatus ClientNetworkContentSocketHandler::CloseConnection([[maybe_unused]] bool error)
 {
 	NetworkContentSocketHandler::CloseConnection();
 
@@ -781,6 +778,7 @@ void ClientNetworkContentSocketHandler::SendReceive()
 /** Timeout after queueing content for it to try to be requested. */
 static constexpr auto CONTENT_QUEUE_TIMEOUT = std::chrono::milliseconds(100);
 
+/** Timer delay requesting content, so it can be batched more efficiently in asynchronous contexts. */
 static TimeoutTimer<TimerWindow> _request_queue_timeout = {CONTENT_QUEUE_TIMEOUT, []() {
 	_network_content_client.RequestQueuedContentInfo();
 }};
@@ -894,7 +892,10 @@ void ClientNetworkContentSocketHandler::UnselectAll()
 	}
 }
 
-/** Toggle the state of a content info and check its dependencies */
+/**
+ * Toggle the state of a content info and check its dependencies.
+ * @param ci The content info to change.
+ */
 void ClientNetworkContentSocketHandler::ToggleSelectedState(const ContentInfo &ci)
 {
 	switch (ci.state) {

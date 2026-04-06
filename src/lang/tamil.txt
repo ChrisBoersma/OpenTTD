@@ -1477,6 +1477,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :மென்ம
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :கரடுமுரடான
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :மிகவும் கரடுமுரடான
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :பலவகை பரவல்: {STRING}
 
 STR_CONFIG_SETTING_RIVER_AMOUNT                                 :ஆறுகளின் எண்ணிக்கை: {STRING}
@@ -2209,15 +2211,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} cl
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} இதுவரை பதிவிறக்கியது
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} இதுவரை பதிவிறக்கியது
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) இணைக்கப்படுகிறது...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) அனுமதிக்கப்படுகிறது...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) காத்திருக்கிறது...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) வரைபடம் பதிவிறக்கமாகிறது...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) தகவல் பரிசீலிக்கப்படுகின்றது...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) பதிவு செய்யப்படுகிறது...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}ஆட்டத்தின் விவரங்கள் பெறப்படுகின்றது...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}நிறுவனத்தின் விவரம் சேகரிக்கப்படுகிறது...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}இணைப்பை துண்டி
 
@@ -2535,6 +2535,8 @@ STR_STATION_BUILD_PLATFORM_LENGTH                               :{BLACK}நி�
 STR_STATION_BUILD_PLATFORM_LENGTH_TOOLTIP                       :{BLACK}இரயில் நிலையத்தின் நீளத்தினை தேர்ந்தெடு
 STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}இழுத்து விடவும்
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}இழுத்து விடுவதன் மூலம் நிலையத்தினைக் கட்டவும்
+
+
 
 
 
@@ -3699,6 +3701,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}அத�
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}தூரம்: {GOLD}{COMMA} கட்டங்கள்
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}விமான வகை: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :அனைத்து சரக்கு வகைகள்
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :சரக்கு
@@ -3846,6 +3850,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}நீ�
 
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}வாகன உற்பத்தியாலரிடமிருந்து ஓர் தகவல்
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :இரயில்வே வாகனம்
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :மின்சார இரயில்
@@ -4003,7 +4008,6 @@ STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED_MAX_TE                  :{BLACK}எட�
 
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}இந்த வருட இலாபம்: {LTBLUE}{CURRENCY_LONG} (சென்ற வருடம்: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}இந்த வருட இலாபம்: {LTBLUE}{CURRENCY_LONG} (சென்ற வருடம்: {CURRENCY_LONG}) {BLACK}கு. திறன்: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}நம்பகத்தன்மை: {LTBLUE}{COMMA}%  {BLACK}கடைசிப் பராமரிப்பிற்குப் பின் ஏற்ப்பட்ட பழுதுகள்: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}கட்டப்பட்டது: {LTBLUE}{NUM}{BLACK} மதிப்பு: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}கொள்ளளவு: {LTBLUE}ஒன்றுமில்லை{STRING}
@@ -4510,7 +4514,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}எந�
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}நகரத்தின் பெயரினை மாற்ற இயலாது...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}நகரத்தினை இங்கே நிறுவ இயலாது...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}நகரத்தினை விரிவாக்க இயலாது...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... படத்தின் எல்லைக்கு மிக அருகாமையில் உள்ளது
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... மற்றொரு நகரத்திற்கு மிகவும் அருகாமையில் உள்ளது
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... மிகவும் அதிகமான நகரங்கள்
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... படத்தில் வேறு வெற்றுஇடம் இல்லை

@@ -1563,6 +1563,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Rèidh
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Garbh
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Glè gharbh
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Sgaoileadh caochlaidh: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :(TerraGenesis a-mhàin) Stiùirich am bi an dà chuid beanntan ’s tìr rèidh air a’ mhapa gus nach bi. O nach adhbharaich an roghainn seo ach tìr nas rèidhe, cuir na roghainnean eile air beanntan
 
@@ -2271,15 +2273,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} {P
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} air a{P 0 "" "" n ""} luchdadh a-nuas gu ruige seo
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} air a{P 0 "" "" n ""} luchdadh a-nuas gu ruige seo
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) A' cheangal ...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) A' dearbhadh ...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) A' feitheamh ...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) A' luchdadh mapa a-nuas ...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) A' giullachd dàta ...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) A' clàradh ...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}A' faighinn fiosrachadh a' gheama ...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}A' faighinn fiosrachadh na companaidh ...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Dì-cheangail
 
@@ -2558,6 +2558,8 @@ STR_STATION_BUILD_PLATFORM_LENGTH                               :{BLACK}Faide na
 STR_STATION_BUILD_PLATFORM_LENGTH_TOOLTIP                       :{BLACK}Tagh dè cho fad ’s a bhios an stèisean
 STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}Slaod is leig às
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Tog stèisean le slaodadh is leigeil às
+
+
 
 
 
@@ -3659,6 +3661,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Spàirn 
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Astar: {GOLD}{COMMA} {P leac leac leacan leac}
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Seòrsa a' charbaid-adhair: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 
 ###length VEHICLE_TYPES
@@ -3809,6 +3813,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Tha thu
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Brath bho dhèanadair a' charbaid
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Tha sinn air {STRING} ùr a dhealbhadh - a bheil ùidh agaibh ann ’s nach cleachd ach sibh fhèin e fad bliadhna ach am faic sinn dè cho math ’s a dh’obraicheas e mus reic sinn don a h-uile duine e?
 
+
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :einnsean-rèile
 STR_ENGINE_PREVIEW_MONORAIL_LOCOMOTIVE                          :einnsean aona-rèile
 STR_ENGINE_PREVIEW_MAGLEV_LOCOMOTIVE                            :einnsean magnaiteach
@@ -3947,7 +3952,6 @@ STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED                         :{BLACK}Cuideam:
 STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED_MAX_TE                  :{BLACK}Cuideam: {LTBLUE}{WEIGHT_SHORT} {BLACK}Cumhachd: {LTBLUE}{POWER}{BLACK} Luaths as motha: {LTBLUE}{VELOCITY} {BLACK}Neart as motha: {LTBLUE}{FORCE}
 
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Prothaid am bliadhna: {LTBLUE}{CURRENCY_LONG} (an-uiridh: {CURRENCY_LONG})
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Earbsachd: {LTBLUE}{COMMA}%  {BLACK}{P 1 Briseadh Briseadh Brisidhean Briseadh} bhon obair-ghlèidhidh mu dheireadh: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Air a {G 0 thogail togail}: {LTBLUE}{NUM}{BLACK} Luach: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Tomhas-lìonaidh: {LTBLUE}—{STRING}
@@ -4429,7 +4433,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Cha ghab
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Cha ghabh ainm a' bhaile atharrachadh...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Cha ghabh baile stèidheachadh an-seo...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Cha ghabh am baile leudachadh...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... ro fhaisg air oir a' mhapa
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... ro fhaisg air baile eile
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... tha cus bhailtean ann
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... chan eil rum air fhàgail air a' mhapa

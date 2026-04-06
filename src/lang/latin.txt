@@ -1556,6 +1556,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Teres
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Aspera
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Asperrima
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Partitio varietatis: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :(modo TerraGenesis) Eligere si tabula contineat et montanos et planos locos. Quoniam haec solum facit ut tabula planior sit, electiones aliae oportet esse montanae
 
@@ -2273,15 +2275,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} cl
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} adhuc arcessita
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} adhuc arcessita
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Coniungens...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Auctorans...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Manens...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Tabulam arcessens...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Data componens...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Nuntians...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Lndicium ludi arcessens...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Indicium societatis arcessens...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Disiungere
 
@@ -2563,6 +2563,8 @@ STR_STATION_BUILD_PLATFORM_LENGTH                               :{BLACK}Longitud
 STR_STATION_BUILD_PLATFORM_LENGTH_TOOLTIP                       :{BLACK}Eligere longitudinem ferriviae stationis
 STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}Trahere Ponereque
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Struere stationem trahendo ponendoque
+
+
 
 
 
@@ -3640,6 +3642,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Vis Trac
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Max. distantia volatus: {GOLD}{COMMA} tegulas
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Typus aeroplani: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 
 ###length VEHICLE_TYPES
@@ -3798,6 +3802,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Omnia v
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Nuntium a fabricatore vehiculorum
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Nuper fabricamus nov{G um am um os as a} {STRING} - visne uti hoc vehiculo unum annum, ut videamus quomodo operatur antequam omnibus venum damus?
 
+
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :{G=f}hamaxam
 STR_ENGINE_PREVIEW_MONORAIL_LOCOMOTIVE                          :{G=f}hamaxam monoorbitalem
 STR_ENGINE_PREVIEW_MAGLEV_LOCOMOTIVE                            :{G=f}hamaxam maglev
@@ -3936,7 +3941,6 @@ STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED                         :{BLACK}Pondus: 
 STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED_MAX_TE                  :{BLACK}Pondus: {LTBLUE}{WEIGHT_SHORT} {BLACK}Potestas: {LTBLUE}{POWER}{BLACK} Velocitas maxima: {LTBLUE}{VELOCITY} {BLACK}V.T. Max.: {LTBLUE}{FORCE}
 
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Lucrum huius anni: {LTBLUE}{CURRENCY_LONG} (anni prioris: {CURRENCY_LONG})
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Constantia: {LTBLUE}{COMMA}%  {BLACK}Defecta post ministrationem priorem: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Factum: {LTBLUE}{NUM}{BLACK} Aestimatio: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Capacitas: {LTBLUE}Nulla{STRING}
@@ -4419,7 +4423,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Non lice
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Non licet oppidum renominare...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Non licet oppidum condere hic...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Non licet augere oppidum...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... nimis prope finem tabulae
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... nimis prope aliud oppidum
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... nimis oppida adsunt
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... plus spatium tabulae deest
