@@ -1637,6 +1637,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Lauge
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Järsk
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Väga järsk
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Iseärasuste jaotus: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :(TerraGenesis only) Määra, kas kaardil on nii mägiseid kui laugeid alasid. Kuna see muudab kaarti ainult laugemaks, peaksid teised sätted olema seadistatud mägisteks
 
@@ -2472,15 +2474,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} kl
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} alla laaditud
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} alla laaditud
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Ühendumine...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Kontrollin õigusi...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Ootel...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Kaardi allalaadimine...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Andmete töötlemine...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Registreerimine...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Hangin mängu infot...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Hangin ettevõtte infot...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Katkesta
 
@@ -2832,6 +2832,8 @@ STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}Lohistam
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Ehita jaam kasutades hiirega lohistamist
 
 STR_PICKER_MODE_ALL                                             :Kõik
+
+
 
 
 STR_PICKER_ROADSTOP_TRUCK_CLASS_TOOLTIP                         :Vali, milliseid veoautojaamu näidatakse
@@ -4107,6 +4109,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Suurim v
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Tegevusradius: {GOLD}{COMMA} ruutu
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Õhusõiduki liik: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Kõik veoseliigid
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Kaubad
@@ -4267,6 +4271,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Sa oled
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Teade veovahendite tootjalt
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Me töötasime välja uue {STRING}. Kas te oleksite huvitatud selle ainuõiguslikust katsetamisest ühe aasta jooksul, et me saaksime seda enne turule laskmist jälgida?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :raudteeveduri
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :elektrirongivedur
@@ -4443,7 +4448,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Kasum se
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Kasum sellel aastal: {LTBLUE}{CURRENCY_LONG} (eelmisel aastal: {CURRENCY_LONG}) {BLACK}Min. jõudlus: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Kasum sellel perioodil: {LTBLUE}{CURRENCY_LONG} (eelmisel perioodil: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Kasum sellel perioodil: {LTBLUE}{CURRENCY_LONG} (eelmisel perioodil: {CURRENCY_LONG}) {BLACK}Min. jõudlus: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Tehnoseisund: {LTBLUE}{COMMA}%  {BLACK}Rikkeid eelmisest hooldusest: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Valmistatud: {LTBLUE}{NUM}{BLACK} Väärtus: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Mahutavus: {LTBLUE}Pole{STRING}
@@ -4984,7 +4988,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Ei saa �
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Ei saa asulat ümbernimetada...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Siia ei saa asulat rajada...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Asulat ei saa laiendada...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... liiga lähedal kaardi servale
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... liiga lähedal teisele asulale
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... liiga palju asulaid
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... pole enam ruumi kaardil

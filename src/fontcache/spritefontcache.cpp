@@ -37,6 +37,7 @@ static std::array<std::unordered_map<char32_t, SpriteID>, FS_END> _char_maps{}; 
 
 /**
  * Get SpriteID associated with a character.
+ * @param fs The font size of the character.
  * @param key Character to find.
  * @return SpriteID for character, or 0 if not present.
  */
@@ -158,14 +159,14 @@ class SpriteFontCacheFactory : public FontCacheFactory {
 public:
 	SpriteFontCacheFactory() : FontCacheFactory("sprite", "Sprite font provider") {}
 
-	std::unique_ptr<FontCache> LoadFont(FontSize fs, FontType fonttype) const override
+	std::unique_ptr<FontCache> LoadFont(FontSize fs, FontType fonttype, bool, const std::string &, const std::any &) const override
 	{
 		if (fonttype != FontType::Sprite) return nullptr;
 
 		return std::make_unique<SpriteFontCache>(fs);
 	}
 
-	bool FindFallbackFont(struct FontCacheSettings *, const std::string &, class MissingGlyphSearcher *) const override
+	bool FindFallbackFont(const std::string &, class MissingGlyphSearcher *) const override
 	{
 		return false;
 	}

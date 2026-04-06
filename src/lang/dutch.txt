@@ -1626,6 +1626,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Glad
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Ruig
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Erg ruig
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Variëteit distributie: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Kies of de kaart zowel bergachtige als vlakke gebieden bevat. Hoe groter de variatie, hoe meer verschillen in hoogte tussen bergachtige en vlakke gebieden
 
@@ -2477,15 +2479,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} sp
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} tot dusver gedownload
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} opgehaald
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Verbinden...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Verifiëren...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Wachten...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Kaart downloaden...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Gegevens verwerken...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Registreren...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Spelinformatie ophalen...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Bedrijfsinformatie ophalen...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Verbinding verbreken
 
@@ -2849,6 +2849,8 @@ STR_PICKER_PREVIEW_SHRINK                                       :-
 STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Verklein de hoogte van voorbeelden. Ctrl+klikken verkleint tot minimaal
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Vergroot de hoogte van voorbeelden. Ctrl+klikken vergroot tot maximaal
+
+
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Selecteer een klasse stations voor weergave
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Selecteer een type station om te bouwen. Ctrl+klik om toe te voegen aan of te verwijderen uit opgeslagen onderdelen
@@ -4202,6 +4204,8 @@ STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Bereik: 
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Vliegtuigtype: {GOLD}{STRING}
 STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}Spoortypen: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Alle soorten vracht
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Vracht
@@ -4362,6 +4366,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Je staa
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Bericht van voertuigenfabrikant
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}We hebben zojuist een nieuwe {STRING} ontworpen - ben je geïnteresseerd in een jaar lang exclusief gebruik van dit voertuig, zodat we kunnen zien of het goed werkt voordat we het wereldwijd beschikbaar maken?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :spoorlocomotief
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :elektrische locomotief
@@ -4539,7 +4544,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Winst di
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Winst dit jaar: {LTBLUE}{CURRENCY_LONG} (vorig jaar: {CURRENCY_LONG}) {BLACK}Min. prestatie: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Winst deze periode: {LTBLUE}{CURRENCY_LONG} (vorige periode: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Winst deze periode: {LTBLUE}{CURRENCY_LONG} (vorige periode: {CURRENCY_LONG}) {BLACK}Min. prestatie: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Betrouwbaarheid: {LTBLUE}{COMMA}%  {BLACK}Aantal keren motorpech sinds laatste onderhoud: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Gebouwd: {LTBLUE}{NUM}{BLACK} Waarde: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Capaciteit: {LTBLUE}Geen{STRING}
@@ -5088,7 +5092,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Kan geen
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Kan stad niet hernoemen...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Kan hier geen nieuwe stad bouwen...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Kan dorp niet uitbreiden...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... te dicht bij de rand van de kaart
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... te dicht bij een andere plaats
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... te veel plaatsen
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... er is geen ruimte meer op de kaart
@@ -5978,4 +5981,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Badgefil
 STR_BADGE_CONFIG_PREVIEW                                        :Voorbeeld
 STR_BADGE_CONFIG_NAME                                           :Naam
 STR_BADGE_FILTER_ANY_LABEL                                      :Willekeurige {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} is {STRING}

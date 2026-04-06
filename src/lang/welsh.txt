@@ -1626,6 +1626,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Llyfn
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Garw
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Garw Iawn
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Dosraniad amrywiaeth: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Rheoli a yw'r map yn cynnwys ardaloedd mynyddig a gwastad. Y mwyaf o amrywiaeth, y mwy o wahaniaeth uchder rhwng ardaloedd mynyddig a gwastad
 
@@ -2477,15 +2479,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} gw
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} wedi'i lawrlwytho hyd yn hyn
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} wedi eu llwytho i lawr hyd yn hyn
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Wrthi'n cysylltu...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Wrthi'n awdurdodi...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Wrthi'n aros...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Wrthi'n llawrlwytho map...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Wrthi'n prosesu data..
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Cofrestru...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Estyn gwybodaeth gêm...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Estyn gwybodaeth cwmnïau...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Datgysylltu
 
@@ -2849,6 +2849,8 @@ STR_PICKER_PREVIEW_SHRINK                                       :-
 STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Lleihau ucher delewddau rhagolwg. Mae Ctrl+Clic yn lleihau at yr isafswm
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Cynyddu ucher delewddau rhagolwg. Mae Ctrl+Clic yn cynyddu at yr uchafswm
+
+
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Dewis dosbarth gorsaf i'w ddangos
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Dewis math gorsaf i'w adeiladu. Mae Ctrl+Clic yn adio neu tynnu o'r eitemau a gedwir
@@ -4202,6 +4204,8 @@ STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Pellter 
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Math awyren: {GOLD}{STRING}
 STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}Mathau rheilffordd: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Pob math o lwyth
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Llwythi
@@ -4362,6 +4366,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Rydych 
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Neges gan wneuthurwr cerbydau
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Rydyn ni newydd gynllunio {STRING} newydd - a fyddai gennych chi ddiddordeb mewn cael defnydd cyfyngol o'r cerbyd hwn am flwyddyn er mwyn i ni gael profi ei berfformiad cyn y bydd ar gael i bawb?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :trên
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :locomotif rheilffordd drydan
@@ -4539,7 +4544,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Elw elen
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Elw eleni: {LTBLUE}{CURRENCY_LONG} (Elw llynedd : {CURRENCY_LONG}) {BLACK}Perfformiad isafsymol: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :Elw y cyfnod yma: {LTBLUE}{CURRENCY_LONG} (cyfnod diwethaf: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Elw'r cyfnod yma: {LTBLUE}{CURRENCY_LONG} (cyfnod diwethaf: {CURRENCY_LONG}) {BLACK}Perfformiad isaf:: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Dibynadwyedd: {LTBLUE}{COMMA}%  {BLACK}Toriadau ers gwasanaeth olaf: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Codi: {LTBLUE}{NUM}{BLACK} Pris: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Cynhwysedd: {LTBLUE}Dim{STRING}
@@ -5088,7 +5092,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Methu ad
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Methu ailenwi tref...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Methu adeiladu tref yma...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Methu ehangu'r dref...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... rhy agos i ymyl y map
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... rhy agos i dref arall
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... gormod o drefi
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... nid oes mwy o le ar y map
@@ -5978,4 +5981,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Hidlau B
 STR_BADGE_CONFIG_PREVIEW                                        :Rhagolwg Delwedd
 STR_BADGE_CONFIG_NAME                                           :Enw
 STR_BADGE_FILTER_ANY_LABEL                                      :Unrhyw {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :Mae {STRING} yn {STRING}

@@ -1891,6 +1891,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Гладкі
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Грубы
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Вельмі грубы
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Разнастайнасць ландшафту: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Вызначае наяўнасць на карце як горных, так і раўнінных абласцей. Чым вышэй разнастайнасць, тым вышэй розніца ў вышыні паміж гэтымі зонамі.
 
@@ -2722,15 +2724,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} к
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} запампавана
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}Запампавана {BYTES} / {BYTES}
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Злучэньне...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Аўтарызацыя...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Чаканьне...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Запампоўваньне мапы...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Апрацоўка даных...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Рэґістрацыя...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Здабыцьцё інфармацыі аб гульні...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Здабыцьцё інфармацыі пра кампаніі...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Адлучыцца
 
@@ -3093,6 +3093,8 @@ STR_STATION_BUILD_PLATFORM_LENGTH                               :{BLACK}Даўж
 STR_STATION_BUILD_PLATFORM_LENGTH_TOOLTIP                       :{BLACK}Выберыце даўжыню станцыйных каляінаў
 STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}Участак
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Пабудаваць станцыю на выбраным участку зямлі
+
+
 
 
 
@@ -4360,6 +4362,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Макс
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Далёкасьць: {GOLD}{COMMA} клет{P ка кi ак}
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Тып паветр. судна: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Усе тыпы грузаў
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Груз
@@ -4520,6 +4524,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Уве�
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Паведамленьне ад вытворцы транспарту
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Мы стварылі новую мадэль {STRING.gen}. Цi зацікаўлены Вы ў яе гадавым эксклюзіўным выкарыстаньні для праверкі перад запускам у масавую вытворчасьць?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :{G=m}чыгуначны лякаматыў
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE.gen                      :чыгуначнага лакаматыва
@@ -4718,7 +4723,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Прыб
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Прыбытак сёлета: {LTBLUE}{CURRENCY_LONG} (летась: {CURRENCY_LONG}) {BLACK}Мін. удзельная магутн.: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Прыбытак у бягучым цыкле: {LTBLUE}{CURRENCY_LONG} (у мінулым: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Прыбытак у бягучым цыкле: {LTBLUE}{CURRENCY_LONG} (у мінулым: {CURRENCY_LONG}) {BLACK}Мін. удзельная магут.: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Надзейнасьць: {LTBLUE}{COMMA}%  {BLACK}Паломак з апошняга агляду: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Пабудаваны ў: {LTBLUE}{NUM} г.{BLACK} Кошт: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Ёмiстасьць: {LTBLUE}адсутнiчае{STRING}
@@ -5256,7 +5260,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Нема
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Немагчыма перайменаваць горад...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Тут немагчыма пабудаваць горад...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Немагчыма пашырыць горад...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... занадта блізка да краю мапы
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... занадта блізка да іншага горада
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... занадта шмат гарадоў
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... няма месца на мапе

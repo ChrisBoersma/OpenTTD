@@ -1448,6 +1448,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Mín
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Garbh
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :An-gharbh
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Dáileadh éagsúlachta: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :(TerraGenesis amháin) Rialaigh an mbeidh limistéir sléibhtiúla agus réidh araon ar an léarscáil. Toisc nach ndéantar an léarscáil ach níos cothroime leis an socrú seo, ba cheart na socruithe eile a shocrú go sléibhtiúil
 
@@ -2216,15 +2218,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} {P
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} íoslódáilte go dtí seo
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} íoslódáilte go dtí seo
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Ag nascadh..
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Ag údarú..
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Ag fanacht..
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Ag íoslódáil na léarscáile..
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Ag próiseáil sonraí..
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Ag clárú..
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Ag fáil faisnéis an chluiche..
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Ag fáil faisnéis cuideachtaí..
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Dínasc
 
@@ -2556,6 +2556,8 @@ STR_STATION_BUILD_PLATFORM_LENGTH                               :{BLACK}Fad an a
 STR_STATION_BUILD_PLATFORM_LENGTH_TOOLTIP                       :{BLACK}Roghnaigh fad an stáisiúin iarnróid
 STR_STATION_BUILD_DRAG_DROP                                     :{BLACK}Tarraing & Scaoil
 STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Tóg stáisiún ag úsáid tarraing & scaoil
+
+
 
 
 
@@ -3737,6 +3739,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Iarracht
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Raon: {GOLD}{COMMA} tíl
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Cineál aerárthaigh: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 
 ###length VEHICLE_TYPES
@@ -3894,6 +3898,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Tá tú
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Teachtaireacht ó dhéantóir feithiclí
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Táimid díreach tar éis {STRING} nua a dhearadh - an mbeadh suim agat úsáid eisiach a bhaint as ar feadh bliana, le go mbeimid in ann a fheiceáil mar a fheidhmíonn sé sula gcuirfimid ar fáil do chách é?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :inneall gluaiste iarnróid
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :inneall gluaiste iarnróid leictrithe
@@ -4054,7 +4059,6 @@ STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED                         :{BLACK}Meáchan
 STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED_MAX_TE                  :{BLACK}Meáchan: {LTBLUE}{WEIGHT_SHORT} {BLACK}Cumhacht: {LTBLUE}{POWER}{BLACK} Uas-luas: {LTBLUE}{VELOCITY} {BLACK}T.E. Uasta: {LTBLUE}{FORCE}
 
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Brabús i mbliana: {LTBLUE}{CURRENCY_LONG} (anuraidh: {CURRENCY_LONG})
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Iontaofacht: {LTBLUE}{COMMA}%  {BLACK}Líon na gcliseadh ón seirbhísiú deiridh: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Tógtha: {LTBLUE}{NUM}{BLACK} Luach: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Lastas: {LTBLUE}Gan lastas{STRING}
@@ -4549,7 +4553,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Ní féi
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Ní féidir an baile a athainmniú...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Ní féidir baile a bhunú anseo...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Ní féidir an baile a fhairsingiú...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... roghearr to thaobh na léarscáile
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... roghearr do bhaile eile
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... an iomarca bailte
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... níl a thuilleadh spáis ar an léarscáil

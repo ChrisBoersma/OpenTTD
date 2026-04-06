@@ -79,12 +79,14 @@
 
 #include "safeguards.h"
 
+#ifndef DOXYGEN_API
+
 NLOHMANN_JSON_SERIALIZE_ENUM(GRFStatus, {
-	{GRFStatus::GCS_UNKNOWN, "unknown"},
-	{GRFStatus::GCS_DISABLED, "disabled"},
-	{GRFStatus::GCS_NOT_FOUND, "not found"},
-	{GRFStatus::GCS_INITIALISED, "initialised"},
-	{GRFStatus::GCS_ACTIVATED, "activated"},
+	{GRFStatus::Unknown, "unknown"},
+	{GRFStatus::Disabled, "disabled"},
+	{GRFStatus::NotFound, "not found"},
+	{GRFStatus::Initialised, "initialised"},
+	{GRFStatus::Activated, "activated"},
 })
 
 NLOHMANN_JSON_SERIALIZE_ENUM(SocialIntegrationPlugin::State, {
@@ -97,6 +99,7 @@ NLOHMANN_JSON_SERIALIZE_ENUM(SocialIntegrationPlugin::State, {
 	{SocialIntegrationPlugin::State::INVALID_SIGNATURE, "invalid_signature"},
 })
 
+#endif /* DOXYGEN_API */
 
 /** Lookup table to convert a VehicleType to a string. */
 static const std::string _vehicle_type_to_string[] = {
@@ -115,6 +118,7 @@ static const std::string _vehicle_type_to_string[] = {
  * - _company_settings
  * - _win32_settings
  * As such, they are not part of this list.
+ * @return The table of generic settings.
  */
 static auto &GenericSettingTables()
 {
@@ -160,6 +164,7 @@ static void SurveySettingsTable(nlohmann::json &survey, const SettingTable &tabl
  * Convert settings to JSON.
  *
  * @param survey The JSON object.
+ * @param skip_if_default If true, skip any settings that are on their default value.
  */
 void SurveySettings(nlohmann::json &survey, bool skip_if_default)
 {

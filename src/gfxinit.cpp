@@ -47,7 +47,7 @@ static uint LoadGrfFile(const std::string &filename, SpriteID load_index, bool n
 	SpriteID load_index_org = load_index;
 	SpriteID sprite_id = 0;
 
-	SpriteFile &file = OpenCachedSpriteFile(filename, BASESET_DIR, needs_palette_remap);
+	SpriteFile &file = OpenCachedSpriteFile(filename, Subdirectory::Baseset, needs_palette_remap);
 
 	Debug(sprite, 2, "Reading grf-file '{}'", filename);
 
@@ -77,13 +77,12 @@ static uint LoadGrfFile(const std::string &filename, SpriteID load_index, bool n
  * @param filename   The name of the file to open.
  * @param index_tbl  The offsets of each of the sprites.
  * @param needs_palette_remap Whether the colours in the GRF file need a palette remap.
- * @return The number of loaded sprites.
  */
 static void LoadGrfFileIndexed(const std::string &filename, std::span<const std::pair<SpriteID, SpriteID>> index_tbl, bool needs_palette_remap)
 {
 	uint sprite_id = 0;
 
-	SpriteFile &file = OpenCachedSpriteFile(filename, BASESET_DIR, needs_palette_remap);
+	SpriteFile &file = OpenCachedSpriteFile(filename, Subdirectory::Baseset, needs_palette_remap);
 
 	Debug(sprite, 2, "Reading indexed grf-file '{}'", filename);
 
@@ -124,7 +123,7 @@ void CheckExternalFiles()
 		/* Not all files were loaded successfully, see which ones */
 		fmt::format_to(output_iterator, "Trying to load graphics set '{}', but it is incomplete. The game will probably not run correctly until you properly install this set or select another one. See section 1.4 of README.md.\n\nThe following files are corrupted or missing:\n", used_set->name);
 		for (const auto &file : used_set->files) {
-			MD5File::ChecksumResult res = GraphicsSet::CheckMD5(&file, BASESET_DIR);
+			MD5File::ChecksumResult res = GraphicsSet::CheckMD5(&file, Subdirectory::Baseset);
 			if (res != MD5File::CR_MATCH) fmt::format_to(output_iterator, "\t{} is {} ({})\n", file.filename, res == MD5File::CR_MISMATCH ? "corrupt" : "missing", file.missing_warning);
 		}
 		fmt::format_to(output_iterator, "\n");
@@ -137,7 +136,7 @@ void CheckExternalFiles()
 		static_assert(SoundsSet::NUM_FILES == 1);
 		/* No need to loop each file, as long as there is only a single
 		 * sound file. */
-		fmt::format_to(output_iterator, "\t{} is {} ({})\n", sounds_set->files[0].filename, SoundsSet::CheckMD5(&sounds_set->files[0], BASESET_DIR) == MD5File::CR_MISMATCH ? "corrupt" : "missing", sounds_set->files[0].missing_warning);
+		fmt::format_to(output_iterator, "\t{} is {} ({})\n", sounds_set->files[0].filename, SoundsSet::CheckMD5(&sounds_set->files[0], Subdirectory::Baseset) == MD5File::CR_MISMATCH ? "corrupt" : "missing", sounds_set->files[0].missing_warning);
 	}
 
 	if (!error_msg.empty()) ShowInfoI(error_msg);
@@ -151,7 +150,7 @@ static std::unique_ptr<GRFConfig> GetDefaultExtraGRFConfig()
 {
 	auto gc = std::make_unique<GRFConfig>("OPENTTD.GRF");
 	gc->palette |= GRFP_GRF_DOS;
-	FillGRFDetails(*gc, false, BASESET_DIR);
+	FillGRFDetails(*gc, false, Subdirectory::Baseset);
 	gc->flags.Reset(GRFConfigFlag::InitOnly);
 	return gc;
 }
@@ -271,7 +270,7 @@ static bool SwitchNewGRFBlitter()
 	uint depth_wanted_by_base = BaseGraphics::GetUsedSet()->blitter == BLT_32BPP ? 32 : 8;
 	uint depth_wanted_by_grf = _support8bpp != S8BPP_NONE ? 8 : 32;
 	for (const auto &c : _grfconfig) {
-		if (c->status == GCS_DISABLED || c->status == GCS_NOT_FOUND || c->flags.Test(GRFConfigFlag::InitOnly)) continue;
+		if (c->status == GRFStatus::Disabled || c->status == GRFStatus::NotFound || c->flags.Test(GRFConfigFlag::InitOnly)) continue;
 		if (c->palette & GRFP_BLT_32BPP) depth_wanted_by_grf = 32;
 	}
 	/* We need a 32bpp blitter for font anti-alias. */
@@ -389,7 +388,7 @@ GRFConfig &GraphicsSet::GetOrCreateExtraConfig() const
 			case PAL_WINDOWS: this->extra_cfg->palette |= GRFP_GRF_WINDOWS; break;
 			default: break;
 		}
-		FillGRFDetails(*this->extra_cfg, false, BASESET_DIR);
+		FillGRFDetails(*this->extra_cfg, false, Subdirectory::Baseset);
 	}
 	return *this->extra_cfg;
 }
@@ -466,7 +465,9 @@ MD5File::ChecksumResult MD5File::CheckMD5(Subdirectory subdir, size_t max_size) 
 /** Names corresponding to the GraphicsFileType */
 static const std::string_view _graphics_file_names[] = { "base", "logos", "arctic", "tropical", "toyland", "extra" };
 
-/** Implementation */
+/* Implementation */
+
+/** @copydoc BaseSet::GetFilenames */
 template <>
 /* static */ std::span<const std::string_view> BaseSet<GraphicsSet>::GetFilenames()
 {

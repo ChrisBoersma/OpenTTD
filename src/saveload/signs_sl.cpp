@@ -50,7 +50,7 @@ struct SIGNChunkHandler : ChunkHandler {
 
 		int index;
 		while ((index = SlIterateArray()) != -1) {
-			Sign *si = new (SignID(index)) Sign();
+			Sign *si = Sign::CreateAtIndex(SignID(index));
 			SlObject(si, slt);
 			/* Before version 6.1, signs didn't have owner.
 			 * Before version 83, invalid signs were determined by si->str == 0.
@@ -63,7 +63,7 @@ struct SIGNChunkHandler : ChunkHandler {
 			}
 
 			/* Signs placed in scenario editor shall now be OWNER_DEITY */
-			if (IsSavegameVersionBefore(SLV_171) && si->owner == OWNER_NONE && _file_to_saveload.ftype.abstract == FT_SCENARIO) {
+			if (IsSavegameVersionBefore(SLV_171) && si->owner == OWNER_NONE && _file_to_saveload.ftype.abstract == AbstractFileType::Scenario) {
 				si->owner = OWNER_DEITY;
 			}
 		}

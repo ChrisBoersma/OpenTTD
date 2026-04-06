@@ -1627,6 +1627,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Eben
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Zerklüftet
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Sehr zerklüftet
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Größe der Geländeformen: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Wählen, ob die Karte sowohl Berge als auch ebene Gebiete enthalten soll. Je höher die Vielfalt, desto häufiger sind Höhenunterschiede zwischen bergigen und flachen Gebieten
 
@@ -2478,15 +2480,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} Te
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} bis jetzt heruntergeladen
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES}/{BYTES} bisher heruntergeladen
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Verbinden...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Autorisieren...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Warten...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Herunterladen des Spielfeldes...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Spieldaten verarbeiten...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Registrieren...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Spielinformationen holen...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Firmeninformationen holen...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Trennen
 
@@ -2850,6 +2850,8 @@ STR_PICKER_PREVIEW_SHRINK                                       :-
 STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Höhe von Vorschaubildern verringern. Strg+Klick, um Minimum zu verringern
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Höhe von Vorschaubildern erhöhen. Strg+Klick, um Maximum zu erhöhen
+
+
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Wählen Sie eine anzuzeigende Stationsklasse
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Wählen Sie einen Stationstyp zum Bauen. Strg+Klick, um in gespeicherten Einträgen hinzuzufügen oder zu entfernen
@@ -4203,6 +4205,8 @@ STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Reichwei
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Flugzeugtyp: {GOLD}{STRING}
 STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}Gleistypen: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Alle Frachttypen
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Fracht
@@ -4363,6 +4367,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Sollen 
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Nachricht vom Fahrzeughersteller
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Wir haben {G "einen" "eine" "ein" ""} neue{G n "" s ""} {0:STRING} entwickelt.{}Besteht Interesse, {G 0 den die das die} {0:STRING} ein Jahr lang exklusiv zu nutzen, so dass wir die Funktionen testen können, bevor {G 0 er sie es sie} allgemein zur Verfügung gestellt {G 0 wird wird wird werden}?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :{G=w}Lokomotive
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :Elektrolokomotive
@@ -4540,7 +4545,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Gewinn d
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Gewinn im laufenden Jahr: {LTBLUE}{CURRENCY_LONG} (vergangenes Jahr: {CURRENCY_LONG}) {BLACK}Min. Leistungsdichte: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Gewinn in diesem Zyklus: {LTBLUE}{CURRENCY_LONG} (im letzten Zyklus: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Gewinn in diesem Zyklus: {LTBLUE}{CURRENCY_LONG} (im letzten Zyklus: {CURRENCY_LONG}) {BLACK}Min. Leistungsdichte: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Zuverlässigkeit: {LTBLUE}{COMMA}%  {BLACK}Pannen seit der letzten Wartung: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Gebaut: {LTBLUE}{NUM}{BLACK} Wert: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Kapazität: {LTBLUE}Keine{STRING}
@@ -5089,7 +5093,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Bau von 
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Die Stadt kann nicht umbenannt werden ...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Stadt kann hier nicht gegründet werden ...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Stadt kann nicht vergrößert werden ...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... zu dicht am Spielfeldrand
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... zu dicht an einer anderen Stadt
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... zu viele Städte
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... es ist kein Platz mehr auf dem Spielfeld
@@ -5979,4 +5982,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Kennzeic
 STR_BADGE_CONFIG_PREVIEW                                        :Vorschaubild
 STR_BADGE_CONFIG_NAME                                           :Name
 STR_BADGE_FILTER_ANY_LABEL                                      :{G "Beliebiger" "Beliebige" "Beliebiges" "Beliebige"} {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} ist {STRING}

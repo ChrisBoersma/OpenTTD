@@ -18,6 +18,8 @@
 #include "newgrf_callbacks.h"
 #include "newgrf_text_type.h"
 
+struct GRFConfig;
+
 /**
  * List of different canal 'features'.
  * Each feature gets an entry in the canal spritegroup table
@@ -41,26 +43,27 @@ struct CanalProperties {
 	uint8_t flags;          ///< Flags controlling display.
 };
 
-enum GrfLoadingStage : uint8_t {
-	GLS_FILESCAN,
-	GLS_SAFETYSCAN,
-	GLS_LABELSCAN,
-	GLS_INIT,
-	GLS_RESERVE,
-	GLS_ACTIVATION,
-	GLS_END,
+/** Stages of loading all NewGRFs. */
+enum class GrfLoadingStage : uint8_t {
+	FileScan, ///< Load the Action 8 metadata (GRF ID, name).
+	SafetyScan, ///< Checks whether the NewGRF can be used in a static context.
+	LabelScan, ///< First step of NewGRF loading; find the 'goto' labels in the NewGRF.
+	Init, ///< Second step of NewGRF loading; load all actions into memory.
+	Reserve, ///< Third step of NewGRF loading; reserve features and GRMs.
+	Activation, ///< Forth step of NewGRF loading; activate the features.
 };
 
 DECLARE_INCREMENT_DECREMENT_OPERATORS(GrfLoadingStage)
 
+/** Bits of NewGRF's GlobalVariable 1E/9E. */
 enum class GrfMiscBit : uint8_t {
-	DesertTreesFields = 0, // Unsupported.
-	DesertPavedRoads = 1,
-	FieldBoundingBox = 2, // Unsupported.
+	DesertTreesFields = 0, ///< Unsupported: allow trees and fields in desert climate.
+	DesertPavedRoads = 1, ///< Show pavement and lights in desert towns
+	FieldBoundingBox = 2, ///< Unsupported: fiels have a height.
 	TrainWidth32Pixels = 3, ///< Use 32 pixels per train vehicle in depot gui and vehicle details. Never set in the global variable; @see GRFFile::traininfo_vehicle_width
-	AmbientSoundCallback = 4,
-	CatenaryOn3rdTrack = 5, // Unsupported.
-	SecondRockyTileSet = 6,
+	AmbientSoundCallback = 4, ///< Enable ambient sound effect callback 144.
+	CatenaryOn3rdTrack = 5, ///< Unsupported: enable catenaries over third track type.
+	SecondRockyTileSet = 6, ///< Enable using the second rocky tile set.
 };
 
 using GrfMiscBits = EnumBitSet<GrfMiscBit, uint8_t>;
@@ -153,16 +156,21 @@ struct GRFFile {
 
 	int traininfo_vehicle_pitch = 0; ///< Vertical offset for drawing train images in depot GUI and vehicle details
 	uint traininfo_vehicle_width = 0; ///< Width (in pixels) of a 8/8 train vehicle in depot GUI and vehicle details
+	bool cargo_list_is_fallback = false; ///< Set if cargo types have been created but a cargo list has not been installed
 
 	GrfSpecFeatures grf_features{}; ///< Bitset of GrfSpecFeature the grf uses
 	PriceMultipliers price_base_multipliers{}; ///< Price base multipliers as set by the grf.
 
-	GRFFile(const struct GRFConfig &config);
+	GRFFile(const GRFConfig &config);
 	GRFFile();
 	GRFFile(GRFFile &&other);
 	~GRFFile();
 
-	/** Get GRF Parameter with range checking */
+	/**
+	 * Get GRF Parameter with range checking.
+	 * @param number The parameter number/index.
+	 * @return The parameter, or \c 0 when the number is out of bounds.
+	 */
 	uint32_t GetParam(uint number) const
 	{
 		/* Note: We implicitly test for number < this->param.size() and return 0 for invalid parameters.
@@ -171,24 +179,27 @@ struct GRFFile {
 	}
 };
 
-enum ShoreReplacement : uint8_t {
-	SHORE_REPLACE_NONE,       ///< No shore sprites were replaced.
-	SHORE_REPLACE_ACTION_5,   ///< Shore sprites were replaced by Action5.
-	SHORE_REPLACE_ACTION_A,   ///< Shore sprites were replaced by ActionA (using grass tiles for the corner-shores).
-	SHORE_REPLACE_ONLY_NEW,   ///< Only corner-shores were loaded by Action5 (openttd(w/d).grf only).
+/** Type of shore replacement loaded by NewGRFs. */
+enum class ShoreReplacement : uint8_t {
+	None, ///< No shore sprites were replaced.
+	Action5, ///< Shore sprites were replaced by Action5.
+	ActionA, ///< Shore sprites were replaced by ActionA (using grass tiles for the corner-shores).
+	OnlyNew, ///< Only corner-shores were loaded by Action5 (openttd(w/d).grf only).
 };
 
-enum TramReplacement : uint8_t {
-	TRAMWAY_REPLACE_DEPOT_NONE,       ///< No tram depot graphics were loaded.
-	TRAMWAY_REPLACE_DEPOT_WITH_TRACK, ///< Electrified depot graphics with tram track were loaded.
-	TRAMWAY_REPLACE_DEPOT_NO_TRACK,   ///< Electrified depot graphics without tram track were loaded.
+/** Type of tram depot replacement loaded by NewGRFs. */
+enum class TramDepotReplacement : uint8_t {
+	None, ///< No tram depot graphics were loaded.
+	WithTrack, ///< Electrified depot graphics with tram track were loaded.
+	WithoutTrack, ///< Electrified depot graphics without tram track were loaded.
 };
 
+/** State of features loaded by NewGRFs. */
 struct GRFLoadedFeatures {
-	bool has_2CC;             ///< Set if any vehicle is loaded which uses 2cc (two company colours).
-	uint64_t used_liveries;     ///< Bitmask of #LiveryScheme used by the defined engines.
-	ShoreReplacement shore;   ///< In which way shore sprites were replaced.
-	TramReplacement tram;     ///< In which way tram depots were replaced.
+	bool has_2CC; ///< Set if any vehicle is loaded which uses 2cc (two company colours).
+	uint64_t used_liveries; ///< Bitmask of #LiveryScheme used by the defined engines.
+	ShoreReplacement shore; ///< In which way shore sprites were replaced.
+	TramDepotReplacement tram; ///< In which way tram depots were replaced.
 };
 
 /**

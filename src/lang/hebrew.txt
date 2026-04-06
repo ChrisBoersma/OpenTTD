@@ -1482,6 +1482,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :חלק
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :מחוספס
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :מחוספס מאוד
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :הפצה מגוונת: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :(עבור בורא הקרקע בלבד) בחר האם המפה תכיל גם הרים וגם אזורים שטוחים. מכיוון שכך המפה שטוחה יותר, יש לקבוע את ההגדרות הנוספות להררי
 
@@ -2248,15 +2250,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{P 0 "ש
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} הורדו עד כה
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} :הורדו
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) מתחבר...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) מקבל הרשאה...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) ממתין...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) טוען מפה...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) מעבד נתונים...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) נרשם...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}טוען מידע על המשחק...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}טוען מידע על החברה...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}התנתק
 
@@ -2585,6 +2585,8 @@ STR_PICKER_MODE_USED                                            :בשימוש
 STR_PICKER_MODE_USED_TOOLTIP                                    :החלף הצגת פריטים קיימים בלבד
 STR_PICKER_MODE_SAVED                                           :נשמר
 STR_PICKER_MODE_SAVED_TOOLTIP                                   :החלף הצגת פריטים שמורים בלבד
+
+
 
 
 
@@ -3770,6 +3772,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}כוח �
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}טווח: {GOLD}{COMMA} משבצות
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}סוג כלי טיס: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :כל סוגי המטען
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :רכבת משא
@@ -3926,6 +3930,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}?אתה
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}הודעה מיצרן הרכב
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}?חדש/ה! האם אתה מעוניין לבחון כלי זה באופן בלעדי לפני הוצאתו לשוק {STRING} זה עתה סיימנו את תכנונו של
 
+
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :קטר רכבת
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :קטר רכבת חשמלי
 STR_ENGINE_PREVIEW_MONORAIL_LOCOMOTIVE                          :קטר חד-פס
@@ -4078,7 +4083,6 @@ STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED                         :{BLACK}משקל
 STR_VEHICLE_INFO_WEIGHT_POWER_MAX_SPEED_MAX_TE                  :{BLACK}משקל: {LTBLUE}{WEIGHT_SHORT} {BLACK}הספק: {LTBLUE}{POWER}{BLACK} מהירות מקסימלית: {LTBLUE}{VELOCITY} {BLACK}T.E. מקסימלי: {LTBLUE}{FORCE}
 
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}רווח בשנה הנוכחת: {LTBLUE}{CURRENCY_LONG} (שנה שעברה: {CURRENCY_LONG})
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}מהימנות: {LTBLUE}{COMMA}%  {BLACK}קלקול מאז טיפול אחרון: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}נבנה: {LTBLUE}{NUM}{BLACK} ערך: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}קיבולת: {LTBLUE}אין{STRING}
@@ -4582,7 +4586,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}לא נ�
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}לא ניתן לשנות את השם של העיר הזאת...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}לא ניתן להקים עיירה כאן...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}לא ניתן להרחיב עיירה...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... קרוב מידי לקצה המפה
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... קרוב מידי לעיר אחרת
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... יותר מידי ערים
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... אין יותר מקום על המפה
@@ -5430,4 +5433,3 @@ STR_BADGE_CONFIG_FILTERS                                        :מסנני תג
 STR_BADGE_CONFIG_PREVIEW                                        :תצוגה מקדימה של התמונה
 STR_BADGE_CONFIG_NAME                                           :שם
 STR_BADGE_FILTER_ANY_LABEL                                      :כל {STRING}
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} הוא {STRING}

@@ -103,23 +103,19 @@ std::optional<std::string> ContentInfo::GetTextfile(TextfileType type) const
  */
 bool NetworkContentSocketHandler::HandlePacket(Packet &p)
 {
-	PacketContentType type = (PacketContentType)p.Recv_uint8();
+	PacketContentType type = static_cast<PacketContentType>(p.Recv_uint8());
 
-	switch (this->HasClientQuit() ? PACKET_CONTENT_END : type) {
-		case PACKET_CONTENT_CLIENT_INFO_LIST:      return this->Receive_CLIENT_INFO_LIST(p);
-		case PACKET_CONTENT_CLIENT_INFO_ID:        return this->Receive_CLIENT_INFO_ID(p);
-		case PACKET_CONTENT_CLIENT_INFO_EXTID:     return this->Receive_CLIENT_INFO_EXTID(p);
-		case PACKET_CONTENT_CLIENT_INFO_EXTID_MD5: return this->Receive_CLIENT_INFO_EXTID_MD5(p);
-		case PACKET_CONTENT_SERVER_INFO:           return this->Receive_SERVER_INFO(p);
-		case PACKET_CONTENT_CLIENT_CONTENT:        return this->Receive_CLIENT_CONTENT(p);
-		case PACKET_CONTENT_SERVER_CONTENT:        return this->Receive_SERVER_CONTENT(p);
+	switch (type) {
+		case PacketContentType::ClientInfoList: return this->ReceiveClientInfoList(p);
+		case PacketContentType::ClientInfoID: return this->ReceiveClientInfoID(p);
+		case PacketContentType::ClientInfoExternalID: return this->ReceiveClientInfoExternalID(p);
+		case PacketContentType::ClientInfoExternalIDMD5: return this->ReceiveClientInfoExternalIDMD5(p);
+		case PacketContentType::ServerInfo: return this->ReceiveServerInfo(p);
+		case PacketContentType::ClientContent: return this->ReceiveClientContent(p);
+		case PacketContentType::ServerContent: return this->ReceiveServerContent(p);
 
 		default:
-			if (this->HasClientQuit()) {
-				Debug(net, 0, "[tcp/content] Received invalid packet type {}", type);
-			} else {
-				Debug(net, 0, "[tcp/content] Received illegal packet");
-			}
+			Debug(net, 0, "[tcp/content] Received invalid packet type {}", type);
 			return false;
 	}
 }
@@ -172,13 +168,13 @@ bool NetworkContentSocketHandler::ReceiveInvalidPacket(PacketContentType type)
 	return false;
 }
 
-bool NetworkContentSocketHandler::Receive_CLIENT_INFO_LIST(Packet &) { return this->ReceiveInvalidPacket(PACKET_CONTENT_CLIENT_INFO_LIST); }
-bool NetworkContentSocketHandler::Receive_CLIENT_INFO_ID(Packet &) { return this->ReceiveInvalidPacket(PACKET_CONTENT_CLIENT_INFO_ID); }
-bool NetworkContentSocketHandler::Receive_CLIENT_INFO_EXTID(Packet &) { return this->ReceiveInvalidPacket(PACKET_CONTENT_CLIENT_INFO_EXTID); }
-bool NetworkContentSocketHandler::Receive_CLIENT_INFO_EXTID_MD5(Packet &) { return this->ReceiveInvalidPacket(PACKET_CONTENT_CLIENT_INFO_EXTID_MD5); }
-bool NetworkContentSocketHandler::Receive_SERVER_INFO(Packet &) { return this->ReceiveInvalidPacket(PACKET_CONTENT_SERVER_INFO); }
-bool NetworkContentSocketHandler::Receive_CLIENT_CONTENT(Packet &) { return this->ReceiveInvalidPacket(PACKET_CONTENT_CLIENT_CONTENT); }
-bool NetworkContentSocketHandler::Receive_SERVER_CONTENT(Packet &) { return this->ReceiveInvalidPacket(PACKET_CONTENT_SERVER_CONTENT); }
+bool NetworkContentSocketHandler::ReceiveClientInfoList(Packet &) { return this->ReceiveInvalidPacket(PacketContentType::ClientInfoList); }
+bool NetworkContentSocketHandler::ReceiveClientInfoID(Packet &) { return this->ReceiveInvalidPacket(PacketContentType::ClientInfoID); }
+bool NetworkContentSocketHandler::ReceiveClientInfoExternalID(Packet &) { return this->ReceiveInvalidPacket(PacketContentType::ClientInfoExternalID); }
+bool NetworkContentSocketHandler::ReceiveClientInfoExternalIDMD5(Packet &) { return this->ReceiveInvalidPacket(PacketContentType::ClientInfoExternalIDMD5); }
+bool NetworkContentSocketHandler::ReceiveServerInfo(Packet &) { return this->ReceiveInvalidPacket(PacketContentType::ServerInfo); }
+bool NetworkContentSocketHandler::ReceiveClientContent(Packet &) { return this->ReceiveInvalidPacket(PacketContentType::ClientContent); }
+bool NetworkContentSocketHandler::ReceiveServerContent(Packet &) { return this->ReceiveInvalidPacket(PacketContentType::ServerContent); }
 
 /**
  * Helper to get the subdirectory a #ContentInfo is located in.
@@ -188,19 +184,19 @@ bool NetworkContentSocketHandler::Receive_SERVER_CONTENT(Packet &) { return this
 Subdirectory GetContentInfoSubDir(ContentType type)
 {
 	switch (type) {
-		default: return NO_DIRECTORY;
-		case CONTENT_TYPE_AI:           return AI_DIR;
-		case CONTENT_TYPE_AI_LIBRARY:   return AI_LIBRARY_DIR;
-		case CONTENT_TYPE_GAME:         return GAME_DIR;
-		case CONTENT_TYPE_GAME_LIBRARY: return GAME_LIBRARY_DIR;
-		case CONTENT_TYPE_NEWGRF:       return NEWGRF_DIR;
+		default: return Subdirectory::None;
+		case CONTENT_TYPE_AI: return Subdirectory::Ai;
+		case CONTENT_TYPE_AI_LIBRARY: return Subdirectory::AiLibrary;
+		case CONTENT_TYPE_GAME: return Subdirectory::Gs;
+		case CONTENT_TYPE_GAME_LIBRARY: return Subdirectory::GsLibrary;
+		case CONTENT_TYPE_NEWGRF: return Subdirectory::NewGrf;
 
 		case CONTENT_TYPE_BASE_GRAPHICS:
 		case CONTENT_TYPE_BASE_SOUNDS:
 		case CONTENT_TYPE_BASE_MUSIC:
-			return BASESET_DIR;
+			return Subdirectory::Baseset;
 
-		case CONTENT_TYPE_SCENARIO:     return SCENARIO_DIR;
-		case CONTENT_TYPE_HEIGHTMAP:    return HEIGHTMAP_DIR;
+		case CONTENT_TYPE_SCENARIO: return Subdirectory::Scenario;
+		case CONTENT_TYPE_HEIGHTMAP: return Subdirectory::Heightmap;
 	}
 }

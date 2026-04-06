@@ -48,6 +48,7 @@ template <class T> struct BaseSetTraits;
  */
 template <class T>
 struct BaseSet {
+	/** Ensure the destructor of the sub classes are called as well. */
 	virtual ~BaseSet() = default;
 
 	typedef std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> TranslatedStrings;
@@ -142,7 +143,7 @@ struct BaseSet {
 	std::optional<std::string> GetTextfile(TextfileType type) const
 	{
 		for (const auto &file : this->files) {
-			auto textfile = ::GetTextfile(type, BASESET_DIR, file.filename);
+			auto textfile = ::GetTextfile(type, Subdirectory::Baseset, file.filename);
 			if (textfile.has_value()) {
 				return textfile;
 			}
@@ -189,13 +190,16 @@ public:
 	 */
 	static bool DetermineBestSet();
 
-	/** Do the scan for files. */
+	/**
+	 * Do the scan for files.
+	 * @return The number of sets that have been found.
+	 */
 	static uint FindSets()
 	{
 		BaseMedia<Tbase_set> fs;
 		/* Searching in tars is only done in the old "data" directories basesets. */
-		uint num = fs.Scan(GetExtension(), Tbase_set::SEARCH_IN_TARS ? OLD_DATA_DIR : OLD_GM_DIR, Tbase_set::SEARCH_IN_TARS);
-		return num + fs.Scan(GetExtension(), BASESET_DIR, Tbase_set::SEARCH_IN_TARS);
+		uint num = fs.Scan(GetExtension(), Tbase_set::SEARCH_IN_TARS ? Subdirectory::OldData : Subdirectory::OldGm, Tbase_set::SEARCH_IN_TARS);
+		return num + fs.Scan(GetExtension(), Subdirectory::Baseset, Tbase_set::SEARCH_IN_TARS);
 	}
 
 	/**
@@ -226,7 +230,7 @@ public:
  * Check whether there's a base set matching some information.
  * @param ci The content info to compare it to.
  * @param md5sum Should the MD5 checksum be tested as well?
- * @param s The list with sets.
+ * @param sets The span with sets.
  * @return The filename of the first file of the base set, or \c std::nullopt if there is no match.
  */
 template <class Tbase_set>

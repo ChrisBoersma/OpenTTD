@@ -923,7 +923,7 @@ STR_NEWS_AIRCRAFT_IS_WAITING                                    :{WHITE}{VEHICLE
 
 # Order review system / warnings
 STR_NEWS_VEHICLE_HAS_TOO_FEW_ORDERS                             :{WHITE}{VEHICLE} có quá ít lệnh trong lộ trình
-STR_NEWS_VEHICLE_HAS_VOID_ORDER                                 :{WHITE}{VEHICLE} chưa có lệnh
+STR_NEWS_VEHICLE_HAS_VOID_ORDER                                 :{WHITE}{VEHICLE} có lệnh không hợp lệ
 STR_NEWS_VEHICLE_HAS_DUPLICATE_ENTRY                            :{WHITE}{VEHICLE} có các lệnh trùng lặp
 STR_NEWS_VEHICLE_HAS_INVALID_ENTRY                              :{WHITE}{VEHICLE} có trạm bất hợp lệ trong lệnh
 STR_NEWS_PLANE_USES_TOO_SHORT_RUNWAY                            :{WHITE}{VEHICLE} có trong lộ trình một sân bay có đường băng quá ngắn
@@ -1089,9 +1089,9 @@ STR_GAME_OPTIONS_GUI_SCALE_BEVELS                               :Tỷ lệ góc 
 STR_GAME_OPTIONS_GUI_SCALE_BEVELS_TOOLTIP                       :Đánh dấu vào ô này để điều chỉnh tỷ lệ góc xiên theo kích thước giao diện
 
 STR_GAME_OPTIONS_GUI_FONT_SPRITE                                :Sử dụng sprite phông truyền thống
-STR_GAME_OPTIONS_GUI_FONT_SPRITE_TOOLTIP                        :Tuỳ chọn này nếu bạn muốn sử dụng sprite phông cố định truyền thống
+STR_GAME_OPTIONS_GUI_FONT_SPRITE_TOOLTIP                        :Bật lên tuỳ chọn này nếu bạn muốn sử dụng sprite phông cố định truyền thống
 STR_GAME_OPTIONS_GUI_FONT_AA                                    :Phông chữ chống răng cưa
-STR_GAME_OPTIONS_GUI_FONT_AA_TOOLTIP                            :Tuỳ chọn này để chống răng cưa phông chữ co dãn được
+STR_GAME_OPTIONS_GUI_FONT_AA_TOOLTIP                            :Bật tuỳ chọn này để chống răng cưa phông chữ co dãn được
 
 STR_GAME_OPTIONS_GUI_SCALE_MARK                                 :{DECIMAL}x
 
@@ -1115,7 +1115,7 @@ STR_GAME_OPTIONS_BASE_GRF_TOOLTIP                               :Chọn gói đ�
 STR_GAME_OPTIONS_BASE_GRF_DESCRIPTION_TOOLTIP                   :Thông tin thêm về gói đồ họa
 
 STR_GAME_OPTIONS_BASE_SFX                                       :Bộ âm thanh chuẩn
-STR_GAME_OPTIONS_BASE_SFX_TOOLTIP                               :Chọn bộ âm thanh chuẩn để dùng (không thể thay đổi khi trong ván chơi, chỉ đổi được khi ở menu chính)
+STR_GAME_OPTIONS_BASE_SFX_TOOLTIP                               :Chọn bộ âm thanh chuẩn để dùng
 STR_GAME_OPTIONS_BASE_SFX_DESCRIPTION_TOOLTIP                   :Thông tin thêm về bộ âm thanh chuẩn
 
 STR_GAME_OPTIONS_BASE_MUSIC                                     :Gói nhạc chuẩn
@@ -1625,6 +1625,14 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_SMOOTH             :Rất Phẳng
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Phẳng
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Gồ Ghề
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Rất Gồ Ghề
+
+STR_CONFIG_SETTING_AVERAGE_HEIGHT                               :Độ cao trung bình: {STRING}
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_HELPTEXT                      :Chọn độ cao trung bình của nền đất. 'Tự động' sử dụng nền mặc định dựa trên khí hậu: 'Đất thấp' cho vùng khí hậu Cận nhiệt đới, 'Bình thường' cho Ôn hoà và Đồ chơi, và 'Cao nguyên' cho khi hậu Bắc Cực.
+###length 4
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_AUTO                          :Tự động
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_LOWLANDS                      :Đất thấp
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_NORMAL                        :Bình thường
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_PLATEAUS                      :Cao nguyên
 
 STR_CONFIG_SETTING_VARIETY                                      :Phân bổ sự đa dạng: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Điều chỉnh liệu rằng bản đồ gồm cả vùng núi cao và vùng đồng bằng. Độ đa dạng càng cao thì sự chênh lệch về độ cao giữa vùng núi và vùng đồng bằng càng nhiều
@@ -2206,7 +2214,7 @@ STR_CONFIG_ERROR                                                :{WHITE}lỗi tr
 STR_CONFIG_ERROR_ARRAY                                          :{WHITE}... lỗi trong mảng '{STRING}'
 STR_CONFIG_ERROR_INVALID_VALUE                                  :{WHITE}... giá trị không hợp lệ của '{STRING}' đối với '{STRING}'
 STR_CONFIG_ERROR_TRAILING_CHARACTERS                            :{WHITE}... thừa ký tự ở cuối tùy chọn '{STRING}'
-STR_CONFIG_ERROR_DUPLICATE_GRFID                                :{WHITE}... bỏ qua NewGRF '{STRING}': trùng lặp GRF ID với '{STRING}'
+STR_CONFIG_ERROR_DUPLICATE_GRFID                                :{WHITE}... bỏ qua NewGRF '{STRING}': trùng lặp NewGRF ID với '{STRING}'
 STR_CONFIG_ERROR_INVALID_GRF                                    :{WHITE}... bỏ qua NewGRF '{STRING}' không hợp lệ: {STRING}
 STR_CONFIG_ERROR_INVALID_GRF_NOT_FOUND                          :không tìm thấy
 STR_CONFIG_ERROR_INVALID_GRF_UNSAFE                             :không an toàn để dùng tĩnh
@@ -2477,15 +2485,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} m�
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}đã tải được {BYTES}
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}đã tải xong {BYTES} / {BYTES}
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Tạo kết nối..
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Xác thực..
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Đợi..
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Tải bản đồ..
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Xử lý..
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Đăng nhập..
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Tải thông tin ván chơi..
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Tải thông tin công ty..
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Ngắt kết nối
 
@@ -2850,18 +2856,38 @@ STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Giảm chiều 
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Tăng chiều cao của ảnh xem trước. Ctrl+Click để tăng đến mức tối đa
 
+STR_PICKER_DEFAULT_COLLECTION                                   :Nhóm mặc định
+STR_PICKER_SELECT_COLLECTION_TOOLTIP                            :Chọn nhóm
+STR_PICKER_COLLECTION_ADD                                       :Thêm
+STR_PICKER_COLLECTION_ADD_TOOLTIP                               :Tạo nhóm mới
+STR_PICKER_COLLECTION_RENAME                                    :Thay tên
+STR_PICKER_COLLECTION_RENAME_TOOLTIP                            :Thay tên nhóm
+STR_PICKER_COLLECTION_DELETE                                    :Xóa
+STR_PICKER_COLLECTION_DELETE_TOOLTIP                            :Xóa nhóm
+
+STR_PICKER_COLLECTION_RENAME_QUERY                              :Thay tên nhóm này
+STR_PICKER_COLLECTION_DELETE_QUERY                              :Xóa nhóm
+STR_PICKER_COLLECTION_DELETE_QUERY_TEXT                         :{YELLOW}Bạn có chắc chắn muốn xóa nhóm này?
+STR_PICKER_COLLECTION_DELETE_QUERY_DISABLED_TEXT                :{YELLOW}Bạn có chắc chắn muốn xóa nhóm này? Nhóm có chứa các mục từ các NewGRFs bị vô hiệu hóa!
+
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Chọn loại ga bến cần hiển thị
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Chọn loại ga bến để xây. Ctrl+Click để thêm hoặc bớt vào danh sách lưu
+STR_PICKER_STATION_COLLECTION_TOOLTIP                           :Chọn một nhóm trạm tàu hỏa để hiển thị
 STR_PICKER_WAYPOINT_CLASS_TOOLTIP                               :Chọn loại điểm mốc cần hiển thị
 STR_PICKER_WAYPOINT_TYPE_TOOLTIP                                :Chọn loại điểm mốc để xây. Ctrl+Click để thêm hoặc xóa trong danh sách lưu
+STR_PICKER_WAYPOINT_COLLECTION_TOOLTIP                          :Chọn một nhóm điểm mốc để hiển thị
 STR_PICKER_ROADSTOP_BUS_CLASS_TOOLTIP                           :Chọn loại bến xe để hiển thị
 STR_PICKER_ROADSTOP_BUS_TYPE_TOOLTIP                            :Chọn loại bến xe khách để xây. Ctrl+Click để thêm hoặc bớt vào danh sách lưu
+STR_PICKER_ROADSTOP_BUS_COLLECTION_TOOLTIP                      :Chọn một nhóm trạm xe buýt để hiển thị
 STR_PICKER_ROADSTOP_TRUCK_CLASS_TOOLTIP                         :Chọn loại bến xe tải để hiển thị
 STR_PICKER_ROADSTOP_TRUCK_TYPE_TOOLTIP                          :Chọn loại bến xe tải để xây. Ctrl+Click để thêm hoặc bớt vào danh sách lưu
+STR_PICKER_ROADSTOP_TRUCK_COLLECTION_TOOLTIP                    :Chọn một nhóm xe tải để hiển thị
 STR_PICKER_OBJECT_CLASS_TOOLTIP                                 :Chọn loại đối tượng để hiển thị
 STR_PICKER_OBJECT_TYPE_TOOLTIP                                  :Chọn kiểu đối tượng để xây. Ctrl+Click để thêm hoặc bớt vào danh sách lưu. Ctrl+Click+Drag để chọn khu vực theo đường chéo. Bấm Shift để xem ước tính chi phí
+STR_PICKER_OBJECT_COLLECTION_TOOLTIP                            :Chọn một nhóm vật thể để hiển thị
 STR_PICKER_HOUSE_CLASS_TOOLTIP                                  :Chọn vùng đô thị để xem
 STR_PICKER_HOUSE_TYPE_TOOLTIP                                   :Chọn kiểu nhà để xây. Ctrl+Click để thêm hoặc xóa trong danh sách lưu
+STR_PICKER_HOUSE_COLLECTION_TOOLTIP                             :Chọn một nhóm nhà cửa để hiển thị
 
 STR_HOUSE_PICKER_CAPTION                                        :Chọn Kiểu Nhà
 STR_HOUSE_PICKER_NAME                                           :{BLACK}Tên: {GOLD}{STRING}
@@ -3387,6 +3413,7 @@ STR_MAPGEN_DESERT_COVERAGE_UP_TOOLTIP                           :{BLACK}Tăng đ
 STR_MAPGEN_DESERT_COVERAGE_DOWN_TOOLTIP                         :{BLACK}Giảm độ phủ sa mạc đi mười phần trăm
 STR_MAPGEN_DESERT_COVERAGE_TEXT                                 :{BLACK}{NUM}%
 STR_MAPGEN_TERRAIN_TYPE                                         :{BLACK}Kiểu nền đất:
+STR_MAPGEN_AVERAGE_HEIGHT                                       :{BLACK}Độ cao trung bình:
 STR_MAPGEN_SEA_LEVEL                                            :{BLACK}Mực nước biển:
 STR_MAPGEN_SEA_LEVEL_TOOLTIP                                    :{BLACK}Chọn mực nước biển
 STR_MAPGEN_QUANTITY_OF_RIVERS                                   :{BLACK}Số sông/suối:
@@ -3647,7 +3674,7 @@ STR_NEWGRF_TOO_MANY_NEWGRFS                                     :{WHITE}Không t
 
 STR_NEWGRF_COMPATIBLE_LOAD_WARNING                              :{WHITE}GRF tương thích được nạp thay cho các file thiếu.
 STR_NEWGRF_DISABLED_WARNING                                     :{WHITE}Các GRF file thiếu bị bỏ qua
-STR_NEWGRF_UNPAUSE_WARNING_TITLE                                :{YELLOW}Thiếu GRF file
+STR_NEWGRF_UNPAUSE_WARNING_TITLE                                :{YELLOW}Thiếu NewGRF file
 STR_NEWGRF_UNPAUSE_WARNING                                      :{WHITE}Tiếp tục có thể làm treo OpenTTD. Không nên báo cáo lỗi sau khi bị treo.{}Bạn có chắc là tiếp tục chơi?
 
 # NewGRF status
@@ -3662,7 +3689,7 @@ STR_NEWGRF_BROKEN                                               :{WHITE}Hoạt �
 STR_NEWGRF_BROKEN_POWERED_WAGON                                 :{WHITE}Trạng thái đầu kéo '{1:ENGINE}' được thay đổi khi không ở trong xưởng sửa chữa
 STR_NEWGRF_BROKEN_VEHICLE_LENGTH                                :{WHITE}Nó cắt ngắn độ dài của đoàn tàu '{1:ENGINE}' nếu không ở trong xưởng
 STR_NEWGRF_BROKEN_CAPACITY                                      :{WHITE}Sức chứa của phương tiện bị thay đổi {1:ENGINE}' khi không ở trong xưởng hoặc vì cải biến
-STR_BROKEN_VEHICLE_LENGTH                                       :{WHITE}Đoàn tàu '{VEHICLE}' của '{COMPANY}' có độ dài không hợp lệ. Sự cố có thể có căn nguyên từ NewGRFs. Ván chơi có thể mất đồng bộ hoặc bị treo
+STR_BROKEN_VEHICLE_LENGTH                                       :Đoàn tàu '{VEHICLE}' của '{COMPANY}' có độ dài không hợp lệ. Sự cố có thể có căn nguyên từ NewGRFs. Ván chơi có thể mất đồng bộ hoặc bị treo
 
 STR_NEWGRF_BUGGY                                                :{WHITE}NewGRF '{0:STRING}' không hợp lệ
 STR_NEWGRF_BUGGY_ARTICULATED_CARGO                              :{WHITE}Danh mục hàng hoá/cải biến được cho '{1:ENGINE}' khác với danh mục mua được sau khi đã có. Việc này khiến cho việc tự thay thế hay là tự cải biến không chính xác
@@ -4202,6 +4229,15 @@ STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Tầm xa
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Kiểu máy bay: {GOLD}{STRING}
 STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}Kiểu đường ray: {GOLD}{STRING}
 
+# Vehicle sort details
+STR_PURCHASE_SORT_DETAILS_COST                                  :{CURRENCY_LONG}
+STR_PURCHASE_SORT_DETAILS_SPEED                                 :{VELOCITY}
+STR_PURCHASE_SORT_DETAILS_POWER                                 :{POWER}
+STR_PURCHASE_SORT_DETAILS_MAX_TE                                :{FORCE}
+STR_PURCHASE_SORT_DETAILS_INTRO_DATE                            :{NUM}
+STR_PURCHASE_SORT_DETAILS_RUNNINGCOST_YEAR                      :{CURRENCY_LONG}/năm
+STR_PURCHASE_SORT_DETAILS_RUNNINGCOST_PERIOD                    :{CURRENCY_LONG}/chu kỳ
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Tất cả hàng hóa
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Hàng hóa
@@ -4361,7 +4397,15 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Bạn �
 
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Thông cáo từ nhà sản xuất phương tiện vận tải
+STR_ENGINE_PREVIEW_CAPTION_COUNT                                :{WHITE}Thông cáo từ nhà sản xuất phương tiện vận tải ({COMMA} của {COMMA})
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Chúng tôi vừa thiết kế một {STRING} mới - bạn có muốn mua nó trước khi chúng tôi hoàn thiện 1 năm, để chúng tôi đánh giá nó trước khi bán rộng rãi?
+
+STR_ENGINE_PREVIEW_PREVIOUS                                     :Trước
+STR_ENGINE_PREVIEW_PREVIOUS_TOOLTIP                             :Nháy chuột để trở lại phương tiện mới trước
+STR_ENGINE_PREVIEW_NEXT                                         :Tiếp
+STR_ENGINE_PREVIEW_NEXT_TOOLTIP                                 :Nháy chuột để đi đến phương tiện mới tiếp theo
+STR_ENGINE_PREVIEW_ENGINE_LIST                                  :{COMMA}: {ENGINE}
+STR_ENGINE_PREVIEW_ENGINE_LIST_TOOLTIP                          :Nháy chuột để xem một phương tiện mới
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :đầu máy tàu hoả
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :ngành vận tải đường sắt điện lực
@@ -4539,7 +4583,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Lợi nh
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Lợi nhuận năm nay: {LTBLUE}{CURRENCY_LONG} (năm ngoái: {CURRENCY_LONG}) {BLACK}Hiệu suất tối thiểu: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Lợi nhuận kỳ này: {LTBLUE}{CURRENCY_LONG} (kỳ trước: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Lợi nhuận kỳ này: {LTBLUE}{CURRENCY_LONG} (kỳ trước: {CURRENCY_LONG}) {BLACK}Hiệu suất tối thiểu: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Độ tin cậy: {LTBLUE}{COMMA}%  {BLACK}Hỏng hóc kể từ lần bảo trì cuối: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Mua lúc: {LTBLUE}{NUM}{BLACK} Giá trị: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Sức chứa: {LTBLUE}Không{STRING}
@@ -5068,6 +5111,7 @@ STR_ERROR_ALREADY_AT_SEA_LEVEL                                  :{WHITE}... ở 
 STR_ERROR_TOO_HIGH                                              :{WHITE}... quá cao
 STR_ERROR_ALREADY_LEVELLED                                      :{WHITE}... đã bình địa rồi
 STR_ERROR_BRIDGE_TOO_HIGH_AFTER_LOWER_LAND                      :{WHITE}Cây cầu phía trên nền đất sau khi san lấp sẽ quá cao.
+STR_ERROR_MUST_DEMOLISH_RIVER_FIRST                             :{WHITE}Phải phá dỡ sông trước
 
 # Company related errors
 STR_ERROR_CAN_T_CHANGE_COMPANY_NAME                             :{WHITE}Không thể đổi tên công ty...
@@ -5088,7 +5132,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Không t
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Không thể đổi tên đô thị...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Không thấy thị trấn ở đây...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Không thể mở rộng thành phố...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... quá gần mép bản đồ
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... quá gần đô thị khác
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... quá nhiều đô thị
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... không còn khoảng trống nào trên bản đồ
@@ -5978,4 +6021,3 @@ STR_BADGE_CONFIG_FILTERS                                        :{WHITE}Bộ l�
 STR_BADGE_CONFIG_PREVIEW                                        :Ảnh xem trước
 STR_BADGE_CONFIG_NAME                                           :Tên
 STR_BADGE_FILTER_ANY_LABEL                                      :Bất cứ {STRING} nào
-STR_BADGE_FILTER_IS_LABEL                                       :{STRING} là {STRING}

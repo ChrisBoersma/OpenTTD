@@ -1747,6 +1747,8 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Malo valovita
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Valovita
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Vrlo valovita
 
+###length 4
+
 STR_CONFIG_SETTING_VARIETY                                      :Raznolikost distribucije: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :(Samo TerraGenesis) Odredi da li će karta sadržavati i planinska i ravna područja. Pošto ovo čini kartu još ravnijom, ostali parametri bi trebali biti postavljeni na planinske.
 
@@ -2569,15 +2571,13 @@ STR_NETWORK_CONNECTING_WAITING                                  :{BLACK}{NUM} ig
 STR_NETWORK_CONNECTING_DOWNLOADING_1                            :{BLACK}{BYTES} preuzeto do sada
 STR_NETWORK_CONNECTING_DOWNLOADING_2                            :{BLACK}{BYTES} / {BYTES} preuzeto do sada
 
-###length 8
+###length 6
 STR_NETWORK_CONNECTING_1                                        :{BLACK}(1/6) Spajam se...
 STR_NETWORK_CONNECTING_2                                        :{BLACK}(2/6) Čekam odobrenje...
 STR_NETWORK_CONNECTING_3                                        :{BLACK}(3/6) Čekam...
 STR_NETWORK_CONNECTING_4                                        :{BLACK}(4/6) Preuzimam teren...
 STR_NETWORK_CONNECTING_5                                        :{BLACK}(5/6) Obrađujem podatke...
 STR_NETWORK_CONNECTING_6                                        :{BLACK}(6/6) Prijavljujem se...
-STR_NETWORK_CONNECTING_SPECIAL_1                                :{BLACK}Preuzimanje podataka o igri...
-STR_NETWORK_CONNECTING_SPECIAL_2                                :{BLACK}Preuzimanje podataka o preduzećima...
 
 STR_NETWORK_CONNECTION_DISCONNECT                               :{BLACK}Isključenje
 
@@ -2930,6 +2930,8 @@ STR_PICKER_PREVIEW_SHRINK                                       :-
 STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Smanjuje visinu slika u pregledu. Ctrl+klik smanjuje na minimum
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Uvećava visinu slika u pregledu. Ctrl+klik povećava na maksimum
+
+
 
 
 STR_HOUSE_PICKER_CAPTION                                        :Odabir kuće
@@ -4200,6 +4202,8 @@ STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}Najveća
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}Domet: {GOLD}{COMMA} pločica
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}Vrsta aviona: {GOLD}{STRING}
 
+# Vehicle sort details
+
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :Sve vrste tereta
 STR_CARGO_TYPE_FILTER_FREIGHT                                   :Teret
@@ -4360,6 +4364,7 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Upravo 
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Poruka od proizvođača vozila
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Upravo smo završili projektovanje nov{G og e og} {STRING.aku} - da li ste zainteresovani za jednogodišnja eksluzivna prava upotrebe ovog vozila, kako bi smo proverili radne osobine pre puštanja u masovnu proizvodnju?
+
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :{G=srednji}železničko vučno vozilo
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE.aku                      :železničkog vučnog vozila
@@ -4547,7 +4552,6 @@ STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR                     :{BLACK}Ovogodi�
 STR_VEHICLE_INFO_PROFIT_THIS_YEAR_LAST_YEAR_MIN_PERFORMANCE     :{BLACK}Ovogodišnja zarada: {LTBLUE}{CURRENCY_LONG} (prošlogodišnja: {CURRENCY_LONG}) {BLACK}Najlošiji učinak: {LTBLUE}{POWER_TO_WEIGHT}
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD                 :{BLACK}Profit trenutnog perioda: {LTBLUE}{CURRENCY_LONG} (protekli period: {CURRENCY_LONG})
 STR_VEHICLE_INFO_PROFIT_THIS_PERIOD_LAST_PERIOD_MIN_PERFORMANCE :{BLACK}Profit trenutnog perioda: {LTBLUE}{CURRENCY_LONG} (protekli period: {CURRENCY_LONG}) {BLACK}Min. performanse: {LTBLUE}{POWER_TO_WEIGHT}
-STR_VEHICLE_INFO_RELIABILITY_BREAKDOWNS                         :{BLACK}Pouzdanost: {LTBLUE}{COMMA}%  {BLACK}Kvarova od poslednjeg servisa: {LTBLUE}{COMMA}
 
 STR_VEHICLE_INFO_BUILT_VALUE                                    :{LTBLUE}{ENGINE} {BLACK}Kupljen: {LTBLUE}{NUM}{BLACK} Vrednost: {LTBLUE}{CURRENCY_LONG}
 STR_VEHICLE_INFO_NO_CAPACITY                                    :{BLACK}Nosivost: {LTBLUE}Nula{STRING}
@@ -5077,7 +5081,6 @@ STR_ERROR_CAN_T_GENERATE_TOWN                                   :{WHITE}Ne mogu 
 STR_ERROR_CAN_T_RENAME_TOWN                                     :{WHITE}Naselje nije moguće preimenovati...
 STR_ERROR_CAN_T_FOUND_TOWN_HERE                                 :{WHITE}Ovde je nemoguće izgraditi naselje...
 STR_ERROR_CAN_T_EXPAND_TOWN                                     :{WHITE}Naselje se ne može proširiti...
-STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP_SUB                          :{WHITE}... previše blizu ivici terena
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_TOWN                             :{WHITE}... drugo naselje je previše blizu
 STR_ERROR_TOO_MANY_TOWNS                                        :{WHITE}... ima previše naselja
 STR_ERROR_NO_SPACE_FOR_TOWN                                     :{WHITE}... više ne postoji slobodnog prostora na terenu
