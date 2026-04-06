@@ -309,7 +309,7 @@ inline bool IsOneWayRoadTile(Tile t)
 {
 	if (IsNormalRoadTile(t)) {
 		DisallowedRoadDirections drd = GetDisallowedRoadDirections(t);
-		if (drd == DRD_SOUTHBOUND || drd == DRD_NORTHBOUND) return true;
+		return (drd == DRD_SOUTHBOUND || drd == DRD_NORTHBOUND);
 	}
 	return false;
 }
