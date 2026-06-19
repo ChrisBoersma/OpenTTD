@@ -104,6 +104,15 @@ void ClearNeighbourNonFloodingStates(TileIndex tile)
 }
 
 /**
+ * Get the minimal height required for a bridge above a ship depot.
+ * @return the minimal bridge height.
+ */
+static uint8_t GetDepotMinimalBridgeHeight()
+{
+	return 4;
+}
+
+/**
  * Build a ship depot.
  * @param flags type of operation
  * @param tile tile where ship depot is built
@@ -119,7 +128,12 @@ CommandCost CmdBuildShipDepot(DoCommandFlags flags, TileIndex tile, Axis axis)
 		return CommandCost(STR_ERROR_MUST_BE_BUILT_ON_WATER);
 	}
 
-	if (IsBridgeAbove(tile) || IsBridgeAbove(tile2)) return CommandCost(STR_ERROR_MUST_DEMOLISH_BRIDGE_FIRST);
+	for (TileIndex t : {tile, tile2}) {
+		if (IsBridgeAbove(t) && GetBridgeHeight(GetSouthernBridgeEnd(t)) < GetTileMaxZ(t) + GetDepotMinimalBridgeHeight()) {
+			int height_diff = (GetTileMaxZ(tile) + GetDepotMinimalBridgeHeight() - GetBridgeHeight(GetSouthernBridgeEnd(t))) * TILE_HEIGHT_STEP;
+			return CommandCostWithParam(STR_ERROR_BRIDGE_TOO_LOW_FOR_DEPOT, height_diff);
+		}
+	}
 
 	if (!IsTileFlat(tile) || !IsTileFlat(tile2)) {
 		/* Prevent depots on rapids */
@@ -1000,6 +1014,12 @@ static void DrawTile_Water(TileInfo *ti)
 
 		case WaterTileType::Depot:
 			DrawWaterDepot(ti);
+			DrawBridgeMiddle(ti, {
+				BridgePillarFlag::CornerW,
+				BridgePillarFlag::CornerS,
+				BridgePillarFlag::CornerE,
+				BridgePillarFlag::CornerN
+			});
 			break;
 	}
 }
@@ -1473,6 +1493,11 @@ static CommandCost CheckBuildAbove_Water(TileIndex tile, DoCommandFlags flags, [
 		if (GetTileMaxZ(tile) + GetLockPartMinimalBridgeHeight(GetLockPart(tile)) <= height) return CommandCost();
 		int height_diff = (GetTileMaxZ(tile) + GetLockPartMinimalBridgeHeight(GetLockPart(tile)) - height) * TILE_HEIGHT_STEP;
 		return CommandCostWithParam(STR_ERROR_BRIDGE_TOO_LOW_FOR_LOCK, height_diff);
+	}
+	if (IsDepotTile(tile)) {
+		if (GetTileMaxZ(tile) + GetDepotMinimalBridgeHeight() <= height) return CommandCost();
+		int height_diff = (GetTileMaxZ(tile) + GetDepotMinimalBridgeHeight() - height) * TILE_HEIGHT_STEP;
+		return CommandCostWithParam(STR_ERROR_BRIDGE_TOO_LOW_FOR_DEPOT, height_diff);
 	}
 	return Command<Commands::LandscapeClear>::Do(flags, tile);
 }
