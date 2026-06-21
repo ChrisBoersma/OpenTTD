@@ -1127,6 +1127,15 @@ std::tuple<CommandCost, Money> CmdRemoveLongRoad(DoCommandFlags flags, TileIndex
 }
 
 /**
+ * Get the minimal height required for a bridge above a ship depot.
+ * @return the minimal bridge height.
+ */
+static uint8_t GetDepotMinimalBridgeHeight()
+{
+	return 3;
+}
+
+/**
  * Build a road depot.
  * @param tile tile where to build the depot
  * @param flags operation to perform
@@ -1166,7 +1175,10 @@ CommandCost CmdBuildRoadDepot(DoCommandFlags flags, TileIndex tile, RoadType rt,
 		cost.AddCost(Command<Commands::LandscapeClear>::Do(flags, tile));
 		if (cost.Failed()) return cost;
 
-		if (IsBridgeAbove(tile)) return CommandCost(STR_ERROR_MUST_DEMOLISH_BRIDGE_FIRST);
+		if (IsBridgeAbove(tile) && GetBridgeHeight(GetSouthernBridgeEnd(tile)) < GetTileMaxZ(tile) + GetDepotMinimalBridgeHeight()) {
+			int height_diff = (GetTileMaxZ(tile) + GetDepotMinimalBridgeHeight() - GetBridgeHeight(GetSouthernBridgeEnd(tile))) * TILE_HEIGHT_STEP;
+			return CommandCostWithParam(STR_ERROR_BRIDGE_TOO_LOW_FOR_DEPOT, height_diff);
+		}
 
 		if (!Depot::CanAllocateItem()) return CMD_ERROR;
 	}
@@ -1884,7 +1896,14 @@ static void DrawTile_Road(TileInfo *ti)
 			}
 
 			DrawRailTileSeq(ti, dts, TransparencyOption::Buildings, relocation, 0, palette);
-			/* Depots can't have bridges above so no blocked pillars. */
+
+			if (IsBridgeAbove(ti->tile))
+			{
+				blocked_pillars.Set(BridgePillarFlag::CornerE);
+				blocked_pillars.Set(BridgePillarFlag::CornerN);
+				blocked_pillars.Set(BridgePillarFlag::CornerS);
+				blocked_pillars.Set(BridgePillarFlag::CornerW);
+			}
 			break;
 		}
 	}
@@ -2660,6 +2679,12 @@ CommandCost CmdConvertRoad(DoCommandFlags flags, TileIndex tile, TileIndex area_
 static CommandCost CheckBuildAbove_Road(TileIndex tile, DoCommandFlags flags, [[maybe_unused]] Axis axis, [[maybe_unused]] int height)
 {
 	if (!IsRoadDepot(tile)) return CommandCost();
+	if (IsDepotTile(tile)) {
+		if (GetTileMaxZ(tile) + GetDepotMinimalBridgeHeight() <= height) return CommandCost();
+		int height_diff = (GetTileMaxZ(tile) + GetDepotMinimalBridgeHeight() - height) * TILE_HEIGHT_STEP;
+		return CommandCostWithParam(STR_ERROR_BRIDGE_TOO_LOW_FOR_DEPOT, height_diff);
+	}
+
 	return Command<Commands::LandscapeClear>::Do(flags, tile);
 }
 
