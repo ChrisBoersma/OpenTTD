@@ -859,6 +859,14 @@ public:
 					if (this->grouping == GB_DEPOT) {
 						if (v->IsStoppedInDepot()) {
 							ShowDepotWindow(v->tile, v->type);
+						} else if (vehgroup.NumVehicles() == 1) {
+							this->vehicle_sel = v->index;
+
+							SetObjectToPlaceWnd(SPR_CURSOR_MOUSE, PAL_NONE, HT_DRAG, this);
+							SetMouseCursorVehicle(v, EngineImageType::InList);
+							_cursor.vehchain = true;
+
+							this->SetDirty();
 						}
 					} else {
 						if (_ctrl_pressed && this->grouping == GB_SHARED_ORDERS) {
@@ -874,9 +882,9 @@ public:
 								this->SelectGroup(v->group_id);
 							}
 
-						SetObjectToPlaceWnd(SPR_CURSOR_MOUSE, PAL_NONE, HT_DRAG, this);
-						SetMouseCursorVehicle(v, EngineImageType::InList);
-						_cursor.vehchain = true;
+							SetObjectToPlaceWnd(SPR_CURSOR_MOUSE, PAL_NONE, HT_DRAG, this);
+							SetMouseCursorVehicle(v, EngineImageType::InList);
+							_cursor.vehchain = true;
 
 							this->SetDirty();
 						}
@@ -1030,6 +1038,8 @@ public:
 							if (v->IsStoppedInDepot())
 							{
 								ShowDepotWindow(v->tile, v->type);
+							} else if (vehgroup.NumVehicles() == 1) {
+								ShowVehicleViewWindow(v);
 							}
 						}
 						break;

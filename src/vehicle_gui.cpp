@@ -2252,6 +2252,8 @@ public:
 							const Vehicle *v = vehgroup.vehicles_begin[0];
 							if (v->IsStoppedInDepot()) {
 								ShowDepotWindow(v->tile, v->type);
+							} else 	if (vehgroup.NumVehicles() == 1) {
+								ShowVehicleViewWindow(v);
 							}
 						}
 						break;
