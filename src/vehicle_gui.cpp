@@ -1929,16 +1929,16 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 
 				for (int i = 0; i < static_cast<int>(vehgroup.NumVehicles()); ++i) {
 					if (image_left + WidgetDimensions::scaled.hsep_wide * i >= image_right) break; // Break if there is no more space to draw any more vehicles anyway.
-					DrawVehicleImage(vehgroup.vehicles_begin[i], { image_left + WidgetDimensions::scaled.hsep_wide * i, ir.top, image_right, ir.bottom }, selected_vehicle, EIT_IN_LIST, 0);
+					DrawVehicleImage(vehgroup.vehicles_begin[i], { image_left + WidgetDimensions::scaled.hsep_wide * i, ir.top, image_right, ir.bottom }, selected_vehicle, EngineImageType::InList, 0);
 				}
 
 				const Vehicle *v = vehgroup.vehicles_begin[0];
 
-				if (v->IsStoppedInDepot() && v->type != VEH_AIRCRAFT) {
-					DrawString(tr.left, tr.right, ir.top, GetString(STR_DEPOT_NAME, v->type, GetDepotIndex(v->tile)), TC_BLACK, SA_LEFT, false, FS_SMALL);
+				if (v->IsStoppedInDepot() && v->type != VehicleType::Aircraft) {
+					DrawString(tr.left, tr.right, ir.top, GetString(STR_DEPOT_NAME, v->type, GetDepotIndex(v->tile)), TextColour::Black, AlignmentH::Start, false, FontSize::Small);
 				}
 
-				TextColour tc = v->IsStoppedInDepot() ? TC_BLUE : TC_BLACK;
+				TextColour tc = v->IsStoppedInDepot() ? TextColour::Blue : TextColour::Black;
 
 				DrawString(ir.left, ir.right, ir.top + WidgetDimensions::scaled.framerect.top, GetString(STR_JUST_COMMA, vehgroup.NumVehicles()), tc);
 				break;
