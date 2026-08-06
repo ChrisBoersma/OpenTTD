@@ -1966,8 +1966,15 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 
 				const Vehicle *v = vehgroup.vehicles_begin[0];
 
-				if (v->IsStoppedInDepot() && v->type != VehicleType::Aircraft) {
-					DrawString(tr.left, tr.right, ir.top, GetString(STR_DEPOT_NAME, v->type, GetDepotIndex(v->tile)), TextColour::Black, AlignmentH::Start, false, FontSize::Small);
+				if (v->IsStoppedInDepot()) {
+					std::string depot_name;
+					if (v->type != VehicleType::Aircraft) {
+						depot_name = GetString(STR_DEPOT_NAME, v->type, GetDepotDestinationIndex(v->tile));
+					}
+					else {
+						depot_name = GetString(STR_FORMAT_DEPOT_NAME_AIRCRAFT, GetDepotDestinationIndex(v->tile));
+					}
+					DrawString(tr.left, tr.right, ir.top, depot_name, TextColour::Black, AlignmentH::Start, false, FontSize::Small);
 				}
 
 				TextColour tc = v->IsStoppedInDepot() ? TextColour::Blue : TextColour::Black;
