@@ -72,6 +72,7 @@ static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupTotalProfitTh
 static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupTotalProfitLastYearSorter;
 static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupAverageProfitThisYearSorter;
 static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupAverageProfitLastYearSorter;
+static BaseVehicleListWindow::VehicleGroupSortFunction VehicleDepotNameSorter;
 
 /** Wrapper to convert a VehicleIndividualSortFunction to a VehicleGroupSortFunction. @copydoc GUIList::Sorter */
 template <BaseVehicleListWindow::VehicleIndividualSortFunction func>
@@ -137,10 +138,12 @@ const std::initializer_list<BaseVehicleListWindow::VehicleGroupSortFunction * co
 };
 
 const std::initializer_list<BaseVehicleListWindow::VehicleGroupSortFunction *const> BaseVehicleListWindow::vehicle_group_depot_sorter_funcs = {
+	&VehicleDepotNameSorter,
 	&VehicleGroupLengthSorter,
 };
 
 const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_depot_sorter_names = {
+	STR_SORT_BY_DEPOT_NAME,
 	STR_SORT_BY_NUM_VEHICLES,
 };
 
@@ -1494,6 +1497,35 @@ static bool VehicleGroupAverageProfitThisYearSorter(const GUIVehicleGroup &a, co
 static bool VehicleGroupAverageProfitLastYearSorter(const GUIVehicleGroup &a, const GUIVehicleGroup &b)
 {
 	return a.GetDisplayProfitLastYear() * static_cast<uint>(b.NumVehicles()) < b.GetDisplayProfitLastYear() * static_cast<uint>(a.NumVehicles());
+}
+
+/** Sort vehicle groups by their depot name. @copydoc GUIList::Sorter */
+static bool VehicleDepotNameSorter(const GUIVehicleGroup &a, const GUIVehicleGroup &b)
+{
+	std::string string_a;
+	std::string string_b;
+
+	const Vehicle *va = a.GetSingleVehicle();
+	const Vehicle *vb = b.GetSingleVehicle();
+
+	bool a_in_depot = va->IsStoppedInDepot() && va->type != VehicleType::Aircraft;
+	bool b_in_depot = vb->IsStoppedInDepot() && vb->type != VehicleType::Aircraft;
+
+	if (a_in_depot) {
+		string_a = GetString(STR_DEPOT_NAME, va->type, GetDepotIndex(va->tile));
+	}
+	else {
+		string_a = "";
+	}
+	if (b_in_depot) {
+		string_b = GetString(STR_DEPOT_NAME, vb->type, GetDepotIndex(vb->tile));
+	}
+	else {
+		string_b = "";
+	}
+
+	int r = StrNaturalCompare(string_a, string_b);
+	return (r != 0) ? (r < 0) : VehicleNumberSorter(va, vb);
 }
 
 /** Sort vehicles by their number. @copydoc GUIList::Sorter */
