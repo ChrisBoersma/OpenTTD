@@ -1505,27 +1505,35 @@ static bool VehicleDepotNameSorter(const GUIVehicleGroup &a, const GUIVehicleGro
 	std::string string_a;
 	std::string string_b;
 
-	const Vehicle *va = a.GetSingleVehicle();
-	const Vehicle *vb = b.GetSingleVehicle();
+	const Vehicle *va = a.vehicles_begin[0];
+	const Vehicle *vb = b.vehicles_begin[0];
 
-	bool a_in_depot = va->IsStoppedInDepot() && va->type != VehicleType::Aircraft;
-	bool b_in_depot = vb->IsStoppedInDepot() && vb->type != VehicleType::Aircraft;
-
-	if (a_in_depot) {
-		string_a = GetString(STR_DEPOT_NAME, va->type, GetDepotIndex(va->tile));
+	if (va->IsStoppedInDepot()) {
+		if (va->type == VehicleType::Aircraft) {
+			string_a = GetString(STR_FORMAT_DEPOT_NAME_AIRCRAFT, GetDepotDestinationIndex(va->tile));
+		}
+		else {
+			string_a = GetString(STR_DEPOT_NAME, va->type, GetDepotDestinationIndex(va->tile));
+		}
 	}
 	else {
 		string_a = "";
 	}
-	if (b_in_depot) {
-		string_b = GetString(STR_DEPOT_NAME, vb->type, GetDepotIndex(vb->tile));
+
+	if (vb->IsStoppedInDepot()) {
+		if (vb->type == VehicleType::Aircraft) {
+			string_b = GetString(STR_FORMAT_DEPOT_NAME_AIRCRAFT, GetDepotDestinationIndex(vb->tile));
+		}
+		else {
+			string_b = GetString(STR_DEPOT_NAME, vb->type, GetDepotIndex(vb->tile));
+		}
 	}
 	else {
 		string_b = "";
 	}
 
 	int r = StrNaturalCompare(string_a, string_b);
-	return (r != 0) ? (r < 0) : VehicleNumberSorter(va, vb);
+	return (r < 0);
 }
 
 /** Sort vehicles by their number. @copydoc GUIList::Sorter */
