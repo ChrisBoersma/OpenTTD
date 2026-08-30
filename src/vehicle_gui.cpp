@@ -1801,13 +1801,17 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 	auto [first, last] = this->vscroll->GetVisibleRangeIterators(this->vehgroups);
 	for (auto it = first; it != last; ++it) {
 		const GUIVehicleGroup &vehgroup = *it;
+		std::string profit_text = GetString(TimerGameEconomy::UsingWallclockUnits() ? STR_VEHICLE_LIST_PROFIT_THIS_PERIOD_LAST_PERIOD : STR_VEHICLE_LIST_PROFIT_THIS_YEAR_LAST_YEAR,
+			vehgroup.GetDisplayProfitThisYear(),
+			vehgroup.GetDisplayProfitLastYear());
 
-		DrawString(tr.left, tr.right, ir.bottom - GetCharacterHeight(FontSize::Small) - WidgetDimensions::scaled.framerect.bottom,
-				GetString(TimerGameEconomy::UsingWallclockUnits() ? STR_VEHICLE_LIST_PROFIT_THIS_PERIOD_LAST_PERIOD : STR_VEHICLE_LIST_PROFIT_THIS_YEAR_LAST_YEAR,
-						vehgroup.GetDisplayProfitThisYear(),
-						vehgroup.GetDisplayProfitLastYear()));
+		if (this->grouping == GB_SHARED_ORDERS) {
+			profit_text += " " + GetString(TimerGameEconomy::UsingWallclockUnits() ? STR_VEHICLE_LIST_AVERAGE_PROFIT_THIS_PERIOD_LAST_PERIOD : STR_VEHICLE_LIST_AVERAGE_PROFIT_THIS_YEAR_LAST_YEAR,
+				vehgroup.GetDisplayAverageProfitThisYear(),
+				vehgroup.GetDisplayAverageProfitLastYear());
+		}
 
-		DrawVehicleProfitButton(vehgroup.GetOldestVehicleAge(), vehgroup.GetDisplayProfitLastYear(), vehgroup.NumVehicles(), vehicle_button_x, ir.top + GetCharacterHeight(FontSize::Normal) + WidgetDimensions::scaled.vsep_normal);
+		DrawString(tr.left, tr.right, ir.bottom - GetCharacterHeight(FontSize::Small) - WidgetDimensions::scaled.framerect.bottom, profit_text, TextColour::Black);
 
 		switch (this->grouping) {
 			case GB_NONE: {

@@ -53,6 +53,20 @@ struct GUIVehicleGroup {
 		});
 	}
 
+	Money GetDisplayAverageProfitThisYear() const
+	{
+		const auto num_vehicles = this->NumVehicles();
+		if (num_vehicles <= 0) return 0;
+		return this->GetDisplayProfitThisYear() / static_cast<Money>(num_vehicles);
+	}
+
+	Money GetDisplayAverageProfitLastYear() const
+	{
+		const auto num_vehicles = this->NumVehicles();
+		if (num_vehicles <= 0) return 0;
+		return this->GetDisplayProfitLastYear() / static_cast<Money>(num_vehicles);
+	}
+
 	TimerGameEconomy::Date GetOldestVehicleAge() const
 	{
 		const Vehicle *oldest = *std::max_element(this->vehicles_begin, this->vehicles_end, [](const Vehicle *v_a, const Vehicle *v_b) {
