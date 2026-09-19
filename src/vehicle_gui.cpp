@@ -593,6 +593,16 @@ static void DrawVehicleProfitButton(TimerGameEconomy::Date age, Money display_pr
 	DrawSprite(spr, PAL_NONE, x, y);
 }
 
+static bool HasSingleNamedGroup(const GUIVehicleGroup &vehgroup)
+{
+	const GroupID group_id = vehgroup.vehicles_begin[0]->group_id;
+	if (group_id == DEFAULT_GROUP) return false;
+
+	return std::all_of(vehgroup.vehicles_begin, vehgroup.vehicles_end, [group_id](const Vehicle *v) {
+		return v->group_id == group_id;
+	});
+}
+
 /** Maximum number of refit cycles we try, to prevent infinite loops. And we store only a byte anyway */
 static const uint MAX_REFIT_CYCLE = 256;
 
@@ -1866,6 +1876,10 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 
 			case GB_SHARED_ORDERS:
 				assert(vehgroup.NumVehicles() > 0);
+
+				if (HasSingleNamedGroup(vehgroup)) {
+					DrawString(tr.left, tr.right, ir.top, GetString(STR_GROUP_NAME, vehgroup.vehicles_begin[0]->group_id), TextColour::Black, AlignmentH::Start, false, FontSize::Small);
+				}
 
 				for (int i = 0; i < static_cast<int>(vehgroup.NumVehicles()); ++i) {
 					if (image_left + WidgetDimensions::scaled.hsep_wide * i >= image_right) break; // Break if there is no more space to draw any more vehicles anyway.
