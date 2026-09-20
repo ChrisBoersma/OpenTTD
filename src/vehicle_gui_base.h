@@ -69,6 +69,7 @@ struct BaseVehicleListWindow : public Window {
 	enum GroupBy : uint8_t {
 		GB_NONE,
 		GB_SHARED_ORDERS,
+		GB_DEPOT,
 
 		GB_END,
 	};
@@ -99,12 +100,15 @@ struct BaseVehicleListWindow : public Window {
 
 	static const VehicleTypeIndexArray<const StringID> vehicle_depot_name;
 	static const std::initializer_list<const StringID> vehicle_group_by_names;
+	static const std::initializer_list<const StringID> vehicle_group_by_hangar_names;
 	static const std::initializer_list<const StringID> vehicle_group_none_sorter_names_calendar;
 	static const std::initializer_list<const StringID> vehicle_group_none_sorter_names_wallclock;
 	static const std::initializer_list<const StringID> vehicle_group_shared_orders_sorter_names_calendar;
 	static const std::initializer_list<const StringID> vehicle_group_shared_orders_sorter_names_wallclock;
+	static const std::initializer_list<const StringID> vehicle_group_depot_sorter_names;
 	static const std::initializer_list<VehicleGroupSortFunction * const> vehicle_group_none_sorter_funcs;
 	static const std::initializer_list<VehicleGroupSortFunction * const> vehicle_group_shared_orders_sorter_funcs;
+	static const std::initializer_list<VehicleGroupSortFunction *const> vehicle_group_depot_sorter_funcs;
 
 	BaseVehicleListWindow(WindowDesc &desc, const VehicleListIdentifier &vli);
 
@@ -125,6 +129,7 @@ struct BaseVehicleListWindow : public Window {
 	DropDownList BuildActionDropdownList(bool show_autoreplace, bool show_group, bool show_create);
 
 	std::span<const StringID> GetVehicleSorterNames() const;
+	std::span<const StringID> GetVehicleGroupByNames() const;
 
 	std::span<VehicleGroupSortFunction * const> GetVehicleSorterFuncs() const
 	{
@@ -133,6 +138,8 @@ struct BaseVehicleListWindow : public Window {
 				return vehicle_group_none_sorter_funcs;
 			case GB_SHARED_ORDERS:
 				return vehicle_group_shared_orders_sorter_funcs;
+			case GB_DEPOT:
+				return vehicle_group_depot_sorter_funcs;
 			default:
 				NOT_REACHED();
 		}

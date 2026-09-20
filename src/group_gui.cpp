@@ -36,6 +36,7 @@
 #include "table/strings.h"
 
 #include "safeguards.h"
+#include "depot_func.h"
 
 static constexpr std::initializer_list<NWidgetPart> _nested_group_widgets = {
 	NWidget(NWID_HORIZONTAL), // Window header
@@ -500,7 +501,7 @@ public:
 				break;
 
 			case WID_GL_GROUP_BY_DROPDOWN:
-				size.width = GetStringListWidth(this->vehicle_group_by_names) + padding.width;
+				size.width = GetStringListWidth(this->GetVehicleGroupByNames()) + padding.width;
 				break;
 
 			case WID_GL_SORT_BY_DROPDOWN:
@@ -628,7 +629,7 @@ public:
 		this->GetWidget<NWidgetCore>(WID_GL_REPLACE_PROTECTION)->SetSprite(protect_sprite + to_underlying(this->vli.vtype));
 
 		/* Set text of "group by" dropdown widget. */
-		this->GetWidget<NWidgetCore>(WID_GL_GROUP_BY_DROPDOWN)->SetString(std::data(this->vehicle_group_by_names)[this->grouping]);
+		this->GetWidget<NWidgetCore>(WID_GL_GROUP_BY_DROPDOWN)->SetString(this->GetVehicleGroupByNames()[this->grouping]);
 
 		/* Set text of "sort by" dropdown widget. */
 		this->GetWidget<NWidgetCore>(WID_GL_SORT_BY_DROPDOWN)->SetString(this->GetVehicleSorterNames()[this->vehgroups.SortType()]);
@@ -745,7 +746,7 @@ public:
 				break;
 
 			case WID_GL_GROUP_BY_DROPDOWN: // Select grouping option dropdown menu
-				ShowDropDownMenu(this, this->vehicle_group_by_names, this->grouping, WID_GL_GROUP_BY_DROPDOWN, 0, 0);
+				ShowDropDownMenu(this, this->GetVehicleGroupByNames(), this->grouping, WID_GL_GROUP_BY_DROPDOWN, 0, 0);
 				return;
 
 			case WID_GL_SORT_BY_DROPDOWN: // Select sorting criteria dropdown menu
@@ -840,28 +841,52 @@ public:
 						break;
 					}
 
+					case GB_DEPOT:
+					{
+						assert(vehgroup.NumVehicles() > 0);
+						v = vehgroup.vehicles_begin[0];
+						/*
+						 * No VehicleClicked(v) support for now
+						 */
+						break;
+					}
+
 					default:
 						NOT_REACHED();
 				}
 				if (v) {
-					if (_ctrl_pressed && this->grouping == GB_SHARED_ORDERS) {
-						ShowOrdersWindow(v);
-					} else {
-						this->vehicle_sel = v->index;
+					if (this->grouping == GB_DEPOT) {
+						if (v->IsStoppedInDepot()) {
+							ShowDepotWindow(v->tile, v->type);
+						} else if (vehgroup.NumVehicles() == 1) {
+							this->vehicle_sel = v->index;
 
-						if (_ctrl_pressed && this->grouping == GB_NONE) {
-							/*
-							 * It only makes sense to select a group if not using shared orders
-							 * since two vehicles sharing orders can be from different groups.
-							 */
-							this->SelectGroup(v->group_id);
+							SetObjectToPlaceWnd(SPR_CURSOR_MOUSE, PAL_NONE, HT_DRAG, this);
+							SetMouseCursorVehicle(v, EngineImageType::InList);
+							_cursor.vehchain = true;
+
+							this->SetDirty();
 						}
+					} else {
+						if (_ctrl_pressed && this->grouping == GB_SHARED_ORDERS) {
+							ShowOrdersWindow(v);
+						} else {
+							this->vehicle_sel = v->index;
 
-						SetObjectToPlaceWnd(SPR_CURSOR_MOUSE, PAL_NONE, HT_DRAG, this);
-						SetMouseCursorVehicle(v, EngineImageType::InList);
-						_cursor.vehchain = true;
+							if (_ctrl_pressed && this->grouping == GB_NONE) {
+								/*
+								* It only makes sense to select a group if not using shared orders
+								* since two vehicles sharing orders can be from different groups.
+								*/
+								this->SelectGroup(v->group_id);
+							}
 
-						this->SetDirty();
+							SetObjectToPlaceWnd(SPR_CURSOR_MOUSE, PAL_NONE, HT_DRAG, this);
+							SetMouseCursorVehicle(v, EngineImageType::InList);
+							_cursor.vehchain = true;
+
+							this->SetDirty();
+						}
 					}
 				}
 
@@ -951,7 +976,7 @@ public:
 	{
 		switch (widget) {
 			case WID_GL_DEFAULT_VEHICLES: // Ungrouped vehicles
-				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, DEFAULT_GROUP, this->vehicle_sel, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS, VehicleListIdentifier{});
+				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, DEFAULT_GROUP, this->vehicle_sel, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS || this->grouping == GB_DEPOT, VehicleListIdentifier{});
 
 				this->vehicle_sel = VehicleID::Invalid();
 				this->group_over = GroupID::Invalid();
@@ -968,7 +993,7 @@ public:
 				auto it = this->group_sb->GetScrolledItemFromWidget(this->groups, pt.y, this, WID_GL_LIST_GROUP);
 				GroupID new_g = it == this->groups.end() ? NEW_GROUP : it->group->index;
 
-				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, new_g == NEW_GROUP ? CcAddVehicleNewGroup : nullptr, new_g, vindex, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS, VehicleListIdentifier{});
+				Command<Commands::AddVehicleToGroup>::Post(STR_ERROR_GROUP_CAN_T_ADD_VEHICLE, new_g == NEW_GROUP ? CcAddVehicleNewGroup : nullptr, new_g, vindex, _ctrl_pressed || this->grouping == GB_SHARED_ORDERS || this->grouping == GB_DEPOT, VehicleListIdentifier{});
 				break;
 			}
 
@@ -1000,6 +1025,20 @@ public:
 								} else {
 									ShowVehicleListWindow(v);
 								}
+							}
+						}
+						break;
+					}
+
+					case GB_DEPOT:
+					{
+						if (!VehicleClicked(vehgroup)) {
+							const Vehicle *v = vehgroup.vehicles_begin[0];
+							if (v->IsStoppedInDepot())
+							{
+								ShowDepotWindow(v->tile, v->type);
+							} else if (vehgroup.NumVehicles() == 1) {
+								ShowVehicleViewWindow(v);
 							}
 						}
 						break;

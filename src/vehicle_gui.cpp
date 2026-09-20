@@ -48,6 +48,7 @@
 #include "table/strings.h"
 
 #include "safeguards.h"
+#include "depot_func.h"
 
 
 static EnumIndexArray<VehicleTypeIndexArray<BaseVehicleListWindow::GroupBy>, VehicleListType, VehicleListType::End> _grouping{};
@@ -71,6 +72,7 @@ static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupTotalProfitTh
 static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupTotalProfitLastYearSorter;
 static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupAverageProfitThisYearSorter;
 static BaseVehicleListWindow::VehicleGroupSortFunction VehicleGroupAverageProfitLastYearSorter;
+static BaseVehicleListWindow::VehicleGroupSortFunction VehicleDepotNameSorter;
 
 /** Wrapper to convert a VehicleIndividualSortFunction to a VehicleGroupSortFunction. @copydoc GUIList::Sorter */
 template <BaseVehicleListWindow::VehicleIndividualSortFunction func>
@@ -135,6 +137,21 @@ const std::initializer_list<BaseVehicleListWindow::VehicleGroupSortFunction * co
 	&VehicleGroupAverageProfitLastYearSorter,
 };
 
+const std::initializer_list<BaseVehicleListWindow::VehicleGroupSortFunction *const> BaseVehicleListWindow::vehicle_group_depot_sorter_funcs = {
+	&VehicleDepotNameSorter,
+	&VehicleGroupLengthSorter,
+};
+
+const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_depot_sorter_names = {
+	STR_SORT_BY_DEPOT_NAME,
+	STR_SORT_BY_NUM_VEHICLES,
+};
+
+static const std::initializer_list<const StringID> vehicle_group_hangar_sorter_names = {
+	STR_SORT_BY_HANGAR_NAME,
+	STR_SORT_BY_NUM_VEHICLES,
+};
+
 const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_shared_orders_sorter_names_calendar = {
 	STR_SORT_BY_NUM_VEHICLES,
 	STR_SORT_BY_TOTAL_PROFIT_THIS_YEAR,
@@ -154,6 +171,13 @@ const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group
 const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_by_names = {
 	STR_GROUP_BY_NONE,
 	STR_GROUP_BY_SHARED_ORDERS,
+	STR_GROUP_BY_STOPPED_IN_DEPOT,
+};
+
+const std::initializer_list<const StringID> BaseVehicleListWindow::vehicle_group_by_hangar_names = {
+	STR_GROUP_BY_NONE,
+	STR_GROUP_BY_SHARED_ORDERS,
+	STR_GROUP_BY_STOPPED_IN_HANGAR,
 };
 
 /** List of depot name strings for each \c VehicleType. */
@@ -178,9 +202,16 @@ std::span<const StringID> BaseVehicleListWindow::GetVehicleSorterNames() const
 			return TimerGameEconomy::UsingWallclockUnits() ? vehicle_group_none_sorter_names_wallclock : vehicle_group_none_sorter_names_calendar;
 		case GB_SHARED_ORDERS:
 			return TimerGameEconomy::UsingWallclockUnits() ? vehicle_group_shared_orders_sorter_names_wallclock : vehicle_group_shared_orders_sorter_names_calendar;
+		case GB_DEPOT:
+			return this->vli.vtype == VehicleType::Aircraft ? vehicle_group_hangar_sorter_names : vehicle_group_depot_sorter_names;
 		default:
 			NOT_REACHED();
 	}
+}
+
+std::span<const StringID> BaseVehicleListWindow::GetVehicleGroupByNames() const
+{
+	return this->vli.vtype == VehicleType::Aircraft ? vehicle_group_by_hangar_names : vehicle_group_by_names;
 }
 
 /**
@@ -235,37 +266,71 @@ void BaseVehicleListWindow::BuildVehicleList()
 	}
 	this->used_cargoes = used;
 
-	if (this->grouping == GB_NONE) {
-		uint max_unitnumber = 0;
-		for (auto it = this->vehicles.begin(); it != this->vehicles.end(); ++it) {
-			this->vehgroups.emplace_back(it, it + 1);
+	switch (this->grouping) {
+		case GB_NONE:
+		{
+			uint max_unitnumber = 0;
+			for (auto it = this->vehicles.begin(); it != this->vehicles.end(); ++it) {
+				this->vehgroups.emplace_back(it, it + 1);
 
-			max_unitnumber = std::max<uint>(max_unitnumber, (*it)->unitnumber);
+				max_unitnumber = std::max<uint>(max_unitnumber, (*it)->unitnumber);
+			}
+			this->unitnumber_digits = CountDigitsForAllocatingSpace(max_unitnumber);
+			break;
 		}
-		this->unitnumber_digits = CountDigitsForAllocatingSpace(max_unitnumber);
-	} else {
+		case GB_SHARED_ORDERS:
+		{
 		/* Sort by the primary vehicle; we just want all vehicles that share the same orders to form a contiguous range. */
-		std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle * const &u, const Vehicle * const &v) {
-			return u->FirstShared() < v->FirstShared();
-		});
-
-		uint max_num_vehicles = 0;
-
-		VehicleList::const_iterator begin = this->vehicles.begin();
-		while (begin != this->vehicles.end()) {
-			VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [first_shared = (*begin)->FirstShared()](const Vehicle * const &v) {
-				return v->FirstShared() == first_shared;
+			std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle * const &u, const Vehicle * const &v) {
+				return u->FirstShared() < v->FirstShared();
 			});
 
-			this->vehgroups.emplace_back(begin, end);
+			uint max_num_vehicles = 0;
 
-			max_num_vehicles = std::max<uint>(max_num_vehicles, static_cast<uint>(end - begin));
+			VehicleList::const_iterator begin = this->vehicles.begin();
+			while (begin != this->vehicles.end()) {
+				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [first_shared = (*begin)->FirstShared()](const Vehicle * const &v) {
+					return v->FirstShared() == first_shared;
+				});
 
-			begin = end;
+				this->vehgroups.emplace_back(begin, end);
+
+				max_num_vehicles = std::max<uint>(max_num_vehicles, static_cast<uint>(end - begin));
+
+				begin = end;
+			}
+
+			this->unitnumber_digits = CountDigitsForAllocatingSpace(max_num_vehicles);
+			break;
 		}
+		case GB_DEPOT:
+		{
+			std::stable_sort(this->vehicles.begin(), this->vehicles.end(), [](const Vehicle *const &u, const Vehicle *const &v) {
+				return u->GetDepotSortingIndex() < v->GetDepotSortingIndex();
+			});
 
-		this->unitnumber_digits = CountDigitsForAllocatingSpace(max_num_vehicles);
+			uint max_num_vehicles = 0;
+
+			VehicleList::const_iterator begin = this->vehicles.begin();
+			while (begin != this->vehicles.end()) {
+				VehicleList::const_iterator end = std::find_if_not(begin, this->vehicles.cend(), [depot = (*begin)->GetDepotSortingIndex()](const Vehicle *const &v) {
+					return v->GetDepotSortingIndex() == depot;
+				});
+
+				this->vehgroups.emplace_back(begin, end);
+
+				max_num_vehicles = std::max<uint>(max_num_vehicles, static_cast<uint>(end - begin));
+
+				begin = end;
+			}
+
+			this->unitnumber_digits = CountDigitsForAllocatingSpace(max_num_vehicles);
+			break;
+		}
+		default:
+			NOT_REACHED();
 	}
+
 	this->FilterVehicleList();
 
 	this->vehgroups.RebuildDone();
@@ -1450,6 +1515,43 @@ static bool VehicleGroupAverageProfitLastYearSorter(const GUIVehicleGroup &a, co
 	return a.GetDisplayProfitLastYear() * static_cast<uint>(b.NumVehicles()) < b.GetDisplayProfitLastYear() * static_cast<uint>(a.NumVehicles());
 }
 
+/** Sort vehicle groups by their depot name. @copydoc GUIList::Sorter */
+static bool VehicleDepotNameSorter(const GUIVehicleGroup &a, const GUIVehicleGroup &b)
+{
+	std::string string_a;
+	std::string string_b;
+
+	const Vehicle *va = a.vehicles_begin[0];
+	const Vehicle *vb = b.vehicles_begin[0];
+
+	if (va->IsStoppedInDepot()) {
+		if (va->type == VehicleType::Aircraft) {
+			string_a = GetString(STR_FORMAT_DEPOT_NAME_AIRCRAFT, GetDepotDestinationIndex(va->tile));
+		}
+		else {
+			string_a = GetString(STR_DEPOT_NAME, va->type, GetDepotDestinationIndex(va->tile));
+		}
+	}
+	else {
+		string_a = "";
+	}
+
+	if (vb->IsStoppedInDepot()) {
+		if (vb->type == VehicleType::Aircraft) {
+			string_b = GetString(STR_FORMAT_DEPOT_NAME_AIRCRAFT, GetDepotDestinationIndex(vb->tile));
+		}
+		else {
+			string_b = GetString(STR_DEPOT_NAME, vb->type, GetDepotIndex(vb->tile));
+		}
+	}
+	else {
+		string_b = "";
+	}
+
+	int r = StrNaturalCompare(string_a, string_b);
+	return (r < 0);
+}
+
 /** Sort vehicles by their number. @copydoc GUIList::Sorter */
 static bool VehicleNumberSorter(const Vehicle * const &a, const Vehicle * const &b)
 {
@@ -1877,6 +1979,33 @@ void BaseVehicleListWindow::DrawVehicleListItems(VehicleID selected_vehicle, int
 				DrawString(ir.left, ir.right, ir.top + WidgetDimensions::scaled.framerect.top, GetString(STR_JUST_COMMA, vehgroup.NumVehicles()), TextColour::Black);
 				break;
 
+			case GB_DEPOT:
+			{
+				assert(vehgroup.NumVehicles() > 0);
+
+				for (int i = 0; i < static_cast<int>(vehgroup.NumVehicles()); ++i) {
+					if (image_left + WidgetDimensions::scaled.hsep_wide * i >= image_right) break; // Break if there is no more space to draw any more vehicles anyway.
+					DrawVehicleImage(vehgroup.vehicles_begin[i], { image_left + WidgetDimensions::scaled.hsep_wide * i, ir.top, image_right, ir.bottom }, selected_vehicle, EngineImageType::InList, 0);
+				}
+
+				const Vehicle *v = vehgroup.vehicles_begin[0];
+
+				if (v->IsStoppedInDepot()) {
+					std::string depot_name;
+					if (v->type != VehicleType::Aircraft) {
+						depot_name = GetString(STR_DEPOT_NAME, v->type, GetDepotDestinationIndex(v->tile));
+					}
+					else {
+						depot_name = GetString(STR_FORMAT_DEPOT_NAME_AIRCRAFT, GetDepotDestinationIndex(v->tile));
+					}
+					DrawString(tr.left, tr.right, ir.top, depot_name, TextColour::Black, AlignmentH::Start, false, FontSize::Small);
+				}
+
+				TextColour tc = v->IsStoppedInDepot() ? TextColour::Blue : TextColour::Black;
+
+				DrawString(ir.left, ir.right, ir.top + WidgetDimensions::scaled.framerect.top, GetString(STR_JUST_COMMA, vehgroup.NumVehicles()), tc);
+				break;
+			}
 			default:
 				NOT_REACHED();
 		}
@@ -2000,7 +2129,7 @@ public:
 			}
 
 			case WID_VL_GROUP_BY_PULLDOWN:
-				size.width = GetStringListWidth(this->vehicle_group_by_names) + padding.width;
+				size.width = GetStringListWidth(this->GetVehicleGroupByNames()) + padding.width;
 				break;
 
 			case WID_VL_SORT_BY_PULLDOWN:
@@ -2032,7 +2161,7 @@ public:
 				return GetString(STR_VEHICLE_LIST_AVAILABLE_TRAINS + to_underlying(this->vli.vtype));
 
 			case WID_VL_GROUP_BY_PULLDOWN:
-				return GetString(std::data(this->vehicle_group_by_names)[this->grouping]);
+				return GetString(this->GetVehicleGroupByNames()[this->grouping]);
 
 			case WID_VL_SORT_BY_PULLDOWN:
 				return GetString(this->GetVehicleSorterNames()[this->vehgroups.SortType()]);
@@ -2130,7 +2259,7 @@ public:
 				break;
 
 			case WID_VL_GROUP_BY_PULLDOWN: // Select sorting criteria dropdown menu
-				ShowDropDownMenu(this, this->vehicle_group_by_names, this->grouping, WID_VL_GROUP_BY_PULLDOWN, 0, 0);
+				ShowDropDownMenu(this, this->GetVehicleGroupByNames(), this->grouping, WID_VL_GROUP_BY_PULLDOWN, 0, 0);
 				return;
 
 			case WID_VL_SORT_BY_PULLDOWN: // Select sorting criteria dropdown menu
@@ -2174,6 +2303,20 @@ public:
 								} else {
 									ShowVehicleListWindow(v);
 								}
+							}
+						}
+						break;
+					}
+
+					case GB_DEPOT:
+					{
+						assert(vehgroup.NumVehicles() > 0);
+						if (!VehicleClicked(vehgroup)) {
+							const Vehicle *v = vehgroup.vehicles_begin[0];
+							if (v->IsStoppedInDepot()) {
+								ShowDepotWindow(v->tile, v->type);
+							} else 	if (vehgroup.NumVehicles() == 1) {
+								ShowVehicleViewWindow(v);
 							}
 						}
 						break;

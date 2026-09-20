@@ -657,6 +657,7 @@ CommandCost CmdStartStopVehicle(DoCommandFlags flags, VehicleID veh_id, bool eva
 		SetWindowDirty(WindowClass::VehicleDepot, v->GetMovingFront()->tile);
 		SetWindowClassesDirty(GetWindowClassForVehicleType(v->type));
 		InvalidateWindowData(WindowClass::VehicleView, v->index);
+		InvalidateWindowClassesData(GetWindowClassForVehicleType(v->type), 0);
 	}
 	return CommandCost();
 }

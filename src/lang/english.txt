@@ -364,6 +364,8 @@ STR_SORT_BY_RANGE                                               :Range
 STR_SORT_BY_POPULATION                                          :Population
 STR_SORT_BY_RATING                                              :Rating
 STR_SORT_BY_NUM_VEHICLES                                        :Number of vehicles
+STR_SORT_BY_DEPOT_NAME                                          :Depot name
+STR_SORT_BY_HANGAR_NAME                                         :Hangar name
 STR_SORT_BY_TOTAL_PROFIT_LAST_YEAR                              :Total profit last year
 STR_SORT_BY_TOTAL_PROFIT_LAST_PERIOD                            :Total profit last period
 STR_SORT_BY_TOTAL_PROFIT_THIS_YEAR                              :Total profit this year
@@ -376,6 +378,8 @@ STR_SORT_BY_AVERAGE_PROFIT_THIS_PERIOD                          :Average profit 
 # Group by options for vehicle list
 STR_GROUP_BY_NONE                                               :None
 STR_GROUP_BY_SHARED_ORDERS                                      :Shared orders
+STR_GROUP_BY_STOPPED_IN_DEPOT									:Stopped in depot
+STR_GROUP_BY_STOPPED_IN_HANGAR                                  :Stopped in hangar
 
 # Order button in shared orders vehicle list
 STR_GOTO_ORDER_VIEW                                             :{BLACK}Orders

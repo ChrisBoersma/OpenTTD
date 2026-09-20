@@ -1620,6 +1620,8 @@ void VehicleEnterDepot(Vehicle *v)
 	v->MarkDirty();
 
 	InvalidateWindowData(WindowClass::VehicleView, v->index);
+	InvalidateWindowClassesData(GetWindowClassForVehicleType(v->type), 0);
+
 
 	if (v->current_order.IsType(OT_GOTO_DEPOT)) {
 		const Order *real_order = v->GetOrder(v->cur_real_order_index);
